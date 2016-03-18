@@ -8,7 +8,14 @@ import java.util.ArrayList;
  */
 public final class TextBox extends DisplayFormat {
     /**
-     * Sets necessary properties for proper display.
+     * Class constants.
+     */
+    private static final int MAX_WIDTH = 60;
+    private static final String H_SYMBOL = "*";
+    private static final String V_SYMBOL = "*";
+
+    /**
+     * Private constructor prevents instantiation.
      */
     private TextBox() {
     }
@@ -19,14 +26,14 @@ public final class TextBox extends DisplayFormat {
      */
     public static void displayText(String... multiple) {
         // Display the top separator and spacing.
-        displaySeparator();
-        displaySeparatorSpacing();
+        displaySeparator(MAX_WIDTH, H_SYMBOL);
+        displaySeparatorSpacing(MAX_WIDTH, V_SYMBOL);
         
         // Iterate over each String supplied as an argument.
         for (String text : multiple) {
             if (text.length() < MAX_WIDTH) {
                 // If it's a short string, just display it as a line.
-                displayLine(text);
+                displayLine(text, MAX_WIDTH, V_SYMBOL);
             }
             else {
                 // If it's a long string, break it apart into words.
@@ -56,13 +63,13 @@ public final class TextBox extends DisplayFormat {
                 
                 // Display each line in the block of text.
                 lines.stream().forEach((line) -> {
-                    displayLine(line);
+                    displayLine(line, MAX_WIDTH, V_SYMBOL);
                 });
             }
             // Display spacing after each block of text.
-            displaySeparatorSpacing();
+            displaySeparatorSpacing(MAX_WIDTH, V_SYMBOL);
         }
         // Display the bottom separator.
-        displaySeparator();
+        displaySeparator(MAX_WIDTH, H_SYMBOL);
     }
 }

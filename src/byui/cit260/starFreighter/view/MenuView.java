@@ -11,11 +11,11 @@ public abstract class MenuView extends DisplayFormat implements ViewInterface {
     /**
      * Class constants.
      */
-    protected static final int MAX_WIDTH = 32;
-    protected static final String H_SYMBOL = "-";
-    protected static final String V_SYMBOL = "|";
-    protected static final String DIVIDER = " - ";
-    protected static final String INVALID = "\nInvalid selection. Please try again.";
+    private static final int MAX_WIDTH = 32;
+    private static final String H_SYMBOL = "-";
+    private static final String V_SYMBOL = "|";
+    private static final String DIVIDER = " - ";
+    protected static String INVALID = "\nInvalid selection. Please try again.";
 
     /**
      * Class instance properties.
@@ -33,13 +33,17 @@ public abstract class MenuView extends DisplayFormat implements ViewInterface {
      * Displays the menu.
      */
     protected void displayMenu() {
-        displaySeparator();
-        displayLine(menuTitle);
-        displaySeparator();
+        displaySeparator(MAX_WIDTH, H_SYMBOL);
+        displayLine(menuTitle, MAX_WIDTH, V_SYMBOL);
+        displaySeparator(MAX_WIDTH, H_SYMBOL);
         menuItems.stream().forEach((item) -> {
-            displayLine(item.symbol() + DIVIDER + item.name());
+            displayLine(
+                item.symbol() + DIVIDER + item.name(),
+                MAX_WIDTH,
+                V_SYMBOL
+            );
         });
-        displaySeparator();
+        displaySeparator(MAX_WIDTH, H_SYMBOL);
     }
 
     @Override

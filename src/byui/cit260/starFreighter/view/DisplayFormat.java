@@ -5,11 +5,7 @@ package byui.cit260.starFreighter.view;
  * format.
  * @author Connor
  */
-public abstract class DisplayFormat {
-    protected static int MAX_WIDTH = 60;
-    protected static String H_SYMBOL = "*";
-    protected static String V_SYMBOL = "*";
-
+public class DisplayFormat {
     /**
      * Creates a string of a specified length, then fills it with a specified
      * substring.
@@ -24,28 +20,34 @@ public abstract class DisplayFormat {
 
     /**
      * Utility function. Displays a horizontal separator.
+     * @param maxWidth
+     * @param hSymbol
      */
-    protected static void displaySeparator() {
-        System.out.println(fillString(MAX_WIDTH + 3, H_SYMBOL));
+    protected static void displaySeparator(int maxWidth, String hSymbol) {
+        System.out.println(fillString(maxWidth + 3, hSymbol));
     }
 
     /**
      * Utility function. Displays horizontal separator spacing.
+     * @param maxWidth
+     * @param vSymbol
      */
-    protected static void displaySeparatorSpacing() {
-        String repeated = fillString(MAX_WIDTH + 1, " ");
-        System.out.println(V_SYMBOL + repeated + V_SYMBOL);
+    protected static void displaySeparatorSpacing(int maxWidth, String vSymbol) {
+        String repeated = fillString(maxWidth + 1, " ");
+        System.out.println(vSymbol + repeated + vSymbol);
     }
 
     /**
      * Utility function. Formats and displays a single line of text.
      * @param line 
+     * @param maxWidth 
+     * @param vSymbol 
      */
-    protected static void displayLine(String line) {
-        String finalLine = V_SYMBOL + " " + line;
-        int lengthDifference = MAX_WIDTH - line.length();
+    protected static void displayLine(String line, int maxWidth, String vSymbol) {
+        String finalLine = vSymbol + " " + line;
+        int lengthDifference = maxWidth - line.length();
         String emptySpace = fillString(lengthDifference, " ");
-        finalLine += emptySpace + V_SYMBOL;
+        finalLine += emptySpace + vSymbol;
         System.out.println(finalLine);
     }
 }
