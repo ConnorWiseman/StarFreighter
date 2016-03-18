@@ -18,3 +18,4 @@ hs_err_pid*
 ehthumbs.db
 Thumbs.db
 /build/
+/nbproject/private/
