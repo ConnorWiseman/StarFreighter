@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * A convenient formatter for printing text inside a box.
  * @author Connor
  */
-public final class TextBox extends DisplayFormat {
+public final class TextBox {
     /**
      * Class constants.
      */
@@ -26,14 +26,14 @@ public final class TextBox extends DisplayFormat {
      */
     public static void displayText(String... multiple) {
         // Display the top separator and spacing.
-        displaySeparator(MAX_WIDTH, H_SYMBOL);
-        displaySeparatorSpacing(MAX_WIDTH, V_SYMBOL);
+        DisplayFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
+        DisplayFormat.displaySeparatorSpacing(MAX_WIDTH, V_SYMBOL);
         
         // Iterate over each String supplied as an argument.
         for (String text : multiple) {
             if (text.length() < MAX_WIDTH) {
                 // If it's a short string, just display it as a line.
-                displayLine(text, MAX_WIDTH, V_SYMBOL);
+                DisplayFormat.displayLine(text, MAX_WIDTH, V_SYMBOL);
             }
             else {
                 // If it's a long string, break it apart into words.
@@ -62,14 +62,14 @@ public final class TextBox extends DisplayFormat {
                 lines.add(tempLine);
                 
                 // Display each line in the block of text.
-                lines.stream().forEach((line) -> {
-                    displayLine(line, MAX_WIDTH, V_SYMBOL);
+                lines.stream().forEach((String line) -> {
+                    DisplayFormat.displayLine(line, MAX_WIDTH, V_SYMBOL);
                 });
             }
             // Display spacing after each block of text.
-            displaySeparatorSpacing(MAX_WIDTH, V_SYMBOL);
+            DisplayFormat.displaySeparatorSpacing(MAX_WIDTH, V_SYMBOL);
         }
         // Display the bottom separator.
-        displaySeparator(MAX_WIDTH, H_SYMBOL);
+        DisplayFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
     }
 }

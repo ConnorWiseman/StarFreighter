@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * @author Connor
  */
-public abstract class MenuView extends DisplayFormat implements ViewInterface {
+public abstract class MenuView implements ViewInterface {
     /**
      * Class constants.
      */
@@ -24,7 +24,7 @@ public abstract class MenuView extends DisplayFormat implements ViewInterface {
     protected final ArrayList<MenuItem> menuItems = new ArrayList<>();
 
     /**
-     * Sets necessary properties for proper display.
+     * Public constructor.
      */
     public MenuView() {
     }
@@ -33,17 +33,17 @@ public abstract class MenuView extends DisplayFormat implements ViewInterface {
      * Displays the menu.
      */
     protected void displayMenu() {
-        displaySeparator(MAX_WIDTH, H_SYMBOL);
-        displayLine(menuTitle, MAX_WIDTH, V_SYMBOL);
-        displaySeparator(MAX_WIDTH, H_SYMBOL);
+        DisplayFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
+        DisplayFormat.displayLine(menuTitle, MAX_WIDTH, V_SYMBOL);
+        DisplayFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
         menuItems.stream().forEach((item) -> {
-            displayLine(
+            DisplayFormat.displayLine(
                 item.symbol() + DIVIDER + item.name(),
                 MAX_WIDTH,
                 V_SYMBOL
             );
         });
-        displaySeparator(MAX_WIDTH, H_SYMBOL);
+        DisplayFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
     }
 
     @Override

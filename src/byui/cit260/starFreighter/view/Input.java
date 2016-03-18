@@ -63,17 +63,30 @@ public final class Input {
      * @return
      */
     private static char promptForCharacter(String prompt, boolean sameLine) {
-        if (sameLine) {
-            System.out.print(prompt);
-        }
-        else {
-            System.out.println(prompt);
-        }
+        char characterValue;
 
-        char value = KEYBOARD_INPUT.nextLine().trim().charAt(0);
+        while(true) {
+            if (sameLine) {
+                System.out.print(prompt);
+            }
+            else {
+                System.out.println(prompt);
+            }
+
+            String value = KEYBOARD_INPUT.nextLine().trim();
+            
+            if (value.length() < 1) {
+                System.out.println("Invalid input - please enter something.");
+                continue;
+            }
+
+            characterValue = value.charAt(0);
+            // Once we have valid input, break from the loop.
+            break;
+        }       
         
         // Return the user's input.
-        return value;
+        return characterValue;
     }
 
     /**
