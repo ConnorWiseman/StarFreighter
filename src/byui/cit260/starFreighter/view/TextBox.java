@@ -7,9 +7,6 @@ import java.util.ArrayList;
  * @author Connor
  */
 public final class TextBox extends DisplayFormat {
-    protected static int MAX_WIDTH = 60;
-    protected static String H_SYMBOL = "*";
-    protected static String V_SYMBOL = "*";
     /**
      * Sets necessary properties for proper display.
      */

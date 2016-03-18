@@ -6,9 +6,9 @@ package byui.cit260.starFreighter.view;
  * @author Connor
  */
 public abstract class DisplayFormat {
-    protected static int MAX_WIDTH;
-    protected static String H_SYMBOL;
-    protected static String V_SYMBOL;
+    protected static int MAX_WIDTH = 60;
+    protected static String H_SYMBOL = "*";
+    protected static String V_SYMBOL = "*";
 
     /**
      * Creates a string of a specified length, then fills it with a specified

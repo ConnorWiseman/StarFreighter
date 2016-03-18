@@ -11,11 +11,11 @@ public abstract class MenuView extends DisplayFormat implements ViewInterface {
     /**
      * Class constants.
      */
-    protected static int MAX_WIDTH = 32;
-    protected static String H_SYMBOL = "-";
-    protected static String V_SYMBOL = "|";
-    protected static String DIVIDER = " - ";
-    protected final String INVALID = "\nInvalid selection. Please try again.";
+    protected static final int MAX_WIDTH = 32;
+    protected static final String H_SYMBOL = "-";
+    protected static final String V_SYMBOL = "|";
+    protected static final String DIVIDER = " - ";
+    protected static final String INVALID = "\nInvalid selection. Please try again.";
 
     /**
      * Class instance properties.
