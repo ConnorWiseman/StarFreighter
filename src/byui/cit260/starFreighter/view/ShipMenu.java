@@ -11,11 +11,6 @@ import starfreighter.StarFreighter;
  */
 public class ShipMenu extends MenuView {
     /**
-     * Class properties. Additional views called by this view.
-     */
-    private final TextBox textBox = new TextBox();
-
-    /**
      * Class constructor. Sets menu title and defines all menu items.
      */
     public ShipMenu() {
@@ -30,11 +25,24 @@ public class ShipMenu extends MenuView {
      */
     private void shipStatus() {
         Ship ship = StarFreighter.currentGame().getShip();
-        textBox.displayText(
+        TextBox.displayText(
             "Welcome, Captain. The " + ship.name() + " is reporting the" +
                 " following status:",
             "Hull integrity: " + ship.hull() + "/" + ship.hullIntegrity(),
             "Fuel supply: " + ship.fuel() + "/" + ship.fuelCapacity()
+        );
+    }
+
+    /**
+     * Renames the player's ship.
+     * @param name
+     * @return 
+     */
+    private void renameShip() {
+        String newName = Input.getStringSameLine("Enter new name: ");
+        ShipController.renameShip(newName);
+        TextBox.displayText(
+            "You have rechristened your ship " + newName + "."
         );
     }
 
@@ -45,7 +53,7 @@ public class ShipMenu extends MenuView {
                 shipStatus();
                 break;
             case 'R':
-                ShipController.renameShip();
+                renameShip();
                 break;
             case 'E':
                 return true;

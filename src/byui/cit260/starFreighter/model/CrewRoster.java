@@ -1,5 +1,6 @@
 package byui.cit260.starFreighter.model;
 
+import byui.cit260.starFreighter.constants.Role;
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -10,19 +11,11 @@ import java.util.Arrays;
 public class CrewRoster implements Serializable {
     private final CrewMember[] roster = new CrewMember[5];
 
-    public static enum ROLE {
-        PILOT,
-        MECHANIC,
-        DOCTOR,
-        FIGHTER,
-        TRADER
-    }
-
     public CrewMember[] getRoster() {
         return roster;
     }
 
-    public void set(ROLE index, CrewMember crewMember) {
+    public void set(Role index, CrewMember crewMember) {
         roster[index.ordinal()] = crewMember;
     }
 

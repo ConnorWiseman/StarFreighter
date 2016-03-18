@@ -12,7 +12,6 @@ public class StarFreighter {
     /**
      * Class constants.
      */
-    private static final TextBox TEXT_BOX = new TextBox();
     private static final MainMenu MAIN_MENU = new MainMenu();
 
     /**
@@ -25,7 +24,7 @@ public class StarFreighter {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        TEXT_BOX.displayText(
+        TextBox.displayText(
             "You are a newly dubbed captain.",
             "A deep space phenomenon has been observed which could be the key" +
                 " to finding an ancient alien treasure. You're not the first" +

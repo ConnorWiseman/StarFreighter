@@ -8,11 +8,6 @@ import byui.cit260.starFreighter.model.MenuItem;
  */
 public class HelpMenu extends MenuView {
     /**
-     * Class properties. Additional views called by this view.
-     */
-    private final TextBox textBox = new TextBox();
-
-    /**
      * Class constructor. Sets menu title and defines all menu items.
      */
     public HelpMenu() {
@@ -30,7 +25,7 @@ public class HelpMenu extends MenuView {
     public boolean doAction(char action) {
         switch (action) {
             case 'G':
-                textBox.displayText(
+                TextBox.displayText(
                     "You are a spaceship captain desiring to be the best and" +
                         " wealthiest in the galaxy. A deep-space phenomena" +
                         " has occurred which could lead you to an ancient" +
@@ -40,7 +35,7 @@ public class HelpMenu extends MenuView {
                 );
                 break;
             case 'C':
-                textBox.displayText(
+                TextBox.displayText(
                     "There are five crew member roles.",
                     "Pilot: The better they are the faster you travel and the" +
                         " less fuel you use.",
@@ -57,7 +52,7 @@ public class HelpMenu extends MenuView {
                 );
                 break;
             case 'J':
-                textBox.displayText(
+                TextBox.displayText(
                     "You can access the jobs boards on any planet. You'll be" +
                         " given a task to complete and rewarded upon" +
                         " completion. You may receive parts you need for your" +
@@ -66,7 +61,7 @@ public class HelpMenu extends MenuView {
                 );
                 break;
             case 'N':
-                textBox.displayText(
+                TextBox.displayText(
                     "You can access the map anytime in the game menu. Each" +
                         " location has a specific distance and fuel cost. You" +
                         " don't want to run out of fuel on your way to a" +
@@ -74,7 +69,7 @@ public class HelpMenu extends MenuView {
                 );
                 break;
             case 'R':
-                textBox.displayText(
+                TextBox.displayText(
                     "Merchants can be accessed in the game menu. You can sell" +
                         " items you don't need or buy what you need. You need" +
                         " to upgrade your ship to be able to make it to the" +

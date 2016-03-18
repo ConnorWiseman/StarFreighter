@@ -1,5 +1,6 @@
 package byui.cit260.starFreighter.model;
 
+import byui.cit260.starFreighter.constants.Role;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,14 +13,6 @@ public class CrewMember implements Serializable {
     private final String name;
     private int hitPoints = 30;
     private final int maxHitPoints = 30;
-
-    public static enum STAT {
-        PILOT,
-        MECHANIC,
-        FIGHTER,
-        DOCTOR,
-        TRADER
-    }
 
     public CrewMember(String name, CrewStatistics stats) {
         this.name = name;
@@ -38,11 +31,11 @@ public class CrewMember implements Serializable {
         return maxHitPoints;
     }
 
-    public int stat(STAT index) {
+    public int stat(Role index) {
         return stats.get(index.ordinal()).value();
     }
 
-    public void setStat(STAT index, int value) {
+    public void setStat(Role index, int value) {
         stats.get(index.ordinal()).setValue(value);
     }
 

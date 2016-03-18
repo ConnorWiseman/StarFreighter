@@ -1,7 +1,6 @@
 package byui.cit260.starFreighter.control;
 
 import byui.cit260.starFreighter.model.Ship;
-import byui.cit260.starFreighter.view.Input;
 import starfreighter.StarFreighter;
 
 /**
@@ -11,11 +10,11 @@ import starfreighter.StarFreighter;
 public class ShipController {
     /**
      * Creates a new Ship.
+     * @param shipName
      * @return 
      */
-    public static Ship createShip() {
-        // Prompt the player for the name of their ship; create a new Ship.
-        String shipName = Input.getStringSameLine("Please name your ship: ");
+    public static Ship createShip(String shipName) {
+        // Create a new Ship.
         Ship newShip = new Ship(shipName);
         
         // Assign values to the Ship's properties.
@@ -29,12 +28,17 @@ public class ShipController {
 
     /**
      * Renames the Ship.
+     * @param newName
      */
-    public static void renameShip() {
-        String newName = Input.getStringSameLine("Enter new name: ");
+    public static void renameShip(String newName) {
         StarFreighter.currentGame().getShip().setName(newName);
     }
 
+    /**
+     * Calculates the fuel cost given a specified distance.
+     * @param distance
+     * @return 
+     */
     public static int calculateFuelCost(double distance) {
         return 0;
     }

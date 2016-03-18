@@ -5,6 +5,7 @@ import byui.cit260.starFreighter.model.GameInstance;
 import byui.cit260.starFreighter.model.GameMap;
 import byui.cit260.starFreighter.model.Player;
 import byui.cit260.starFreighter.model.Ship;
+import byui.cit260.starFreighter.view.Input;
 import byui.cit260.starFreighter.view.TextBox;
 import starfreighter.StarFreighter;
 
@@ -13,8 +14,6 @@ import starfreighter.StarFreighter;
  * @author Connor
  */
 public class GameController {
-    private static final TextBox TEXT_BOX = new TextBox();
-
     /**
      * Creates a new game.
      */
@@ -22,17 +21,22 @@ public class GameController {
         // Create a new GameInstance object.
         GameInstance newGame = new GameInstance();
 
+        String playerName = Input.getStringSameLine("Please enter your name: ");
+
         // Create a new Player.
-        Player newPlayer = PlayerController.createPlayer();
+        Player newPlayer = PlayerController.createPlayer(playerName);
 
         // Welcome the player.
-        TEXT_BOX.displayText(
+        TextBox.displayText(
             "Welcome, Captain " + newPlayer.name() + ".",
             "What is your ship called, sir?"
         );
 
+        // Prompt the player for the name of their ship.
+        String shipName = Input.getStringSameLine("Please name your ship: ");
+
         // Create a new Ship.
-        Ship newShip = ShipController.createShip();
+        Ship newShip = ShipController.createShip(shipName);
 
         // Create a CrewRoster for the Ship.
         CrewRoster newRoster = CrewController.createCrew(newPlayer.name());

@@ -1,5 +1,6 @@
 package byui.cit260.starFreighter.control;
 
+import byui.cit260.starFreighter.constants.Role;
 import byui.cit260.starFreighter.model.CrewMember;
 import byui.cit260.starFreighter.model.CrewRoster;
 import byui.cit260.starFreighter.model.CrewStatistics;
@@ -11,26 +12,26 @@ import byui.cit260.starFreighter.model.CrewStatistics;
 public class CrewController {
     public static CrewRoster createCrew(String name) {
         CrewMember captain = CrewController.createCrewMember(name);
-        captain.setStat(CrewMember.STAT.FIGHTER, 4);
+        captain.setStat(Role.FIGHTER, 4);
 
         CrewMember crewOne = CrewController.createCrewMember("Spock");
-        crewOne.setStat(CrewMember.STAT.TRADER, 4);
+        crewOne.setStat(Role.TRADER, 4);
 
         CrewMember crewTwo = CrewController.createCrewMember("Bones");
-        crewTwo.setStat(CrewMember.STAT.DOCTOR, 4);
+        crewTwo.setStat(Role.DOCTOR, 4);
 
         CrewMember crewThree = CrewController.createCrewMember("McCoy");
-        crewThree.setStat(CrewMember.STAT.MECHANIC, 4);
+        crewThree.setStat(Role.MECHANIC, 4);
 
         CrewMember crewFour = CrewController.createCrewMember("Sulu");
-        crewFour.setStat(CrewMember.STAT.PILOT, 4);
+        crewFour.setStat(Role.PILOT, 4);
 
         CrewRoster roster = new CrewRoster();
-        roster.set(CrewRoster.ROLE.FIGHTER, captain);
-        roster.set(CrewRoster.ROLE.TRADER, crewOne);
-        roster.set(CrewRoster.ROLE.DOCTOR, crewTwo);
-        roster.set(CrewRoster.ROLE.MECHANIC, crewThree);
-        roster.set(CrewRoster.ROLE.PILOT, crewFour);
+        roster.set(Role.FIGHTER, captain);
+        roster.set(Role.TRADER, crewOne);
+        roster.set(Role.DOCTOR, crewTwo);
+        roster.set(Role.MECHANIC, crewThree);
+        roster.set(Role.PILOT, crewFour);
         return roster;
     }
 

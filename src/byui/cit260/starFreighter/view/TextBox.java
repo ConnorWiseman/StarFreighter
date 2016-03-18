@@ -7,20 +7,20 @@ import java.util.ArrayList;
  * @author Connor
  */
 public final class TextBox extends DisplayFormat {
+    protected static int MAX_WIDTH = 60;
+    protected static String H_SYMBOL = "*";
+    protected static String V_SYMBOL = "*";
     /**
      * Sets necessary properties for proper display.
      */
-    public TextBox() {
-        MAX_WIDTH = 60;
-        H_SYMBOL = "*";
-        V_SYMBOL = "*";
+    private TextBox() {
     }
     
     /**
      * Displays a specific string in a box. 
      * @param multiple
      */
-    public void displayText(String... multiple) {
+    public static void displayText(String... multiple) {
         // Display the top separator and spacing.
         displaySeparator();
         displaySeparatorSpacing();

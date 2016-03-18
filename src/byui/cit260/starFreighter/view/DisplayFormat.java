@@ -5,11 +5,11 @@ package byui.cit260.starFreighter.view;
  * format.
  * @author Connor
  */
-public class DisplayFormat {
-    protected int MAX_WIDTH;
-    protected String H_SYMBOL;
-    protected String V_SYMBOL;
-    protected String DIVIDER;
+public abstract class DisplayFormat {
+    protected static int MAX_WIDTH = 60;
+    protected static String H_SYMBOL = "*";
+    protected static String V_SYMBOL = "*";
+    protected static String DIVIDER;
 
     /**
      * Creates a string of a specified length, then fills it with a specified
@@ -18,7 +18,7 @@ public class DisplayFormat {
      * @param fill
      * @return 
      */
-    protected String fillString(int length, String fill) {
+    protected static String fillString(int length, String fill) {
         String constructed = new String(new char[length]);
         return constructed.replace("\0", fill);
     }
@@ -26,14 +26,14 @@ public class DisplayFormat {
     /**
      * Utility function. Displays a horizontal separator.
      */
-    protected void displaySeparator() {
+    protected static void displaySeparator() {
         System.out.println(fillString(MAX_WIDTH + 3, H_SYMBOL));
     }
 
     /**
      * Utility function. Displays horizontal separator spacing.
      */
-    protected void displaySeparatorSpacing() {
+    protected static void displaySeparatorSpacing() {
         String repeated = fillString(MAX_WIDTH + 1, " ");
         System.out.println(V_SYMBOL + repeated + V_SYMBOL);
     }
@@ -42,7 +42,7 @@ public class DisplayFormat {
      * Utility function. Formats and displays a single line of text.
      * @param line 
      */
-    protected void displayLine(String line) {
+    protected static void displayLine(String line) {
         String finalLine = V_SYMBOL + " " + line;
         int lengthDifference = MAX_WIDTH - line.length();
         String emptySpace = fillString(lengthDifference, " ");
