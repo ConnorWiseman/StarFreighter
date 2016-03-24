@@ -3,7 +3,7 @@ package byui.cit260.starFreighter.view;
 import byui.cit260.starFreighter.model.MenuItem;
 
 /**
- * The help menu view, accessible in-game.
+ * The map menu view, accessible in-game.
  */
 public class MapMenu extends MenuView {
     /**
@@ -20,7 +20,7 @@ public class MapMenu extends MenuView {
     public boolean doAction(char action) {
         switch (action) {
             case 'M':
-                displayMap();
+                MapDisplay.display();
                 break;
             case 'T':
                 // travel
@@ -32,12 +32,5 @@ public class MapMenu extends MenuView {
                 break;
         }
         return false;
-    }
-
-    /**
-     * Displays the map.
-     */
-    public void displayMap() {
-        MapDisplay.display();
     }
 }

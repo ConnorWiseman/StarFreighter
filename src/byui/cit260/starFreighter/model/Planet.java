@@ -30,6 +30,14 @@ public final class Planet implements Serializable {
     }
     
     /**
+     * Gets the planet's name.
+     * @return 
+     */
+    public String getName() {
+        return name;
+    }
+    
+    /**
      * Gets the planet's description.
      * @return 
      */

@@ -2,14 +2,17 @@ package byui.cit260.starFreighter.view;
 
 import byui.cit260.starFreighter.control.PlanetSystemController;
 import byui.cit260.starFreighter.model.Point;
+import starfreighter.StarFreighter;
 
 /**
  * A utility for displaying the game's map.
  */
 public final class MapDisplay {
-    // Class constants
+    /**
+     * Class constants.
+     */
     private final static int ROWS = 10; // number of horizontal rows in the map
-    private final static int COLS = 10; // number of vertical columns in the map
+    private final static int COLS = 18; // number of vertical columns in the map
     private final static char SYMBOL_EMPTY = '.'; // used to display empty space
     private final static int MAP_HSPACE = 1; // how much horizontal space in the grid
     private final static int MAP_VSPACE = 0; // how much vertical space in the grid
@@ -45,13 +48,17 @@ public final class MapDisplay {
         
         // Display the map.
         for (int row = 0; row < ROWS; row++) {
-            displayHorizontalSpace();
             for (int col = 0; col < COLS; col++) {
                 System.out.print(displayMap[row][col]);
                 displayHorizontalSpace();
             }
             displayVerticalSpace();
         }
+        
+        // Display the ship's current location.
+        String shipName = StarFreighter.currentGame().getShip().name();
+        String location = StarFreighter.currentGame().getShip().getLocation().getName();
+        TextBox.displayText("The " + shipName + " is currently docked on " + location + ".");
     }
     
     /**

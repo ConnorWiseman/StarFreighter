@@ -22,7 +22,7 @@ public final class PlanetSystemController {
         PlanetSystem system = new PlanetSystem();
         
         // Create each planet using some random numbers, and add it to the
-        // system.
+        // system. Sorry, we gotta do it manually.
         Point krytaCoords = new Point(1, RandomNumbers.range(2, 8));
         Planet kryta = new Planet("Kryta", "A barren desert planet with a few secrets", krytaCoords, 'K');
         system.addPlanet(kryta);
@@ -60,6 +60,21 @@ public final class PlanetSystemController {
         ArrayList<Planet> planets = getSystem().getContents();
         for (Planet planet : planets) {
             if (planet.getCoords() == coords) {
+                return planet;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Retrieves the planet with a given name.
+     * @param name
+     * @return 
+     */
+    public static Planet planetNamed(String name) {
+        ArrayList<Planet> planets = getSystem().getContents();
+        for (Planet planet : planets) {
+            if (planet.getName() == name) {
                 return planet;
             }
         }

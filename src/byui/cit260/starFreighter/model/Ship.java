@@ -17,6 +17,8 @@ public class Ship implements Serializable {
     // Current health/fuel.
     private int fuel;
     private int hull;
+    // The planetary location of this particular ship.
+    private Planet location;
 
     /**
      * Class constructor. Sets default values.
@@ -105,15 +107,32 @@ public class Ship implements Serializable {
     public void setHull(int amount) {
         this.hull = amount;
     }
+    
+    /**
+     * Gets the Ship's current location.
+     * @return 
+     */
+    public Planet getLocation() {
+        return location;
+    }
+    
+    /**
+     * Sets the Ship's current location.
+     * @param location 
+     */
+    public void setLocation(Planet location) {
+        this.location = location;
+    }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.name);
-        hash = 97 * hash + this.fuelCapacity;
-        hash = 97 * hash + this.hullIntegrity;
-        hash = 97 * hash + this.fuel;
-        hash = 97 * hash + this.hull;
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.name);
+        hash = 83 * hash + this.fuelCapacity;
+        hash = 83 * hash + this.hullIntegrity;
+        hash = 83 * hash + this.fuel;
+        hash = 83 * hash + this.hull;
+        hash = 83 * hash + Objects.hashCode(this.location);
         return hash;
     }
 
@@ -141,11 +160,14 @@ public class Ship implements Serializable {
         if (this.hull != other.hull) {
             return false;
         }
-        return Objects.equals(this.name, other.name);
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return Objects.equals(this.location, other.location);
     }
 
     @Override
     public String toString() {
-        return "Ship{" + "name=" + name + ", fuelCapacity=" + fuelCapacity + ", hullIntegrity=" + hullIntegrity + ", fuel=" + fuel + ", hull=" + hull + '}';
+        return "Ship{" + "name=" + name + ", fuelCapacity=" + fuelCapacity + ", hullIntegrity=" + hullIntegrity + ", fuel=" + fuel + ", hull=" + hull + ", location=" + location + '}';
     }
 }

@@ -3,6 +3,7 @@ package byui.cit260.starFreighter.control;
 import byui.cit260.starFreighter.exceptions.GameControlException;
 import byui.cit260.starFreighter.model.CrewRoster;
 import byui.cit260.starFreighter.model.GameInstance;
+import byui.cit260.starFreighter.model.Planet;
 import byui.cit260.starFreighter.model.PlanetSystem;
 import byui.cit260.starFreighter.model.Player;
 import byui.cit260.starFreighter.model.Ship;
@@ -50,6 +51,12 @@ public class GameController {
         /* Pass the new GameInstance up to the main program so it can be
            accessed from within the various game views. */
         StarFreighter.setCurrentGame(newGame);
+        
+        // Set the ship's starting point. We have to do this, 'cause they're
+        // generated randomly. We also have to do this here, because the controller
+        // reads from the game instance.
+        Planet start = PlanetSystemController.planetNamed("Kryta");
+        newShip.setLocation(start);
     }
 
     /**
