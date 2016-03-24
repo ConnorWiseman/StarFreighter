@@ -45,6 +45,14 @@ public abstract class MenuView implements ViewInterface {
         });
         DisplayFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
     }
+    
+    /**
+     * Gets the menu's title.
+     * @return 
+     */
+    protected String getTitle() {
+        return menuTitle;
+    }
 
     @Override
     public char getInput() {
