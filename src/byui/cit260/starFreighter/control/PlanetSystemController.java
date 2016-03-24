@@ -27,7 +27,7 @@ public final class PlanetSystemController {
         Planet kryta = new Planet("Kryta", "A barren desert planet with a few secrets", krytaCoords, 'K');
         system.addPlanet(kryta);
         
-        Point qualufeCoords = new Point(RandomNumbers.range(3, 4), RandomNumbers.range(1, 10));
+        Point qualufeCoords = new Point(RandomNumbers.range(3, 4), RandomNumbers.range(0, 9));
         Planet qualufe = new Planet("Qualufe", "Oceans as far as the eye can see", qualufeCoords, 'Q');
         system.addPlanet(qualufe);
         
@@ -35,7 +35,7 @@ public final class PlanetSystemController {
         Planet mezopan = new Planet("Mezopan", "Green forests and tall trees", mezopanCoords, 'M');
         system.addPlanet(mezopan);
 
-        Point redecentCoords = new Point(RandomNumbers.range(5, 6), RandomNumbers.range(3, 7));
+        Point redecentCoords = new Point(RandomNumbers.range(7, 8), RandomNumbers.range(4, 6));
         Planet redecent = new Planet("Redecent", "The galaxy's capital", redecentCoords, 'R');
         system.addPlanet(redecent);
         
@@ -59,11 +59,35 @@ public final class PlanetSystemController {
     public static Planet planetAt(Point coords) {
         ArrayList<Planet> planets = getSystem().getContents();
         for (Planet planet : planets) {
-            if (planet.getCoords().x() == coords.x() &&
-                planet.getCoords().y() == coords.y()) {
+            if (planet.getCoords() == coords) {
                 return planet;
             }
         }
         return null;
+    }
+
+    /**
+     * Calculates the distance between two planets using the distance formula
+     * @param current
+     * @param desired
+     * @return {double} the distance between the two planets
+     */
+    public static double calculateDistance(Planet current, Planet desired) {
+        /* The distance formula between two points on a coordinate plane
+           is given by sqrt( (x2 - x1)^2 + (y2 - y1)^2 ) */
+
+        // Perform subtraction
+        int coordX = (desired.getCoords().x() - current.getCoords().x());
+        int coordY = (desired.getCoords().y() - current.getCoords().y());
+
+        // Square the result
+        double coordXSquared = Math.pow(coordX, 2);
+        double coordYSquared = Math.pow(coordY, 2);
+
+        // Add the squares
+        double coordSum = coordXSquared + coordYSquared;
+
+        // Return the square root of the summed squares
+        return Math.sqrt(coordSum);
     }
 }

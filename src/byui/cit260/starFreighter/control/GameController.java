@@ -3,7 +3,6 @@ package byui.cit260.starFreighter.control;
 import byui.cit260.starFreighter.exceptions.GameControlException;
 import byui.cit260.starFreighter.model.CrewRoster;
 import byui.cit260.starFreighter.model.GameInstance;
-import byui.cit260.starFreighter.model.GameMap;
 import byui.cit260.starFreighter.model.PlanetSystem;
 import byui.cit260.starFreighter.model.Player;
 import byui.cit260.starFreighter.model.Ship;
