@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- *
- * @author Connor
+ * A game instance object. Contains all necessary values for saving/loading.
  */
 public class GameInstance implements Serializable {
     private Player player;

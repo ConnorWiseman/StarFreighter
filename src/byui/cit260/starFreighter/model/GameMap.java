@@ -3,8 +3,7 @@ package byui.cit260.starFreighter.model;
 import java.io.Serializable;
 
 /**
- *
- * @author Connor
+ * An object representing the game's map.
  */
 public class GameMap implements Serializable {
     // Class constants

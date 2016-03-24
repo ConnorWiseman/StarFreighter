@@ -17,8 +17,7 @@ import java.io.ObjectOutputStream;
 import starfreighter.StarFreighter;
 
 /**
- *
- * @author Connor
+ * Controls the GameInstance object.
  */
 public class GameController {
     

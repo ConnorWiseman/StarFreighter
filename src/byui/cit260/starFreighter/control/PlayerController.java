@@ -3,8 +3,7 @@ package byui.cit260.starFreighter.control;
 import byui.cit260.starFreighter.model.Player;
 
 /**
- *
- * @author Connor
+ * Controls the player object.
  */
 public class PlayerController {
     /**

@@ -3,7 +3,6 @@ package byui.cit260.starFreighter.view;
 /**
  * A utility class for displaying text boxes, menus, and the like in a uniform
  * format.
- * @author Connor
  */
 public class DisplayFormat {
     /**

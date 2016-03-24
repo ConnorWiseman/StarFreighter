@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  * Represents a planet.
- * @author Connor
  */
 public enum Planet implements Serializable {
     /* The size of the map is defined in GameMap on a per-instance basis. If you

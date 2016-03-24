@@ -6,8 +6,7 @@ import byui.cit260.starFreighter.model.CrewRoster;
 import byui.cit260.starFreighter.model.CrewStatistics;
 
 /**
- *
- * @author Connor
+ * Controls the crew.
  */
 public class CrewController {
     public static CrewRoster createCrew(String name) {

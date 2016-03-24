@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 /**
  * A convenient formatter for printing text inside a box.
- * @author Connor
  */
 public final class TextBox {
     /**

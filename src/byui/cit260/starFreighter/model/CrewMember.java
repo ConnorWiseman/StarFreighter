@@ -5,14 +5,14 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * 
- * @author Connor
+ * A class representing a crew member.
  */
 public class CrewMember implements Serializable {
     private final CrewStatistics stats;
     private final String name;
     private int hitPoints = 30;
     private final int maxHitPoints = 30;
+    private boolean alive = true;
 
     public CrewMember(String name, CrewStatistics stats) {
         this.name = name;
@@ -38,13 +38,23 @@ public class CrewMember implements Serializable {
     public void setStat(Role index, int value) {
         stats.get(index.ordinal()).setValue(value);
     }
+    
+    public boolean alive() {
+        return alive;
+    }
+    
+    public void setAlive(boolean status) {
+        alive = status;
+    }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 79 * hash + Objects.hashCode(this.stats);
-        hash = 79 * hash + Objects.hashCode(this.name);
-        hash = 79 * hash + this.hitPoints;
+        hash = 17 * hash + Objects.hashCode(this.stats);
+        hash = 17 * hash + Objects.hashCode(this.name);
+        hash = 17 * hash + this.hitPoints;
+        hash = 17 * hash + this.maxHitPoints;
+        hash = 17 * hash + (this.alive ? 1 : 0);
         return hash;
     }
 
@@ -63,6 +73,12 @@ public class CrewMember implements Serializable {
         if (this.hitPoints != other.hitPoints) {
             return false;
         }
+        if (this.maxHitPoints != other.maxHitPoints) {
+            return false;
+        }
+        if (this.alive != other.alive) {
+            return false;
+        }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -74,6 +90,6 @@ public class CrewMember implements Serializable {
 
     @Override
     public String toString() {
-        return "CrewMember{" + "stats=" + stats + ", name=" + name + ", hitPoints=" + hitPoints + '}';
+        return "CrewMember{" + "stats=" + stats + ", name=" + name + ", hitPoints=" + hitPoints + ", maxHitPoints=" + maxHitPoints + ", alive=" + alive + '}';
     }
 }

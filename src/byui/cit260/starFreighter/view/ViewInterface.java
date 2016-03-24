@@ -2,7 +2,6 @@ package byui.cit260.starFreighter.view;
 
 /**
  * A basic view interface.
- * @author Connor
  */
 interface ViewInterface {
     public void display();

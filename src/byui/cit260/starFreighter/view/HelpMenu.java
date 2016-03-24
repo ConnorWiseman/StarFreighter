@@ -4,7 +4,6 @@ import byui.cit260.starFreighter.model.MenuItem;
 
 /**
  * The help menu view, accessible in-game.
- * @author Connor
  */
 public class HelpMenu extends MenuView {
     /**

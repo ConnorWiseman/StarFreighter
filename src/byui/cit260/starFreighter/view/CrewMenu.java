@@ -7,7 +7,6 @@ import starfreighter.StarFreighter;
 
 /**
  * The game's main menu view.
- * @author Connor
  */
 public final class CrewMenu extends MenuView {
     /**

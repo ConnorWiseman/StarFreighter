@@ -4,8 +4,7 @@ import byui.cit260.starFreighter.model.MenuItem;
 import java.util.ArrayList;
 
 /**
- *
- * @author Connor
+ * An abstraction layer between other menu classes and the view interface.
  */
 public abstract class MenuView implements ViewInterface {
     /**

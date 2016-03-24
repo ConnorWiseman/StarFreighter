@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  * A simple representation of a stat point.
- * @author Connor
  */
 class StatPoint implements Serializable {
     /**

@@ -11,7 +11,6 @@ import starfreighter.StarFreighter;
 
 /**
  * The game's main menu view.
- * @author Connor
  */
 public final class MainMenu extends MenuView {
     /**

@@ -4,8 +4,7 @@ import byui.cit260.starFreighter.model.GameMap;
 import byui.cit260.starFreighter.model.Planet;
 
 /**
- *
- * @author Connor
+ * Controls the map object.
  */
 public class MapController {
     /**

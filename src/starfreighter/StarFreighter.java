@@ -10,7 +10,6 @@ import java.io.PrintWriter;
 
 /**
  * StarFreighter. Let's play?
- * @author Connor
  */
 public class StarFreighter {
     /**

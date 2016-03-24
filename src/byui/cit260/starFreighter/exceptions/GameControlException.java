@@ -1,8 +1,7 @@
 package byui.cit260.starFreighter.exceptions;
 
 /**
- *
- * @author Austin Golding
+ * GameController exception. Primarily thrown during loading/saving.
  */
 public class GameControlException extends Exception {
 

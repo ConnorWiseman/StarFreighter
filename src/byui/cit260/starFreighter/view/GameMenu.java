@@ -4,7 +4,6 @@ import byui.cit260.starFreighter.model.MenuItem;
 
 /**
  * The in-game menu view.
- * @author Connor
  */
 class GameMenu extends MenuView {
     /**

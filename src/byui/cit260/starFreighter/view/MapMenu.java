@@ -6,7 +6,6 @@ import starfreighter.StarFreighter;
 
 /**
  * The help menu view, accessible in-game.
- * @author Connor
  */
 public class MapMenu extends MenuView {
     /**

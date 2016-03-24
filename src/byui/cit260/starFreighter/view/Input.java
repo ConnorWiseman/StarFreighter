@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 /**
  * Convenient methods for retrieving various types of user input.
- * @author Connor
  */
 public final class Input {
 

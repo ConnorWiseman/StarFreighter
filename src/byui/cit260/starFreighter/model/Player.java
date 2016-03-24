@@ -5,7 +5,6 @@ import java.util.Objects;
 
 /**
  * Very simple player object.
- * @author Connor
  */
 public class Player implements Serializable {
     /**

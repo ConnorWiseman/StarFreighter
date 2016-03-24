@@ -5,8 +5,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- *
- * @author Connor
+ * An abstraction layer between a Ship and its CrewMembers.
  */
 public class CrewRoster implements Serializable {
     private final CrewMember[] roster = new CrewMember[5];

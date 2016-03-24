@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  * A simple representation of a pair of coordinates.
- * @author Connor
  */
 public class Point implements Serializable {
     /**

@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * 
- * @author Connor
+ * A class representing a ship. The player has one. Space pirates have them, too.
  */
 public class Ship implements Serializable {
     /**

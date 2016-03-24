@@ -4,8 +4,7 @@ import byui.cit260.starFreighter.model.Ship;
 import starfreighter.StarFreighter;
 
 /**
- *
- * @author Connor
+ * Controls instances of the player's ship.
  */
 public class ShipController {
     /**

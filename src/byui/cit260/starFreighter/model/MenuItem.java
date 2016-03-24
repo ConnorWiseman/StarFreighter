@@ -5,7 +5,6 @@ import java.util.Objects;
 
 /**
  * A simple representation of a menu item.
- * @author Connor
  */
 public class MenuItem implements Serializable {
     /**

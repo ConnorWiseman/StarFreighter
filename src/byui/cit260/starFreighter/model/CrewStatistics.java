@@ -5,8 +5,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- *
- * @author Connor
+ * An abstraction layer between a CrewMember and their StatPoints.
  */
 public class CrewStatistics implements Serializable {
     private final StatPoint[] stats = new StatPoint[5];
