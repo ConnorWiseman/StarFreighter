@@ -1,8 +1,8 @@
 package byui.cit260.starFreighter.view;
 
 import byui.cit260.starFreighter.control.PlanetSystemController;
+import byui.cit260.starFreighter.control.ShipController;
 import byui.cit260.starFreighter.model.Point;
-import starfreighter.StarFreighter;
 
 /**
  * A utility for displaying the game's map.
@@ -54,8 +54,8 @@ public final class MapDisplay {
         }
         
         // Display the ship's current location.
-        String shipName = StarFreighter.currentGame().getShip().name();
-        String location = StarFreighter.currentGame().getShip().getLocation().getName();
+        String shipName = ShipController.getShip().getName();
+        String location = ShipController.getShip().getLocation().getName();
         TextBox.displayText("The " + shipName + " is currently docked on " + location + ".");
     }
     

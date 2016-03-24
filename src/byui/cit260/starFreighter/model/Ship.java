@@ -32,7 +32,7 @@ public class Ship implements Serializable {
      * Gets the Ship's name.
      * @return 
      */
-    public String name() {
+    public String getName() {
         return name;
     }
 

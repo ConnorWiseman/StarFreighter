@@ -106,7 +106,7 @@ public class GameController {
         // Save the current game instance to the directory.
         try (FileOutputStream fop = new FileOutputStream(saveFilePath)) {
             ObjectOutputStream output = new ObjectOutputStream(fop);
-            output.writeObject(StarFreighter.currentGame());
+            output.writeObject(StarFreighter.getCurrentGame());
         } catch (IOException error) {
             throw new GameControlException(error.getMessage());
         }

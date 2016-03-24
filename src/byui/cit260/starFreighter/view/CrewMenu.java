@@ -1,9 +1,8 @@
 package byui.cit260.starFreighter.view;
 
+import byui.cit260.starFreighter.control.CrewController;
 import byui.cit260.starFreighter.model.CrewMember;
-import byui.cit260.starFreighter.model.CrewRoster;
 import byui.cit260.starFreighter.model.MenuItem;
-import starfreighter.StarFreighter;
 
 /**
  * The game's main menu view.
@@ -19,8 +18,7 @@ public final class CrewMenu extends MenuView {
     }
 
     private void displayCrew() {
-        CrewRoster crew = StarFreighter.currentGame().getCrew();
-        for (CrewMember member : crew.getRoster()) {
+        for (CrewMember member : CrewController.getRoster()) {
             System.out.println(member.name() + ":\t\t" + member.hitPoints() +
                 "/" + member.maxHitPoints() + "HP");
         }

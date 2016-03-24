@@ -3,7 +3,6 @@ package byui.cit260.starFreighter.view;
 import byui.cit260.starFreighter.control.ShipController;
 import byui.cit260.starFreighter.model.MenuItem;
 import byui.cit260.starFreighter.model.Ship;
-import starfreighter.StarFreighter;
 
 /**
  * The help menu view, accessible in-game.
@@ -23,9 +22,9 @@ public class ShipMenu extends MenuView {
      * Displays a status report on the player's Ship.
      */
     private void shipStatus() {
-        Ship ship = StarFreighter.currentGame().getShip();
+        Ship ship = ShipController.getShip();
         TextBox.displayText(
-            "Welcome, Captain. The " + ship.name() + " is reporting the" +
+            "Welcome, Captain. The " + ship.getName() + " is reporting the" +
                 " following status:",
             "Hull integrity: " + ship.hull() + "/" + ship.hullIntegrity(),
             "Fuel supply: " + ship.fuel() + "/" + ship.fuelCapacity()

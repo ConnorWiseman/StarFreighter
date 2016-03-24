@@ -2,7 +2,6 @@ package starfreighter;
 
 import byui.cit260.starFreighter.model.GameInstance;
 import byui.cit260.starFreighter.view.MainMenu;
-import byui.cit260.starFreighter.view.TextBox;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,6 +17,7 @@ public class StarFreighter {
     public static final MainMenu MAIN_MENU = new MainMenu();
     private static PrintWriter outFile = null;
     private static BufferedReader inFile = null;
+    private static PrintWriter logFile = null;
 
     /**
      * Class properties.
@@ -46,6 +46,9 @@ public class StarFreighter {
                 if (StarFreighter.outFile != null) {
                     StarFreighter.outFile.close();
                 }
+                if (StarFreighter.logFile != null) {
+                    StarFreighter.logFile.close();
+                }
             } 
             catch (IOException ex) { 
                 System.out.println("Error closing files");
@@ -58,7 +61,7 @@ public class StarFreighter {
      * Retrieves the current game instance.
      * @return 
      */
-    public static GameInstance currentGame() {
+    public static GameInstance getCurrentGame() {
         return CURRENT_GAME;
     }
 

@@ -30,7 +30,15 @@ public class ShipController {
      * @param newName
      */
     public static void renameShip(String newName) {
-        StarFreighter.currentGame().getShip().setName(newName);
+        getShip().setName(newName);
+    }
+    
+    /**
+     * Gets the player's ship from the current game instance.
+     * @return 
+     */
+    public static Ship getShip() {
+        return StarFreighter.getCurrentGame().getShip();
     }
 
     /**

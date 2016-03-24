@@ -62,7 +62,7 @@ public final class PlanetSystemController {
      * @return 
      */
     public static PlanetSystem getSystem() {
-        return StarFreighter.currentGame().getPlanetSystem();
+        return StarFreighter.getCurrentGame().getPlanetSystem();
     }
     
     /**
@@ -116,7 +116,7 @@ public final class PlanetSystemController {
      * @return {double} the distance between the two planets
      */
     public static double calculateDistance(Planet desired) {
-        Planet current = StarFreighter.currentGame().getShip().getLocation();
+        Planet current = ShipController.getShip().getLocation();
         /* The distance formula between two points on a coordinate plane
            is given by sqrt( (x2 - x1)^2 + (y2 - y1)^2 ) */
 

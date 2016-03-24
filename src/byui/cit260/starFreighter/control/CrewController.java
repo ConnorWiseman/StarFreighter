@@ -4,6 +4,7 @@ import byui.cit260.starFreighter.constants.Role;
 import byui.cit260.starFreighter.model.CrewMember;
 import byui.cit260.starFreighter.model.CrewRoster;
 import byui.cit260.starFreighter.model.CrewStatistics;
+import starfreighter.StarFreighter;
 
 /**
  * Controls the crew.
@@ -37,5 +38,9 @@ public class CrewController {
     private static CrewMember createCrewMember(String name) {
         CrewStatistics stats = new CrewStatistics();
         return new CrewMember(name, stats);
+    }
+    
+    public static CrewMember[] getRoster() {
+        return StarFreighter.getCurrentGame().getCrew().getRoster();
     }
 }
