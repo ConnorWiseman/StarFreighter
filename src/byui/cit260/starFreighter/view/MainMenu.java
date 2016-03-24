@@ -76,7 +76,6 @@ public final class MainMenu extends MenuView {
         } catch (GameControlException | IOException | ClassNotFoundException error) {
             out.println("Unable to load game. Error: ");
             System.out.println(error.getMessage());
-            StarFreighter.MAIN_MENU.display();
         }
     }
     

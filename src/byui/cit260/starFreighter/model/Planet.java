@@ -1,62 +1,94 @@
 package byui.cit260.starFreighter.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Represents a planet.
  */
-public enum Planet implements Serializable {
-    /* The size of the map is defined in GameMap on a per-instance basis. If you
-    receive an array out of bounds error, it's because one of the planets
-    defined below falls outside the bounds of the map size.
-    
-    With the current setup, coordinates must also be positive. Sorry!
-    Still working on figuring out that four-quadrant plane.
+public final class Planet implements Serializable {
+    /**
+     * Class members.
      */
-    Kryta("A barren desert planet with a few secrets", 1, 1, 'K'),
-    Qualufe("Oceans as far as the eye can see", 3, 4, 'Q'),
-    Mezopan("Green forests and tall trees", 5, 4, 'M'),
-    Redecent("Galaxy capital", 7, 8, 'R');
-
-    private final String description;
+    private final String name;
+    private final String desc;
     private final Point coords;
     private final char symbol;
 
-    Planet(String description, int x, int y, char symbol) {
-        this.description = description;
-        this.coords = new Point(x, y);
+    /**
+     * Class constructor.
+     * @param name
+     * @param desc
+     * @param coords
+     * @param symbol 
+     */
+    public Planet(String name, String desc, Point coords, char symbol) {
+        this.name = name;
+        this.desc = desc;
+        this.coords = coords;
         this.symbol = symbol;
     }
     
-    public String description() {
-        return description;
+    /**
+     * Gets the planet's description.
+     * @return 
+     */
+    public String getDesc() {
+        return desc;
     }
     
-    public Point coords() {
+    /**
+     * Gets the planet's coordinates.
+     * @return 
+     */
+    public Point getCoords() {
         return coords;
     }
     
+    /**
+     * Gets the planet's map symbol.
+     * @return 
+     */
     public char getSymbol() {
         return symbol;
     }
 
-    public static Planet at(Point coords) {
-        for (Planet planet : values()) {
-            /* Comparing objects was being wonky here- comparing values instead,
-               for now. */
-            if (planet.coords() == coords) {
-                System.out.println("hey");
-            }
-            if (planet.coords().x() == coords.x() &&
-                planet.coords().x() == coords.x()) {
-                return planet;
-            }
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + Objects.hashCode(this.name);
+        hash = 31 * hash + Objects.hashCode(this.desc);
+        hash = 31 * hash + Objects.hashCode(this.coords);
+        hash = 31 * hash + this.symbol;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
         }
-        return null;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Planet other = (Planet) obj;
+        if (this.symbol != other.symbol) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.desc, other.desc)) {
+            return false;
+        }
+        return Objects.equals(this.coords, other.coords);
     }
 
     @Override
     public String toString() {
-        return "Planet{" + "name= " + name() + ", description= " + description + '}';
+        return "Planet{" + "name=" + name + ", desc=" + desc + ", coords=" + coords + ", symbol=" + symbol + '}';
     }
 }

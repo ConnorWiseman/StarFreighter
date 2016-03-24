@@ -1,5 +1,6 @@
 package byui.cit260.starFreighter.model;
 
+import byui.cit260.starFreighter.control.PlanetSystemController;
 import java.io.Serializable;
 
 /**
@@ -55,8 +56,8 @@ public class GameMap implements Serializable {
         // next, fill in the planets
         /* todo: "can use functional operations"? I don't get it,
            sticking with syntax I understand */
-        for (Planet current : Planet.values()) {
-            Point coords = current.coords();
+        for (Planet current : PlanetSystemController.getSystem().getContents()) {
+            Point coords = current.getCoords();
             int x = coords.x();
             int y = coords.y();
             displayMap[y][x] = current.getSymbol();

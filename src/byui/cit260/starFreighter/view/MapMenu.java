@@ -40,25 +40,28 @@ public class MapMenu extends MenuView {
      * Displays the map.
      */
     public void displayMap() {
-        displayTopLegend();
-        displayRows();
+        System.out.println("Placeholder!");
+        //displayTopLegend();
+        //displayRows();
     }
 
     
     /**
      * Displays horizontal spacing using ' '
      */
+    /*
     private void displayHorizontalSpace() {
         GameMap map = StarFreighter.currentGame().getMap();
         for (int i = 0; i < map.getHorizontalSpace(); i++) {
             System.out.print(' ');
         }
-    }
+    }*/
 
     
     /**
      * Displays vertical spacing using '\n'
      */
+    /*
     private void displayVerticalSpace() {
         GameMap map = StarFreighter.currentGame().getMap();
         System.out.print('\n');
@@ -66,12 +69,14 @@ public class MapMenu extends MenuView {
             System.out.print('\n');
         }
     }
+    */
 
 
     /**
      * Displays the top row of coordinate identifiers.
      * Called in displayMap.
      */
+    /*
     private void displayTopLegend() {
         GameMap map = StarFreighter.currentGame().getMap();
         // print a single empty space to offset the legend
@@ -81,7 +86,7 @@ public class MapMenu extends MenuView {
         
         for (int col = 0; col < map.getColumns(); col++) {
             /* Using characters instead of digits, because double-digit numbers
-               make the map really ugly when it's large */
+               make the map really ugly when it's large 
             // offset character by 65, the ASCII value of 'A'
             char colIdentifier = Character.toChars(65 + col)[0];
             System.out.print(colIdentifier);
@@ -90,18 +95,19 @@ public class MapMenu extends MenuView {
         
         // print a single newline to end the legend
         System.out.print('\n');
-    }
+    }*/
 
 
     /**
      * Displays each row.
      * Called in displayMap.
      */
+/*
     private void displayRows() {
         GameMap map = StarFreighter.currentGame().getMap();
         for (int row = 0; row < map.getRows(); row++) {
             /* Using characters instead of digits, because double-digit numbers
-               make the map really ugly when it's large */
+               make the map really ugly when it's large 
             // offset character by 65, the ASCII value of 'A'
             char rowIdentifier = Character.toChars(65 + row)[0];
             System.out.print(rowIdentifier);
@@ -111,6 +117,7 @@ public class MapMenu extends MenuView {
             this.displayVerticalSpace();
         }
     }
+*/
     
 
     /**
@@ -118,6 +125,7 @@ public class MapMenu extends MenuView {
      * Called in displayRows.
      * @param row 
      */
+/*
     private void displayCells(int row) {
         GameMap map = StarFreighter.currentGame().getMap();
         for (int col = 0; col < map.getColumns(); col++) {
@@ -125,4 +133,5 @@ public class MapMenu extends MenuView {
             this.displayHorizontalSpace();
         }
     }
+*/
 }

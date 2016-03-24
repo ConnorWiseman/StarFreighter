@@ -7,11 +7,17 @@ import java.util.Objects;
  * A game instance object. Contains all necessary values for saving/loading.
  */
 public class GameInstance implements Serializable {
+    /**
+     * Class members.
+     */
     private Player player;
     private Ship ship;
     private CrewRoster crew;
-    private GameMap map;
+    private PlanetSystem planets;
 
+    /**
+     * Class constructor.
+     */
     public GameInstance() {
         
     }
@@ -57,28 +63,30 @@ public class GameInstance implements Serializable {
     public void setCrew(CrewRoster crew) {
         this.crew = crew;
     }
-
+    
     /**
-     * @return the map
+     * Gets the planet system.
+     * @return 
      */
-    public GameMap getMap() {
-        return map;
+    public PlanetSystem getPlanetSystem() {
+        return planets;
     }
-
+    
     /**
-     * @param map the map to set
+     * Sets the planet system.
+     * @param planets 
      */
-    public void setMap(GameMap map) {
-        this.map = map;
+    public void setPlanetSystem(PlanetSystem planets) {
+        this.planets = planets;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.player);
-        hash = 17 * hash + Objects.hashCode(this.ship);
-        hash = 17 * hash + Objects.hashCode(this.crew);
-        hash = 17 * hash + Objects.hashCode(this.map);
+        hash = 59 * hash + Objects.hashCode(this.player);
+        hash = 59 * hash + Objects.hashCode(this.ship);
+        hash = 59 * hash + Objects.hashCode(this.crew);
+        hash = 59 * hash + Objects.hashCode(this.planets);
         return hash;
     }
 
@@ -103,11 +111,11 @@ public class GameInstance implements Serializable {
         if (!Objects.equals(this.crew, other.crew)) {
             return false;
         }
-        return Objects.equals(this.map, other.map);
+        return Objects.equals(this.planets, other.planets);
     }
 
     @Override
     public String toString() {
-        return "GameInstance{" + "player=" + player + ", ship=" + ship + ", crew=" + crew + ", map=" + map + '}';
+        return "GameInstance{" + "player=" + player + ", ship=" + ship + ", crew=" + crew + ", planets=" + planets + '}';
     }
 }
