@@ -9,8 +9,8 @@ public class Point implements Serializable {
     /**
      * Class properties.
      */
-    private final int x;
-    private final int y;
+    public final int x;
+    public final int y;
 
     /**
      * Class constructor. Sets the internal coordinates.
@@ -20,22 +20,6 @@ public class Point implements Serializable {
     public Point(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    /**
-     * Gets the x coordinate.
-     * @return 
-     */
-    public int x() {
-        return x;
-    }
-
-    /**
-     * Gets the y coordinate.
-     * @return 
-     */
-    public int y() {
-        return y;
     }
 
     @Override

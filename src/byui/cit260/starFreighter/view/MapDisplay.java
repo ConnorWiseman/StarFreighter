@@ -41,9 +41,7 @@ public final class MapDisplay {
         // Fill the planets in on the map.
         PlanetSystemController.getSystem().getContents().stream().forEach((current) -> {
             Point coords = current.getCoords();
-            int x = coords.x();
-            int y = coords.y();
-            displayMap[y][x] = current.getSymbol();
+            displayMap[coords.y][coords.x] = current.getSymbol();
         });
         
         // Display the map.

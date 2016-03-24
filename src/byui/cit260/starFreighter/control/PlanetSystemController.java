@@ -121,8 +121,8 @@ public final class PlanetSystemController {
            is given by sqrt( (x2 - x1)^2 + (y2 - y1)^2 ) */
 
         // Perform subtraction
-        int coordX = (desired.getCoords().x() - current.getCoords().x());
-        int coordY = (desired.getCoords().y() - current.getCoords().y());
+        int coordX = (desired.getCoords().x - current.getCoords().x);
+        int coordY = (desired.getCoords().y - current.getCoords().y);
 
         // Square the result
         double coordXSquared = Math.pow(coordX, 2);
