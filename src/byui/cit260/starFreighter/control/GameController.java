@@ -54,7 +54,8 @@ public class GameController {
         
         // Set the ship's starting point. We have to do this, 'cause they're
         // generated randomly. We also have to do this here, because the controller
-        // reads from the game instance.
+        // reads from the game instance- without an instance set, we'll get
+        // a null pointer exception.
         Planet start = PlanetSystemController.planetNamed("Kryta");
         newShip.setLocation(start);
     }
