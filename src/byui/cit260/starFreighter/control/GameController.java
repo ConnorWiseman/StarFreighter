@@ -6,7 +6,6 @@ import byui.cit260.starFreighter.model.GameInstance;
 import byui.cit260.starFreighter.model.GameMap;
 import byui.cit260.starFreighter.model.Player;
 import byui.cit260.starFreighter.model.Ship;
-import byui.cit260.starFreighter.view.TextBox;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -32,12 +31,6 @@ public class GameController {
 
         // Create a new Player.
         Player newPlayer = PlayerController.createPlayer(playerName);
-
-        // Welcome the player.
-        TextBox.displayText(
-            "Welcome, Captain " + newPlayer.name() + ".",
-            "What is your ship called, sir?"
-        );
 
         // Create a new Ship.
         Ship newShip = ShipController.createShip(shipName);
