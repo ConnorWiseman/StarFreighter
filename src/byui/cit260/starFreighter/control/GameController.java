@@ -43,7 +43,7 @@ public class GameController {
         // Create a new Ship.
         Ship newShip = ShipController.createShip(shipName);
         
-        // Create the player's inventory.
+        // Create the player's inventory and give them a little cash.
         Inventory newInventory = InventoryController.createInventory();
         newInventory.setCurrency(100);
 

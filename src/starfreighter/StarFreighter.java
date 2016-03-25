@@ -1,7 +1,6 @@
 package starfreighter;
 
 import byui.cit260.starFreighter.model.GameInstance;
-import byui.cit260.starFreighter.view.ErrorView;
 import byui.cit260.starFreighter.view.MainMenu;
 import java.io.BufferedReader;
 import java.io.IOException;

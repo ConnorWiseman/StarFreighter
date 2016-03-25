@@ -30,6 +30,7 @@ public class InventoryController {
         Inventory playerInventory = new Inventory();
         
         playerInventory.addItem(new InventoryItem("Testing", 100));
+        playerInventory.addItem(new InventoryItem("More!", 1000));
         
         return playerInventory;
     }
@@ -82,11 +83,17 @@ public class InventoryController {
      * @param item 
      */
     public static void buyItem(InventoryItem item) {
-        // get player's current location
-        // remove item from shop at current location
-        // add value to shop's currency
-        // add item to player's inventory
-        // remove value from player's currency
-        // done
+        Inventory currentInventory = getInventory();
+        
+        Planet currentLocation = ShipController.getShip().getLocation();
+        Inventory otherInventory = currentLocation.getShop();
+        
+        otherInventory.removeItem(item);
+        otherInventory.addCurrency(item.getValue());
+        currentInventory.addItem(item);
+        currentInventory.removeCurrency(item.getValue());
+
+        sortByValue(currentInventory);
+        sortByValue(otherInventory);
     }
 }
