@@ -1,6 +1,7 @@
 package byui.cit260.starFreighter.control;
 
 import byui.cit260.starFreighter.constants.Role;
+import byui.cit260.starFreighter.model.CrewRoster;
 import byui.cit260.starFreighter.model.Inventory;
 import byui.cit260.starFreighter.model.InventoryItem;
 import byui.cit260.starFreighter.model.Planet;
@@ -40,7 +41,7 @@ public class InventoryController {
      * Gets the player's inventory.
      * @return 
      */
-    public static Inventory getInventory() {
+    public static Inventory getPlayerInventory() {
         return StarFreighter.getCurrentGame().getInventory();
     }
 
@@ -80,7 +81,8 @@ public class InventoryController {
      * @return 
      */
     public static int calculateResaleValue(InventoryItem item) {
-        int tradeModifier = CrewController.getCrewMemberAssignedTo(Role.TRADER).getStat(Role.TRADER);
+        CrewRoster playerCrew = CrewController.getPlayerRoster();
+        int tradeModifier = playerCrew.getCrewMemberAssignedTo(Role.TRADER).getStat(Role.TRADER);
         double baseResaleValue = 0.45;
         double resaleValue = baseResaleValue + (0.05 * tradeModifier);
         return (int) ((int) item.getValue() * resaleValue);
@@ -91,17 +93,17 @@ public class InventoryController {
      * @param item 
      */
     public static void sellItem(InventoryItem item) {
-        Inventory currentInventory = getInventory();
+        Inventory playerInventory = getPlayerInventory();
         
         Planet currentLocation = ShipController.getShip().getLocation();
         Inventory otherInventory = currentLocation.getShop();
         
-        currentInventory.removeItem(item);
-        currentInventory.addCurrency(calculateResaleValue(item));
+        playerInventory.removeItem(item);
+        playerInventory.addCurrency(calculateResaleValue(item));
         otherInventory.addItem(item);
         otherInventory.removeCurrency(item.getValue());
 
-        sortByValue(currentInventory);
+        sortByValue(playerInventory);
         sortByValue(otherInventory);
     }
 
@@ -110,17 +112,17 @@ public class InventoryController {
      * @param item 
      */
     public static void buyItem(InventoryItem item) {
-        Inventory currentInventory = getInventory();
+        Inventory playerInventory = getPlayerInventory();
         
         Planet currentLocation = ShipController.getShip().getLocation();
         Inventory otherInventory = currentLocation.getShop();
         
         otherInventory.removeItem(item);
         otherInventory.addCurrency(item.getValue());
-        currentInventory.addItem(item);
-        currentInventory.removeCurrency(item.getValue());
+        playerInventory.addItem(item);
+        playerInventory.removeCurrency(item.getValue());
 
-        sortByValue(currentInventory);
+        sortByValue(playerInventory);
         sortByValue(otherInventory);
     }
     
@@ -140,7 +142,7 @@ public class InventoryController {
         InventoryItem newParts = new InventoryItem("New Parts", 15);
 
         // ... then add it to the player's inventory.
-        Inventory playerInventory = getInventory();
+        Inventory playerInventory = getPlayerInventory();
         playerInventory.addItem(junk1);
         playerInventory.addItem(junk2);
         playerInventory.addItem(junk3);
@@ -153,5 +155,13 @@ public class InventoryController {
 
         // Sort the player's inventory as a parting gesture.
         sortByValue(playerInventory);
+    }
+    
+    /**
+     * Empties the specified inventory.
+     * @param inventory 
+     */
+    public static void emptyInventory(Inventory inventory) {
+        inventory.empty();
     }
 }

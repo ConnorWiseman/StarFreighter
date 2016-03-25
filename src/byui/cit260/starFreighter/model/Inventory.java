@@ -77,6 +77,13 @@ public class Inventory implements Serializable {
     public void removeItem(InventoryItem item) {
         contents.remove(item);
     }
+    
+    /**
+     * Clears the contents of this inventory.
+     */
+    public void empty() {
+        contents.clear();
+    }
 
     @Override
     public int hashCode() {

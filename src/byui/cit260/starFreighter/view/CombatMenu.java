@@ -1,8 +1,14 @@
 package byui.cit260.starFreighter.view;
 
 import byui.cit260.starFreighter.constants.Difficulty;
+import byui.cit260.starFreighter.constants.Role;
+import byui.cit260.starFreighter.control.CombatController;
+import byui.cit260.starFreighter.control.CrewController;
+import byui.cit260.starFreighter.control.InventoryController;
 import byui.cit260.starFreighter.control.PirateController;
 import byui.cit260.starFreighter.control.ShipController;
+import byui.cit260.starFreighter.model.CrewRoster;
+import byui.cit260.starFreighter.model.Inventory;
 import byui.cit260.starFreighter.model.MenuItem;
 import byui.cit260.starFreighter.model.Ship;
 import byui.cit260.starFreighter.model.SpacePirate;
@@ -12,6 +18,11 @@ import java.io.IOException;
  * The combat menu is used in-game to fight off space pirates.
  */
 public class CombatMenu extends MenuView {
+    /**
+     * Class members.
+     */
+    private SpacePirate enemy;
+
     /**
      * Class constructor. Sets menu title and defines all menu items.
      */
@@ -26,23 +37,107 @@ public class CombatMenu extends MenuView {
      * @param difficulty
      */
     public void initiateCombat(Difficulty difficulty) {
-        SpacePirate enemyShip = PirateController.createEnemy(difficulty);
-        CONSOLE.print(enemyShip);
+        // Update the enemy to reflect the current encounter.
+        enemy = PirateController.createEnemy(difficulty);
+        
+        // Then display the menu.
         display();
     }
     
     /**
      * Fights the enemy.
+     * @todo Implement this!
      */
-    public void engageEnemy() {
+    private boolean engageEnemy() {
+        // Get the player and enemy ships.
+        Ship playerShip = ShipController.getShip();
+        Ship enemyShip = enemy.getShip();
+                
+        // Get the player and enemy crews.
+        CrewRoster playerCrew = CrewController.getPlayerRoster();
+        CrewRoster enemyCrew = enemy.getRoster();
         
+        // Get the player and enemy attack pools. These are essentially the number
+        // of virtual dice to roll for either party. Larger pools = more dice =
+        // greater potential damage.
+        // Luck could still mess you up, though, so always weight the player's
+        // pool in their favor (+2).
+        // Upset players = nobody plays. It's the opposite of the Las Vegas
+        // house-must-win philosophy.
+        int playerAttackPool = playerCrew.getCrewMemberAssignedTo(Role.FIGHTER).getStat(Role.FIGHTER) + 2;
+        int enemyAttackPool = enemyCrew.getCrewMemberAssignedTo(Role.FIGHTER).getStat(Role.FIGHTER);
+        
+        // Calculate damage amounts.
+        int playerDamage = CombatController.calculateDamage(playerAttackPool);
+        int enemyDamage = CombatController.calculateDamage(enemyAttackPool);
+        
+        // Display battle information.
+        TextBox.displayText(
+            "The space pirates attack! Hull integrity drops by " +
+                enemyDamage +
+                " points!",
+            "The " + playerShip.getName() + " returns fire! The enemy " +
+                "vessel's hull integrity drops by " +
+                playerDamage +
+                " points!"
+        );
+        
+        // Have each ship trade blows, as it were.
+        playerShip.setHull(playerShip.getHull() - enemyDamage);
+        enemyShip.setHull(enemyShip.getHull() - playerDamage);
+        
+        // Handle the results of this round of battle.
+        if (playerShip.getHull() <= 0 && enemyShip.getHull() <= 0) {
+            // Set the hull to 1.
+            playerShip.setHull(1);
+            
+            // Display the outcome.
+            TextBox.displayText(
+                "The enemy's ship explodes in a fiery blast," +
+                " but the " +
+                playerShip.getName() +
+                " has sustained crippling damage. You barely manage to drift" +
+                " to safety..."
+            );
+            return true;
+        }
+        else if (playerShip.getHull() <= 0) {
+            // Set the hull to 1.
+            playerShip.setHull(1);
+            
+            // Take the player's items and half their money.
+            Inventory playerInventory = InventoryController.getPlayerInventory();
+            InventoryController.emptyInventory(playerInventory);
+            playerInventory.setCurrency(playerInventory.getCurrency() / 2);
+            
+            // Display the outcome.
+            TextBox.displayText(
+                "The space pirates prove victorious. They board the " +
+                    playerShip.getName() +
+                    " and plunder your cargo, leaving nothing behind.",
+                "Your battered vessel lands"
+            );
+            return true;
+        }
+        else if (enemyShip.getHull() <= 0) {
+            // add a bunch of stuff from the pirates
+            // Display the outcome.
+            TextBox.displayText(
+                "You destroy the space pirates' vessel and " +
+                "seize their cargo."
+            );
+            return true;
+        }
+
+        // Return false by default.
+        return false;
     }
     
     /**
      * Flees the enemy.
      * @return 
      */
-    public boolean fleeEnemy() {
+    private boolean fleeEnemy() {
         try {
             // Get the player's ship.
             Ship playerShip = ShipController.getShip();
@@ -99,7 +194,9 @@ public class CombatMenu extends MenuView {
     public boolean doAction(char action) {
         switch (action) {
             case 'F': {
-                engageEnemy();
+                if (engageEnemy()) {
+                    return true;
+                }
                 break;
             }
             case 'R': {

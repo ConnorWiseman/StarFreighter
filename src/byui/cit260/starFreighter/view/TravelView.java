@@ -40,11 +40,16 @@ public class TravelView extends Display {
             double distance = 0.0;
 
             while (true) {
-                // Get an uppercase character for the player's selection.
-                char selection = Input.getCharSameLineUppercase("Enter planet symbol: ");
+                // Use a nested loop to make sure we get a destination and not null.
+                while (destination == null) {
+                    // Get an uppercase character for the player's selection.
+                    char selection = Input.getCharSameLineUppercase("Enter planet symbol: ");
+
+                    // Set the destination.
+                    destination = PlanetSystemController.planetAtSymbol(selection);
+                }
                 
-                // Set the destination and distance.
-                destination = PlanetSystemController.planetAtSymbol(selection);
+                // Calculate the distance.
                 distance = PlanetSystemController.calculateDistance(destination);
                 
                 // Check to see if the player is traveling to a different planet.

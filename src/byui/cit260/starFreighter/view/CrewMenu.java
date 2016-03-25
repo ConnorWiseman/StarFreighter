@@ -14,7 +14,6 @@ public final class CrewMenu extends MenuView {
     public CrewMenu() {
         menuTitle = "Crew Menu";
         menuItems.add(new MenuItem('S', "Crew status"));
-        menuItems.add(new MenuItem('D', "Details"));
         menuItems.add(new MenuItem('E', "Exit"));
     }
 
@@ -23,8 +22,8 @@ public final class CrewMenu extends MenuView {
      * @todo Tidy it up with printf?
      */
     private void displayCrew() {
-        for (CrewMember member : CrewController.getRoster()) {
-            CONSOLE.println(member.name() + ":\t\t" + member.getHitPoints() +
+        for (CrewMember member : CrewController.getPlayerRoster().getContents()) {
+            CONSOLE.println(member.getName() + ":\t\t" + member.getHitPoints() +
                 "/" + member.getMaxHitPoints() + "HP");
         }
     }
@@ -34,9 +33,6 @@ public final class CrewMenu extends MenuView {
         switch (action) {
             case 'S': {
                 displayCrew();
-                break;
-            }
-            case 'D': {
                 break;
             }
             case 'E': {

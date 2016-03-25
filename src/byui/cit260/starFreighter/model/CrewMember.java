@@ -9,45 +9,91 @@ import java.util.Objects;
  * dastardly space pirates.
  */
 public class CrewMember implements Serializable {
+    /**
+     * Class members.
+     */
     private final CrewStatistics stats;
     private final String name;
     private int hitPoints = 30;
     private final int maxHitPoints = 30;
     private boolean alive = true;
 
+    /**
+     * Constructor
+     * @param name
+     * @param stats 
+     */
     public CrewMember(String name, CrewStatistics stats) {
         this.name = name;
         this.stats = stats;
     }
 
-    public String name() {
+    /**
+     * Gets the crew member's name.
+     * @return 
+     */
+    public String getName() {
         return name;
     }
     
+    /**
+     * Gets the crew member's hit points.
+     * @return 
+     */
+    public int getHitPoints() {
+        return hitPoints;
+    }
+    
+    /**
+     * Sets the crew member's hit points.
+     * @param value 
+     */
     public void setHitPoints(int value) {
         hitPoints = value;
     }
 
-    public int getHitPoints() {
-        return hitPoints;
-    }
-
+    /**
+     * Gets the crew member's max hit points.
+     * @return 
+     */
     public int getMaxHitPoints() {
         return maxHitPoints;
     }
 
+    /**
+     * Gets a specified stat from the crew member.
+     * @param index
+     * @return 
+     */
     public int getStat(Role index) {
-        return stats.get(index.ordinal()).value();
+        if (alive) {
+            return stats.get(index.ordinal()).value();
+        }
+        // If the crew member is dead, their stats are all effectively zero.
+        return 0;
     }
 
+    /**
+     * Sets the crew member's specified stat.
+     * @param index
+     * @param value 
+     */
     public void setStat(Role index, int value) {
         stats.get(index.ordinal()).setValue(value);
     }
     
+    /**
+     * Gets the crew member's living status.
+     * @return 
+     */
     public boolean getAlive() {
         return alive;
     }
     
+    /**
+     * Sets the crew member's living status.
+     * @param status 
+     */
     public void setAlive(boolean status) {
         alive = status;
     }

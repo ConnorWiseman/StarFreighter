@@ -1,6 +1,7 @@
 package byui.cit260.starFreighter.control;
 
 import byui.cit260.starFreighter.constants.Role;
+import byui.cit260.starFreighter.model.CrewRoster;
 import byui.cit260.starFreighter.model.Ship;
 import starfreighter.StarFreighter;
 
@@ -50,7 +51,8 @@ public class ShipController {
      * @return 
      */
     public static int calculateFuelCost(double distance) {
-        int pilotModifier = CrewController.getCrewMemberAssignedTo(Role.PILOT).getStat(Role.PILOT);
+        CrewRoster playerCrew = CrewController.getPlayerRoster();
+        int pilotModifier = playerCrew.getCrewMemberAssignedTo(Role.PILOT).getStat(Role.PILOT);
         int fuelCostModifier = 11 - pilotModifier;
         return (int) ((int) distance * fuelCostModifier);
     }

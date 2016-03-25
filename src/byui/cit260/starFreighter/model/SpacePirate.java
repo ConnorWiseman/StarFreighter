@@ -22,6 +22,22 @@ public class SpacePirate implements Serializable {
         this.ship = ship;
         this.crew = crew;
     }
+    
+    /**
+     * Gets the space pirate's ship.
+     * @return 
+     */
+    public Ship getShip() {
+        return ship;
+    }
+    
+    /**
+     * Gets the space pirate's crew.
+     * @return 
+     */
+    public CrewRoster getRoster() {
+        return crew;
+    }
 
     @Override
     public int hashCode() {

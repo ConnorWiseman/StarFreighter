@@ -17,7 +17,7 @@ public class CrewRoster implements Serializable {
      * Gets the crew roster.
      * @return 
      */
-    public CrewMember[] getRoster() {
+    public CrewMember[] getContents() {
         return roster;
     }
 
@@ -28,6 +28,15 @@ public class CrewRoster implements Serializable {
      */
     public void set(Role index, CrewMember crewMember) {
         roster[index.ordinal()] = crewMember;
+    }
+
+    /**
+     * Gets the crew member assigned to a specific role.
+     * @param role
+     * @return 
+     */
+    public CrewMember getCrewMemberAssignedTo(Role role) {
+        return getContents()[role.ordinal()];
     }
 
     /**

@@ -28,7 +28,7 @@ public final class InventoryMenu extends MenuView {
      * @todo Fix the way this prints out. printf, maybe?
      */
     private void displayInventoryContents() {
-        Inventory playerInventory = InventoryController.getInventory();
+        Inventory playerInventory = InventoryController.getPlayerInventory();
         CONSOLE.println("You have " + playerInventory.getCurrency() + " " + InventoryController.CURRENCY);
         CONSOLE.println("[Item name]\t[Value]");
         playerInventory.getContents().stream().forEach((current) -> {
@@ -40,34 +40,11 @@ public final class InventoryMenu extends MenuView {
     }
     
     /**
-     * Displays the item list of an inventory. Used during buying/selling.
-     * @param inventory 
-     * @todo printf?
-     */
-    private void displayItemList(ArrayList<InventoryItem> inventory) {
-        // Must keep track of index manually; ArrayList indexOf method returns
-        // duplicate indexes for separate items with the same values.
-        int index = 1;
-        for (InventoryItem current : inventory) {
-            // Pad the index with a leading zero for readability's sake.
-            CONSOLE.write("[");
-            if (index < 10) {
-                CONSOLE.write("0");
-            }
-            CONSOLE.write(index + "] - " + current.getName() + "\t");
-            CONSOLE.write(InventoryController.calculateResaleValue(current) + "\n");
-            CONSOLE.flush();
-            // Increment the index.
-            index++;
-        }
-    }
-    
-    /**
      * Sells an item to the shop at the player's current location.
      */
     private void sellItem() {
         // Get the player's inventory.
-        ArrayList<InventoryItem> playerInventory = InventoryController.getInventory().getContents();
+        ArrayList<InventoryItem> playerInventory = InventoryController.getPlayerInventory().getContents();
         
         // Ensure there are items to sell.
         if (!(playerInventory.size() > 0)) {
@@ -77,16 +54,42 @@ public final class InventoryMenu extends MenuView {
         
         try {
             // Display the player's inventory.
-            displayItemList(playerInventory);
+            int index = 1;
+            for (InventoryItem current : playerInventory) {
+                // Pad the index with a leading zero for readability's sake.
+                CONSOLE.write("[");
+                if (index < 10) {
+                    CONSOLE.write("0");
+                }
+                CONSOLE.write(index + "] - " + current.getName() + "\t");
+                CONSOLE.write(InventoryController.calculateResaleValue(current) + "\n");
+                CONSOLE.flush();
+                // Increment the index.
+                index++;
+            }
 
             // Offset the selection by minus one to make it "computer-readable."
             int selection = Input.getIntSameLine("Choose an item to sell: ") - 1;
+            
+            // Get the item to sell.
+            InventoryItem itemToSell = playerInventory.get(selection);
 
             // If the user got smart and gave us a number that doesn't exist
             // in the inventory ArrayList indices, we need to catch the
             // impending error in addition to the IO exception potentially
             // thrown by Input class's methods.
-            InventoryController.sellItem(playerInventory.get(selection));
+            InventoryController.sellItem(itemToSell);
+            
+            // Display an explanatory message.
+            TextBox.displayText(
+                "You sold one " +
+                itemToSell.getName() +
+                " and now have " +
+                InventoryController.getPlayerInventory().getCurrency() +
+                " " +
+                InventoryController.CURRENCY +
+                "."
+            );
         } catch (IOException | IndexOutOfBoundsException error) {
             ErrorView.display(this.getClass().getName(), error.getMessage());
         }
@@ -107,16 +110,42 @@ public final class InventoryMenu extends MenuView {
         
         try {
             // Display the shop's inventory.
-            displayItemList(shopStock);
+            int index = 1;
+            for (InventoryItem current : shopStock) {
+                // Pad the index with a leading zero for readability's sake.
+                CONSOLE.write("[");
+                if (index < 10) {
+                    CONSOLE.write("0");
+                }
+                CONSOLE.write(index + "] - " + current.getName() + "\t");
+                CONSOLE.write(current.getValue() + "\n");
+                CONSOLE.flush();
+                // Increment the index.
+                index++;
+            }
 
             // Offset the selection by minus one to make it "computer-readable."
             int selection = Input.getIntSameLine("Choose an item to buy: ") - 1;
+
+            // Get the item to buy.
+            InventoryItem itemToBuy = shopStock.get(selection);
 
             // If the user got smart and gave us a number that doesn't exist
             // in the inventory ArrayList indices, we need to catch the
             // impending error in addition to the IO exception potentially
             // thrown by Input class's methods.
-            InventoryController.buyItem(shopStock.get(selection));
+            InventoryController.buyItem(itemToBuy);
+            
+            // Display an explanatory message.
+            TextBox.displayText(
+                "You bought one " +
+                itemToBuy.getName() +
+                " and now have " +
+                InventoryController.getPlayerInventory().getCurrency() +
+                " " +
+                InventoryController.CURRENCY +
+                "."
+            );
         } catch (IOException | IndexOutOfBoundsException error) {
             ErrorView.display(this.getClass().getName(), error.getMessage());
         }
