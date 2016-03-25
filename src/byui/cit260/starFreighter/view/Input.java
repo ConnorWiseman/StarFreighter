@@ -22,6 +22,22 @@ public final class Input {
     private Input() {
         
     }
+    
+    
+    /**
+     * Displays a prompt.
+     * @param prompt
+     * @param sameLine 
+     */
+    private static void displayPrompt(String prompt, boolean sameLine) {
+        if (sameLine == false) {
+            console.println(prompt);
+        }
+        else {
+            console.write(prompt);
+            console.flush();
+        }
+    }
 
     /**
      * Gets a character, accepting input on the next line.
@@ -73,21 +89,12 @@ public final class Input {
         char characterValue;
 
         while(true) {
-            if (sameLine) {
-                console.write(prompt);
-                console.flush();
-            }
-            else {
-                console.println(prompt);
-            }
-
+            displayPrompt(prompt, sameLine);
             String value = KEYBOARD_INPUT.readLine().trim();
-            
             if (value.length() < 1) {
                 console.println("Invalid input - please enter something.");
                 continue;
             }
-
             characterValue = value.charAt(0);
             // Once we have valid input, break from the loop.
             break;
@@ -127,16 +134,8 @@ public final class Input {
         String value = null;
 
         while(true) {
-            if (sameLine) {
-                console.write(prompt);
-                console.flush();
-            }
-            else {
-                console.println(prompt);
-            }
-
+            displayPrompt(prompt, sameLine);
             value = KEYBOARD_INPUT.readLine().trim();
-            
             if (value.length() < 1) {
                 console.println("Invalid input - please enter something.");
                 continue;
@@ -179,14 +178,7 @@ public final class Input {
         int value;
 
         while(true) {
-            if (sameLine) {
-                console.write(prompt);
-                console.flush();
-            }
-            else {
-                console.println(prompt);
-            }
-
+            displayPrompt(prompt, sameLine);
             // Attempt to read an integer in.
             try {
                 value = Integer.parseInt(KEYBOARD_INPUT.readLine().trim());
@@ -194,7 +186,6 @@ public final class Input {
                 console.println("Invalid input - please enter an integer.");
                 continue;
             }
-            
             // Once we have valid input, break from the loop.
             break;
         }
