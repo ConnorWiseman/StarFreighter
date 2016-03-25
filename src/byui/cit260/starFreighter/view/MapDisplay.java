@@ -3,13 +3,11 @@ package byui.cit260.starFreighter.view;
 import byui.cit260.starFreighter.control.PlanetSystemController;
 import byui.cit260.starFreighter.control.ShipController;
 import byui.cit260.starFreighter.model.Point;
-import java.io.PrintWriter;
-import starfreighter.StarFreighter;
 
 /**
  * A utility for displaying the game's map.
  */
-public final class MapDisplay {
+public final class MapDisplay extends Display {
     /**
      * Class constants.
      */
@@ -18,7 +16,6 @@ public final class MapDisplay {
     private final static char SYMBOL_EMPTY = '.'; // used to display empty space
     private final static int MAP_HSPACE = 1; // how much horizontal space in the grid
     private final static int MAP_VSPACE = 0; // how much vertical space in the grid
-    private final static PrintWriter console = StarFreighter.getOutFile();
 
     /**
      * Private constructor prevents instantiation.
@@ -31,6 +28,9 @@ public final class MapDisplay {
      * Displays the map.
      */
     public static void display() {
+        // Display a message indicating the map view.
+        TextBox.displayText("All known planets in this sector of the galaxy:");
+        
         // Create an empty map to display.
         char[][] displayMap = new char[ROWS][COLS];
         
@@ -50,8 +50,8 @@ public final class MapDisplay {
         // Display the map.
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
-                console.write(displayMap[row][col]);
-                console.flush();
+                CONSOLE.write(displayMap[row][col]);
+                CONSOLE.flush();
                 displayHorizontalSpace();
             }
             displayVerticalSpace();
@@ -68,8 +68,8 @@ public final class MapDisplay {
      */
     private static void displayHorizontalSpace() {
         for (int i = 0; i < MAP_HSPACE; i++) {
-            console.write(' ');
-            console.flush();
+            CONSOLE.write(' ');
+            CONSOLE.flush();
         }
     }
 
@@ -77,11 +77,11 @@ public final class MapDisplay {
      * Displays vertical spacing using '\n'
      */
     private static void displayVerticalSpace() {
-        console.write('\n');
-        console.flush();
+        CONSOLE.write('\n');
+        CONSOLE.flush();
         for (int i = 0; i < MAP_VSPACE; i++) {
-            console.write('\n');
-            console.flush();
+            CONSOLE.write('\n');
+            CONSOLE.flush();
         }
     }
 }

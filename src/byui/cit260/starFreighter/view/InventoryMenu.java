@@ -42,11 +42,14 @@ public final class InventoryMenu extends MenuView {
     /**
      * Displays the item list of an inventory. Used during buying/selling.
      * @param inventory 
+     * @todo printf?
      */
     private void displayItemList(ArrayList<InventoryItem> inventory) {
-        inventory.stream().forEach((InventoryItem current) -> {
-            // Offset the index by one to make the numbers "human-readable."
-            int index = inventory.indexOf(current) + 1;
+        // Must keep track of index manually; ArrayList indexOf method returns
+        // duplicate indexes for separate items with the same values.
+        int index = 1;
+        for (InventoryItem current : inventory) {
+            // Pad the index with a leading zero for readability's sake.
             console.write("[");
             if (index < 10) {
                 console.write("0");
@@ -54,7 +57,9 @@ public final class InventoryMenu extends MenuView {
             console.write(index + "] - " + current.getName() + "\t");
             console.write(InventoryController.calculateResaleValue(current) + "\n");
             console.flush();
-        });
+            // Increment the index.
+            index++;
+        }
     }
     
     /**
@@ -67,7 +72,15 @@ public final class InventoryMenu extends MenuView {
                 displayItemList(playerInventory);
                 // Offset the selection by minus one to make it "computer-readable."
                 int selection = Input.getIntSameLine("Choose an item to sell: ") - 1;
-                InventoryController.sellItem(playerInventory.get(selection));
+                
+                // If the user got smart and gave us a number that doesn't exist
+                // in the inventory ArrayList indices, we need to catch the
+                // impending error.
+                try {
+                    InventoryController.sellItem(playerInventory.get(selection));
+                } catch(IndexOutOfBoundsException error) {
+                    ErrorView.display(this.getClass().getName(), error.getMessage());
+                }
             }
             else {
                 console.println("You have no items to sell!");
