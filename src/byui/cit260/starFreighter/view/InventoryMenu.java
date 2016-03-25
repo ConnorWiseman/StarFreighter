@@ -66,26 +66,28 @@ public final class InventoryMenu extends MenuView {
      * Sells an item to the shop at the player's current location.
      */
     private void sellItem() {
+        // Get the player's inventory.
+        ArrayList<InventoryItem> playerInventory = InventoryController.getInventory().getContents();
+        
+        // Ensure there are items to sell.
+        if (!(playerInventory.size() > 0)) {
+            TextBox.displayText("You have no items to sell!");
+            return;
+        }
+        
         try {
-            ArrayList<InventoryItem> playerInventory = InventoryController.getInventory().getContents();
-            if (playerInventory.size() > 0) { 
-                displayItemList(playerInventory);
-                // Offset the selection by minus one to make it "computer-readable."
-                int selection = Input.getIntSameLine("Choose an item to sell: ") - 1;
-                
-                // If the user got smart and gave us a number that doesn't exist
-                // in the inventory ArrayList indices, we need to catch the
-                // impending error.
-                try {
-                    InventoryController.sellItem(playerInventory.get(selection));
-                } catch(IndexOutOfBoundsException error) {
-                    ErrorView.display(this.getClass().getName(), error.getMessage());
-                }
-            }
-            else {
-                console.println("You have no items to sell!");
-            }
-        } catch (IOException error) {
+            // Display the player's inventory.
+            displayItemList(playerInventory);
+
+            // Offset the selection by minus one to make it "computer-readable."
+            int selection = Input.getIntSameLine("Choose an item to sell: ") - 1;
+
+            // If the user got smart and gave us a number that doesn't exist
+            // in the inventory ArrayList indices, we need to catch the
+            // impending error in addition to the IO exception potentially
+            // thrown by Input class's methods.
+            InventoryController.sellItem(playerInventory.get(selection));
+        } catch (IOException | IndexOutOfBoundsException error) {
             ErrorView.display(this.getClass().getName(), error.getMessage());
         }
     }
@@ -94,18 +96,28 @@ public final class InventoryMenu extends MenuView {
      * Buys an item from the shop at the player's current location.
      */
     private void buyItem() {
+        // Get the shop's inventory.
+        ArrayList<InventoryItem> shopStock = ShipController.getShip().getLocation().getShop().getContents();
+        
+        // Ensure there are items to buy.
+        if (!(shopStock.size() > 0)) {
+            TextBox.displayText("There are no items for sale here.");
+            return;
+        }
+        
         try {
-            ArrayList<InventoryItem> shopStock = ShipController.getShip().getLocation().getShop().getContents();
-            if (shopStock.size() > 0) { 
-                displayItemList(shopStock);
-                // Offset the selection by minus one to make it "computer-readable."
-                int selection = Input.getIntSameLine("Choose an item to buy: ") - 1;
-                InventoryController.buyItem(shopStock.get(selection));
-            }
-            else {
-                console.println("There are no items for sale here.");
-            }
-        } catch (IOException error) {
+            // Display the shop's inventory.
+            displayItemList(shopStock);
+
+            // Offset the selection by minus one to make it "computer-readable."
+            int selection = Input.getIntSameLine("Choose an item to buy: ") - 1;
+
+            // If the user got smart and gave us a number that doesn't exist
+            // in the inventory ArrayList indices, we need to catch the
+            // impending error in addition to the IO exception potentially
+            // thrown by Input class's methods.
+            InventoryController.buyItem(shopStock.get(selection));
+        } catch (IOException | IndexOutOfBoundsException error) {
             ErrorView.display(this.getClass().getName(), error.getMessage());
         }
     }
