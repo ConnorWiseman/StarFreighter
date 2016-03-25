@@ -36,10 +36,8 @@ public class ShipController {
         // Create a new enemy Ship.
         Ship enemyShip = new Ship("Space Pirates");
         
-        // Assign values to the Ship's properties.
-        enemyShip.setFuelCapacity(difficulty.getRating());
-        enemyShip.setHullIntegrity(difficulty.getRating());
-        enemyShip.setFuel(enemyShip.fuelCapacity());
+        // Set the ship's hull integrity. Fuel doesn't matter, pirates don't travel.
+        enemyShip.setHullIntegrity(difficulty.getHullIntegrity());
         enemyShip.setHull(enemyShip.hullIntegrity());
 
         return enemyShip;
@@ -68,7 +66,7 @@ public class ShipController {
      * @return 
      */
     public static int calculateFuelCost(double distance) {
-        int pilotModifier = CrewController.getCrewMemberAssignedTo(Role.PILOT).stat(Role.PILOT);
+        int pilotModifier = CrewController.getCrewMemberAssignedTo(Role.PILOT).getStat(Role.PILOT);
         int fuelCostModifier = 11 - pilotModifier;
         return (int) ((int) distance * fuelCostModifier);
     }

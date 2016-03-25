@@ -5,7 +5,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A class representing a crew member.
+ * A class representing a crew member. Used by both player crew and those
+ * dastardly space pirates.
  */
 public class CrewMember implements Serializable {
     private final CrewStatistics stats;
@@ -22,16 +23,20 @@ public class CrewMember implements Serializable {
     public String name() {
         return name;
     }
+    
+    public void setHitPoints(int value) {
+        hitPoints = value;
+    }
 
-    public int hitPoints() {
+    public int getHitPoints() {
         return hitPoints;
     }
 
-    public int maxHitPoints() {
+    public int getMaxHitPoints() {
         return maxHitPoints;
     }
 
-    public int stat(Role index) {
+    public int getStat(Role index) {
         return stats.get(index.ordinal()).value();
     }
 
@@ -39,7 +44,7 @@ public class CrewMember implements Serializable {
         stats.get(index.ordinal()).setValue(value);
     }
     
-    public boolean alive() {
+    public boolean getAlive() {
         return alive;
     }
     

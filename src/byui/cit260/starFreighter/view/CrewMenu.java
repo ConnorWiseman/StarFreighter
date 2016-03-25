@@ -24,8 +24,8 @@ public final class CrewMenu extends MenuView {
      */
     private void displayCrew() {
         for (CrewMember member : CrewController.getRoster()) {
-            console.println(member.name() + ":\t\t" + member.hitPoints() +
-                "/" + member.maxHitPoints() + "HP");
+            console.println(member.name() + ":\t\t" + member.getHitPoints() +
+                "/" + member.getMaxHitPoints() + "HP");
         }
     }
 

@@ -80,7 +80,7 @@ public class InventoryController {
      * @return 
      */
     public static int calculateResaleValue(InventoryItem item) {
-        int tradeModifier = CrewController.getCrewMemberAssignedTo(Role.TRADER).stat(Role.TRADER);
+        int tradeModifier = CrewController.getCrewMemberAssignedTo(Role.TRADER).getStat(Role.TRADER);
         double baseResaleValue = 0.45;
         double resaleValue = baseResaleValue + (0.05 * tradeModifier);
         return (int) ((int) item.getValue() * resaleValue);
