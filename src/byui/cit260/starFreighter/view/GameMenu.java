@@ -1,5 +1,6 @@
 package byui.cit260.starFreighter.view;
 
+import byui.cit260.starFreighter.control.ShipController;
 import byui.cit260.starFreighter.model.MenuItem;
 
 /**
@@ -26,6 +27,17 @@ public final class GameMenu extends MenuView {
         menuItems.add(new MenuItem('H', "Help"));
         menuItems.add(new MenuItem('E', "Exit to main menu"));
     }
+    
+    /**
+     * Displays a game over message.
+     */
+    private void displayGameOver() {
+        TextBox.displayText(
+            "Your ship was destroyed and your quest is at an end. Perhaps " +
+                "your next venture will be more successful?",
+            "GAME OVER"
+        );
+    }
 
     @Override
     public boolean doAction(char action) {
@@ -39,7 +51,14 @@ public final class GameMenu extends MenuView {
                 break;
             }
             case 'T': {
+                // Display the travel view.
                 TravelView.display();
+                
+                // Did the player die?
+                if (ShipController.getShip().getHull() <= 0) {
+                    displayGameOver();
+                    return true;
+                }
                 break;
             }
             case 'I': {

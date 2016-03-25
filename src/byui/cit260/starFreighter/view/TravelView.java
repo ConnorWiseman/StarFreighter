@@ -60,6 +60,11 @@ public class TravelView extends Display {
                         destination.getName() +
                         "."
                     );
+                    
+                    // Set destination back to null. Important!
+                    destination = null;
+                    
+                    // Start the loop over.
                     continue;
                 }
                 

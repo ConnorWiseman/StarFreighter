@@ -6,6 +6,7 @@ import byui.cit260.starFreighter.control.CombatController;
 import byui.cit260.starFreighter.control.CrewController;
 import byui.cit260.starFreighter.control.InventoryController;
 import byui.cit260.starFreighter.control.PirateController;
+import byui.cit260.starFreighter.control.RandomNumbers;
 import byui.cit260.starFreighter.control.ShipController;
 import byui.cit260.starFreighter.model.CrewRoster;
 import byui.cit260.starFreighter.model.Inventory;
@@ -102,21 +103,31 @@ public class CombatMenu extends MenuView {
             return true;
         }
         else if (playerShip.getHull() <= 0) {
-            // Set the hull to 1.
-            playerShip.setHull(1);
-            
             // Take the player's items and half their money.
             Inventory playerInventory = InventoryController.getPlayerInventory();
             InventoryController.emptyInventory(playerInventory);
             playerInventory.setCurrency(playerInventory.getCurrency() / 2);
             
-            // Display the outcome.
-            TextBox.displayText(
-                "The space pirates prove victorious. They board the " +
-                    playerShip.getName() +
-                    " and plunder your cargo, leaving nothing behind.",
-                "Your battered vessel lands"
-            );
+            // Decide whether or not the space pirates destroy the player.
+            int gameOver = RandomNumbers.range(1, 5);
+            if (gameOver != 1) {
+                playerShip.setHull(1);
+                TextBox.displayText(
+                    "The space pirates prove victorious. They board the " +
+                        playerShip.getName() +
+                        " and plunder your cargo, leaving nothing behind.",
+                    "This time, the space pirates let you go."
+                );
+            }
+            else {
+                TextBox.displayText(
+                    "The space pirates prove victorious. They board the " +
+                        playerShip.getName() +
+                        " and plunder your cargo, leaving nothing behind.",
+                    "Once they're finished, they finish off the wreckage" +
+                        " of your ship, ending your career prematurely."
+                );
+            }
             return true;
         }
         else if (enemyShip.getHull() <= 0) {
