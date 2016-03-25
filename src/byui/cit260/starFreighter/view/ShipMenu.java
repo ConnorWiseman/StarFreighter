@@ -89,7 +89,7 @@ public class ShipMenu extends MenuView {
 
             // If the player does, then proceed. Otherwise, cancel.
             if (proceed == 'Y') {
-                // Make sure the player's ship has enough extra fuel to run.
+                // Make sure the player has enough money to spend.
                 if (StarFreighter.getCurrentGame().getInventory().getCurrency() >= refuelCost) {
                     // Update the player's fuel.
                     playerShip.setFuel(playerShip.getFuelCapacity());
@@ -124,10 +124,74 @@ public class ShipMenu extends MenuView {
     }
 
     /**
-     * 
+     * Repairs the player's ship.
      */
     private void repairShip() {
+        // Get the player's ship.
+        Ship playerShip = ShipController.getShip();
         
+        // Check to make sure hull integrity isn't maxed already.
+        if (playerShip.getHull() == playerShip.getHullIntegrity()) {
+            TextBox.displayText(
+                "The " +
+                playerShip.getName() +
+                "'s hull is at maximum integrity, sir."
+            );
+            return;
+        }
+        
+        // Calculate the cost of repairing.
+        int repairCost = ShipController.calculateRepairCost();
+
+        // Inform the player of the consequences of their actions.
+        TextBox.displayText(
+            "Repairing the " +
+            playerShip.getName() +
+            " will cost " +
+            repairCost +
+            " " +
+            InventoryController.CURRENCY +
+            "."
+        );
+        
+        try {
+            // Does the player want to proceed?
+            char proceed = Input.getCharSameLineUppercase("Proceed? (Y/N) ");
+
+            // If the player does, then proceed. Otherwise, cancel.
+            if (proceed == 'Y') {
+                // Make sure the player has enough money to spend.
+                if (StarFreighter.getCurrentGame().getInventory().getCurrency() >= repairCost) {
+                    // Update the player's hull integrity.
+                    playerShip.setHull(playerShip.getHullIntegrity());
+                    
+                    // Display a confirmation message.
+                    TextBox.displayText(
+                        "You spend " +
+                        repairCost +
+                        " " +
+                        InventoryController.CURRENCY +
+                        " to repair the " +
+                        playerShip.getName() +
+                        "."
+                    );
+                }
+                else {
+                    // Inform the player of their inability to repair.
+                    // Should have used a budget!
+                    TextBox.displayText(
+                        "Unfortunately, you cannot afford to repair your ship."
+                    );
+                }
+            }
+            else {
+                TextBox.displayText(
+                    "Repairing canceled."
+                );
+            }
+        } catch (IOException error) {
+            ErrorView.display(TravelView.class.getName(), error.getMessage());
+        }
     }
 
     @Override
