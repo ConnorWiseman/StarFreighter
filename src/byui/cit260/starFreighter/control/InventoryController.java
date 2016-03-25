@@ -1,5 +1,6 @@
 package byui.cit260.starFreighter.control;
 
+import byui.cit260.starFreighter.constants.Role;
 import byui.cit260.starFreighter.model.Inventory;
 import byui.cit260.starFreighter.model.InventoryItem;
 import byui.cit260.starFreighter.model.Planet;
@@ -60,6 +61,19 @@ public class InventoryController {
     }
     
     /**
+     * Calculates the resale value of a specific item. Takes into account the
+     * skill of the crew member assigned to the trader role.
+     * @param item
+     * @return 
+     */
+    public static int calculateResaleValue(InventoryItem item) {
+        int tradeModifier = CrewController.getCrewMemberAssignedTo(Role.TRADER).stat(Role.TRADER);
+        double baseResaleValue = 0.45;
+        double resaleValue = baseResaleValue + (0.05 * tradeModifier);
+        return (int) ((int) item.getValue() * resaleValue);
+    }
+    
+    /**
      * Sells a particular item to the shop on the current planet.
      * @param item 
      */
@@ -70,7 +84,7 @@ public class InventoryController {
         Inventory otherInventory = currentLocation.getShop();
         
         currentInventory.removeItem(item);
-        currentInventory.addCurrency(item.getValue());
+        currentInventory.addCurrency(calculateResaleValue(item));
         otherInventory.addItem(item);
         otherInventory.removeCurrency(item.getValue());
 

@@ -65,4 +65,13 @@ public class CrewController {
     public static CrewMember[] getRoster() {
         return StarFreighter.getCurrentGame().getCrew().getRoster();
     }
+    
+    /**
+     * Gets the crew member assigned to a specific role.
+     * @param role
+     * @return 
+     */
+    public static CrewMember getCrewMemberAssignedTo(Role role) {
+        return getRoster()[role.ordinal()];
+    }
 }

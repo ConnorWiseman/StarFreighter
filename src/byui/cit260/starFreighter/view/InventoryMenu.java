@@ -49,7 +49,8 @@ public final class InventoryMenu extends MenuView {
             if (index < 10) {
                 console.write("0");
             }
-            console.write(index + "] - " + current.getName() + "\n");
+            console.write(index + "] - " + current.getName() + "\t");
+            console.write(InventoryController.calculateResaleValue(current) + "\n");
             console.flush();
         });
     }
