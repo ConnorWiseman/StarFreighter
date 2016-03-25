@@ -68,10 +68,7 @@ public final class MainMenu extends MenuView {
     private void loadGame() {
         try {
             GameController.loadGame();
-            String playerName = StarFreighter.getCurrentGame().getPlayer().getName();
-            TextBox.displayText(
-                "Welcome back, Captain " + playerName + ". You have the bridge."
-            );
+            TextBox.displayText("Welcome back, Captain. You have the bridge.");
             gameMenu.display();
         } catch (GameControlException | IOException | ClassNotFoundException error) {
             ErrorView.display(this.getClass().getName(), error.getMessage());
