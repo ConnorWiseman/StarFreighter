@@ -61,6 +61,19 @@ public class InventoryController {
     }
     
     /**
+     * Calculates the total value of a specified inventory.
+     * @param inventory
+     * @return 
+     */
+    public static int calculateTotalValue(Inventory inventory) {
+        int totalValue = 0;
+        for (InventoryItem current : inventory.getContents()) {
+            totalValue += current.getValue();
+        }
+        return totalValue;
+    }
+    
+    /**
      * Calculates the resale value of a specific item. Takes into account the
      * skill of the crew member assigned to the trader role.
      * @param item

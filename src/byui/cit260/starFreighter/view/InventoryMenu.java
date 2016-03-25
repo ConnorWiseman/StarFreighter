@@ -7,8 +7,6 @@ import byui.cit260.starFreighter.model.InventoryItem;
 import byui.cit260.starFreighter.model.MenuItem;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The player inventory menu.
@@ -27,6 +25,7 @@ public final class InventoryMenu extends MenuView {
     
     /**
      * Displays the contents of the player's inventory.
+     * @todo Fix the way this prints out. printf, maybe?
      */
     private void displayInventoryContents() {
         Inventory playerInventory = InventoryController.getInventory();
@@ -35,6 +34,9 @@ public final class InventoryMenu extends MenuView {
         playerInventory.getContents().stream().forEach((current) -> {
             console.println(current);
         });
+        console.println("Your cargo is worth a combined " +
+                InventoryController.calculateTotalValue(playerInventory) +
+                " credits.");
     }
     
     /**
@@ -58,32 +60,40 @@ public final class InventoryMenu extends MenuView {
     /**
      * Sells an item to the shop at the player's current location.
      */
-    private void sellItem() throws IOException {
-        ArrayList<InventoryItem> playerInventory = InventoryController.getInventory().getContents();
-        if (playerInventory.size() > 0) { 
-            displayItemList(playerInventory);
-            // Offset the selection by minus one to make it "computer-readable."
-            int selection = Input.getIntSameLine("Choose an item to sell: ") - 1;
-            InventoryController.sellItem(playerInventory.get(selection));
-        }
-        else {
-            console.println("You have no items to sell!");
+    private void sellItem() {
+        try {
+            ArrayList<InventoryItem> playerInventory = InventoryController.getInventory().getContents();
+            if (playerInventory.size() > 0) { 
+                displayItemList(playerInventory);
+                // Offset the selection by minus one to make it "computer-readable."
+                int selection = Input.getIntSameLine("Choose an item to sell: ") - 1;
+                InventoryController.sellItem(playerInventory.get(selection));
+            }
+            else {
+                console.println("You have no items to sell!");
+            }
+        } catch (IOException error) {
+            ErrorView.display(this.getClass().getName(), error.getMessage());
         }
     }
     
     /**
      * Buys an item from the shop at the player's current location.
      */
-    private void buyItem() throws IOException {
-        ArrayList<InventoryItem> shopStock = ShipController.getShip().getLocation().getShop().getContents();
-        if (shopStock.size() > 0) { 
-            displayItemList(shopStock);
-            // Offset the selection by minus one to make it "computer-readable."
-            int selection = Input.getIntSameLine("Choose an item to buy: ") - 1;
-            InventoryController.buyItem(shopStock.get(selection));
-        }
-        else {
-            console.println("There are no items for sale here.");
+    private void buyItem() {
+        try {
+            ArrayList<InventoryItem> shopStock = ShipController.getShip().getLocation().getShop().getContents();
+            if (shopStock.size() > 0) { 
+                displayItemList(shopStock);
+                // Offset the selection by minus one to make it "computer-readable."
+                int selection = Input.getIntSameLine("Choose an item to buy: ") - 1;
+                InventoryController.buyItem(shopStock.get(selection));
+            }
+            else {
+                console.println("There are no items for sale here.");
+            }
+        } catch (IOException error) {
+            ErrorView.display(this.getClass().getName(), error.getMessage());
         }
     }
 
@@ -95,19 +105,11 @@ public final class InventoryMenu extends MenuView {
                 break;
             }
             case 'S': {
-                try {
-                    sellItem();
-                } catch (IOException error) {
-                    ErrorView.display(this.getClass().getName(), error.getMessage());
-                }
+                sellItem();
                 break;
             }
             case 'B': {
-                try {
-                    buyItem();
-                } catch (IOException error) {
-                    ErrorView.display(this.getClass().getName(), error.getMessage());
-                }
+                buyItem();
                 break;
             }
             case 'E': {

@@ -44,21 +44,25 @@ public final class MainMenu extends MenuView {
     /**
      * Starts a new game.
      */
-    private void newGame() throws IOException {
-        // Prompt the player for their name and the name of their ship.
-        String playerName = Input.getStringSameLine("Please enter your name: ");
-        String shipName = Input.getStringSameLine("Please name your ship: ");
-        
-        // Create a new game.
-        GameController.newGame(playerName, shipName);
-        
-        // Welcome the player.
-        TextBox.displayText(
-            "Welcome, Captain " + playerName + " of the " + shipName + "."
-        );
-        
-        // Display the game menu.
-        gameMenu.display();
+    private void newGame() {
+        try {
+            // Prompt the player for their name and the name of their ship.
+            String playerName = Input.getStringSameLine("Please enter your name: ");
+            String shipName = Input.getStringSameLine("Please name your ship: ");
+
+            // Create a new game.
+            GameController.newGame(playerName, shipName);
+
+            // Welcome the player.
+            TextBox.displayText(
+                "Welcome, Captain " + playerName + " of the " + shipName + "."
+            );
+
+            // Display the game menu.
+            gameMenu.display();
+        } catch (IOException error) {
+            ErrorView.display(this.getClass().getName(), error.getMessage());
+        }
     }
     
     /**
@@ -82,10 +86,8 @@ public final class MainMenu extends MenuView {
             GameController.saveGame();
             console.println("File successfully saved.");
             gameMenu.display();
-        } catch (GameControlException saveError) {
+        } catch (GameControlException | IOException saveError) {
             ErrorView.display(this.getClass().getName(), saveError.getMessage());
-        } catch (IOException error) {
-            ErrorView.display(this.getClass().getName(), error.getMessage());
         }
     }
 
@@ -93,19 +95,15 @@ public final class MainMenu extends MenuView {
     public boolean doAction(char action) {
         switch (action) {
             case 'N': {
-                try {
-                    this.newGame();
-                } catch (IOException error) {
-                    ErrorView.display(this.getClass().getName(), error.getMessage());
-                }
+                newGame();
                 break;
             }
             case 'L': {
-                this.loadGame();
+                loadGame();
                 break;
             }
             case 'S': {
-                this.saveGame();
+                saveGame();
                 break;
             }
             case 'E': {

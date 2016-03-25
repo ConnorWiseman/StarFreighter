@@ -1,5 +1,6 @@
 package byui.cit260.starFreighter.control;
 
+import byui.cit260.starFreighter.constants.Difficulty;
 import byui.cit260.starFreighter.model.Ship;
 import starfreighter.StarFreighter;
 
@@ -23,6 +24,24 @@ public class ShipController {
         newShip.setHull(newShip.hullIntegrity());
 
         return newShip;
+    }
+    
+    /**
+     * Creates an enemy ship of the specified difficulty rating.
+     * @param difficulty
+     * @return 
+     */
+    public static Ship createEnemyShip(Difficulty difficulty) {
+        // Create a new enemy Ship.
+        Ship enemyShip = new Ship("Space Pirates");
+        
+        // Assign values to the Ship's properties.
+        enemyShip.setFuelCapacity(difficulty.getRating());
+        enemyShip.setHullIntegrity(difficulty.getRating());
+        enemyShip.setFuel(enemyShip.fuelCapacity());
+        enemyShip.setHull(enemyShip.hullIntegrity());
+
+        return enemyShip;
     }
 
     /**

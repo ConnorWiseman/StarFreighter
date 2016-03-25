@@ -14,9 +14,14 @@ public final class CrewMenu extends MenuView {
     public CrewMenu() {
         menuTitle = "Crew Menu";
         menuItems.add(new MenuItem('S', "Crew status"));
+        menuItems.add(new MenuItem('D', "Details"));
         menuItems.add(new MenuItem('E', "Exit"));
     }
 
+    /**
+     * Displays the crew list and status.
+     * @todo Tidy it up with printf?
+     */
     private void displayCrew() {
         for (CrewMember member : CrewController.getRoster()) {
             console.println(member.name() + ":\t\t" + member.hitPoints() +
@@ -29,6 +34,9 @@ public final class CrewMenu extends MenuView {
         switch (action) {
             case 'S': {
                 displayCrew();
+                break;
+            }
+            case 'D': {
                 break;
             }
             case 'E': {

@@ -4,8 +4,6 @@ import byui.cit260.starFreighter.control.ShipController;
 import byui.cit260.starFreighter.model.MenuItem;
 import byui.cit260.starFreighter.model.Ship;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The help menu view, accessible in-game.
@@ -17,12 +15,15 @@ public class ShipMenu extends MenuView {
     public ShipMenu() {
         menuTitle = "Ship Menu";
         menuItems.add(new MenuItem('S', "Ship Status"));
-        menuItems.add(new MenuItem('R', "Rename Ship"));
+        menuItems.add(new MenuItem('N', "Rename Ship"));
+        menuItems.add(new MenuItem('F', "Refuel Ship"));
+        menuItems.add(new MenuItem('R', "Repair Ship"));
         menuItems.add(new MenuItem('E', "Exit to previous menu"));
     }
 
     /**
      * Displays a status report on the player's Ship.
+     * @todo Something with printf, for nicer formatting?
      */
     private void shipStatus() {
         Ship ship = ShipController.getShip();
@@ -36,15 +37,31 @@ public class ShipMenu extends MenuView {
 
     /**
      * Renames the player's ship.
-     * @param name
-     * @return 
      */
-    private void renameShip() throws IOException {
-        String newName = Input.getStringSameLine("Enter new name: ");
-        ShipController.renameShip(newName);
-        TextBox.displayText(
-            "You have rechristened your ship " + newName + "."
-        );
+    private void renameShip() {
+        try {
+            String newName = Input.getStringSameLine("Enter new name: ");
+            ShipController.renameShip(newName);
+            TextBox.displayText(
+                "You have rechristened your ship " + newName + "."
+            );
+        } catch (IOException error) {
+            ErrorView.display(this.getClass().getName(), error.getMessage());
+        }
+    }
+
+    /**
+     * Refuels the player's ship.
+     */
+    private void refuelShip() {
+        
+    }
+
+    /**
+     * 
+     */
+    private void repairShip() {
+        
     }
 
     @Override
@@ -54,12 +71,16 @@ public class ShipMenu extends MenuView {
                 shipStatus();
                 break;
             }
+            case 'N': {
+                renameShip();
+                break;
+            }
+            case 'F': {
+                refuelShip();
+                break;
+            }
             case 'R': {
-                try {
-                    renameShip();
-                } catch (IOException error) {
-                    ErrorView.display(this.getClass().getName(), error.getMessage());
-                }
+                repairShip();
                 break;
             }
             case 'E': {
