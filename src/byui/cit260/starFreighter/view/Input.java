@@ -14,7 +14,7 @@ public final class Input {
      * Class constants.
      */
     private final static BufferedReader KEYBOARD_INPUT = StarFreighter.getInFile();
-    private final static PrintWriter console = StarFreighter.getOutFile();
+    private final static PrintWriter CONSOLE = StarFreighter.getOutFile();
 
     /**
      * Private constructor prevents instantiation.
@@ -23,7 +23,6 @@ public final class Input {
         
     }
     
-    
     /**
      * Displays a prompt.
      * @param prompt
@@ -31,11 +30,11 @@ public final class Input {
      */
     private static void displayPrompt(String prompt, boolean sameLine) {
         if (sameLine == false) {
-            console.println(prompt);
+            CONSOLE.println(" > " + prompt);
         }
         else {
-            console.write(prompt);
-            console.flush();
+            CONSOLE.write(" > " + prompt);
+            CONSOLE.flush();
         }
     }
 
@@ -92,7 +91,7 @@ public final class Input {
             displayPrompt(prompt, sameLine);
             String value = KEYBOARD_INPUT.readLine().trim();
             if (value.length() < 1) {
-                console.println("Invalid input - please enter something.");
+                CONSOLE.println("Invalid input - please enter something.");
                 continue;
             }
             characterValue = value.charAt(0);
@@ -137,7 +136,7 @@ public final class Input {
             displayPrompt(prompt, sameLine);
             value = KEYBOARD_INPUT.readLine().trim();
             if (value.length() < 1) {
-                console.println("Invalid input - please enter something.");
+                CONSOLE.println("Invalid input - please enter something.");
                 continue;
             }
             // Once we have valid input, break from the loop.
@@ -183,7 +182,7 @@ public final class Input {
             try {
                 value = Integer.parseInt(KEYBOARD_INPUT.readLine().trim());
             } catch(NumberFormatException error) {
-                console.println("Invalid input - please enter an integer.");
+                CONSOLE.println("Invalid input - please enter an integer.");
                 continue;
             }
             // Once we have valid input, break from the loop.
