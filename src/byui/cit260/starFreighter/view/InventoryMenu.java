@@ -7,6 +7,8 @@ import byui.cit260.starFreighter.model.InventoryItem;
 import byui.cit260.starFreighter.model.MenuItem;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The player inventory menu.
@@ -19,6 +21,7 @@ public final class InventoryMenu extends MenuView {
         menuTitle = "Inventory";
         menuItems.add(new MenuItem('C', "Cargo Manifest"));
         menuItems.add(new MenuItem('S', "Sell"));
+        menuItems.add(new MenuItem('A', "Sell All"));
         menuItems.add(new MenuItem('B', "Buy"));
         menuItems.add(new MenuItem('E', "Exit"));
     }
@@ -96,6 +99,43 @@ public final class InventoryMenu extends MenuView {
     }
     
     /**
+     * Sells all the items in the player's inventory.
+     */
+    private void sellAllItems() {
+        // Get the player's inventory.
+        ArrayList<InventoryItem> playerInventory = InventoryController.getPlayerInventory().getContents();
+        
+        // Ensure there are items to sell.
+        if (!(playerInventory.size() > 0)) {
+            TextBox.displayText("You have no items to sell!");
+            return;
+        }
+        
+        try {
+            // Does the player want to proceed?
+            CONSOLE.println("This will sell all the items in your inventory.");
+            char proceed = Input.getCharSameLineUppercase("Proceed? (Y/N) ");
+
+            // If the player does, then proceed. Otherwise, cancel.
+            if (proceed == 'Y') {
+                // Sell all the items in the player's inventory.
+                InventoryController.sellAll();
+
+                // Display an explanatory message.
+                TextBox.displayText(
+                    "You sold your entire inventory and now have " +
+                    InventoryController.getPlayerInventory().getCurrency() +
+                    " " +
+                    InventoryController.CURRENCY +
+                    "."
+                );
+            }
+        } catch (IndexOutOfBoundsException | IOException error) {
+            ErrorView.display(this.getClass().getName(), error.getMessage());
+        }
+    }
+    
+    /**
      * Buys an item from the shop at the player's current location.
      */
     private void buyItem() {
@@ -160,6 +200,10 @@ public final class InventoryMenu extends MenuView {
             }
             case 'S': {
                 sellItem();
+                break;
+            }
+            case 'A': {
+                sellAllItems();
                 break;
             }
             case 'B': {

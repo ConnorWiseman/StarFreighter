@@ -103,6 +103,28 @@ public class InventoryController {
         sortByValue(playerInventory);
         sortByValue(otherInventory);
     }
+    
+    /**
+     * Sells all the items in the player's inventory.
+     */
+    public static void sellAll() {
+        Inventory playerInventory = getPlayerInventory();
+        
+        Planet currentLocation = ShipController.getShip().getLocation();
+        Inventory otherInventory = currentLocation.getShop();
+        
+        // While the inventory has things in it, sell the first one.
+        while (playerInventory.getContents().size() > 0) {
+            InventoryItem current = playerInventory.getContents().get(0);
+            playerInventory.removeItem(current);
+            playerInventory.addCurrency(calculateResaleValue(current));
+            otherInventory.addItem(current);
+            otherInventory.removeCurrency(current.getValue());
+        }
+
+        // Don't bother sorting the player's inventory, there's nothing in it.
+        sortByValue(otherInventory);
+    }
 
     /**
      * Buys a particular item from the shop on the current planet.
