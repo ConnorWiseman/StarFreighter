@@ -1,5 +1,6 @@
 package byui.cit260.starFreighter.control;
 
+import byui.cit260.starFreighter.constants.ItemList;
 import byui.cit260.starFreighter.constants.Role;
 import byui.cit260.starFreighter.model.CrewRoster;
 import byui.cit260.starFreighter.model.Inventory;
@@ -29,12 +30,8 @@ public class InventoryController {
      * @return 
      */
     public static Inventory createInventory() {
-        Inventory playerInventory = new Inventory();
-        
-        playerInventory.addItem(new InventoryItem("Testing", 100));
-        playerInventory.addItem(new InventoryItem("More!", 1000));
-        
-        return playerInventory;
+        Inventory inventory = new Inventory();
+        return inventory;
     }
     
     /**
@@ -130,28 +127,17 @@ public class InventoryController {
      * Adds a bunch of debris to the player's inventory. Used in TravelDisplay.
      */
     public static void salvageDebris() {
-        // Create a bunch of stuff...
-        InventoryItem junk1 = new InventoryItem("Junk", 1);
-        InventoryItem junk2 = new InventoryItem("Junk", 1);
-        InventoryItem junk3 = new InventoryItem("Junk", 1);
-        InventoryItem junk4 = new InventoryItem("Junk", 1);
-        InventoryItem junk5 = new InventoryItem("Junk", 1);
-        InventoryItem oldParts1 = new InventoryItem("Old Parts", 3);
-        InventoryItem oldParts2 = new InventoryItem("Old Parts", 3);
-        InventoryItem oldParts3 = new InventoryItem("Old Parts", 3);
-        InventoryItem newParts = new InventoryItem("New Parts", 15);
-
-        // ... then add it to the player's inventory.
+        // Add a bunch of stuff to the player's inventory.
         Inventory playerInventory = getPlayerInventory();
-        playerInventory.addItem(junk1);
-        playerInventory.addItem(junk2);
-        playerInventory.addItem(junk3);
-        playerInventory.addItem(junk4);
-        playerInventory.addItem(junk5);
-        playerInventory.addItem(oldParts1);
-        playerInventory.addItem(oldParts2);
-        playerInventory.addItem(oldParts3);
-        playerInventory.addItem(newParts);
+        playerInventory.addItem(ItemList.JUNK);
+        playerInventory.addItem(ItemList.JUNK);
+        playerInventory.addItem(ItemList.JUNK);
+        playerInventory.addItem(ItemList.JUNK);
+        playerInventory.addItem(ItemList.JUNK);
+        playerInventory.addItem(ItemList.OLD_PARTS);
+        playerInventory.addItem(ItemList.OLD_PARTS);
+        playerInventory.addItem(ItemList.OLD_PARTS);
+        playerInventory.addItem(ItemList.NEW_PARTS);
 
         // Sort the player's inventory as a parting gesture.
         sortByValue(playerInventory);
@@ -163,5 +149,26 @@ public class InventoryController {
      */
     public static void emptyInventory(Inventory inventory) {
         inventory.empty();
+    }
+    
+    /**
+     * Adds the contents of a specified inventory to the player's inventory.
+     * @param inventory 
+     */
+    public static void addInventoryToPlayerInventory(Inventory inventory) {
+        // Get the player's inventory.
+        Inventory playerInventory = getPlayerInventory();
+        
+        // Iterate over the specified inventory and add each item to the
+        // player's inventory.
+        inventory.getContents().stream().forEach((current) -> {
+            playerInventory.addItem(current);
+        });
+        
+        // Sort the player's inventory.
+        sortByValue(playerInventory);
+        
+        // Give the player's inventory the other inventory's currency, too.
+        playerInventory.setCurrency(playerInventory.getCurrency() + inventory.getCurrency());
     }
 }

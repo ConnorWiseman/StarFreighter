@@ -1,9 +1,11 @@
 package byui.cit260.starFreighter.control;
 
 import byui.cit260.starFreighter.constants.Difficulty;
+import byui.cit260.starFreighter.constants.ItemList;
 import byui.cit260.starFreighter.constants.Role;
 import byui.cit260.starFreighter.model.CrewMember;
 import byui.cit260.starFreighter.model.CrewRoster;
+import byui.cit260.starFreighter.model.Inventory;
 import byui.cit260.starFreighter.model.Ship;
 import byui.cit260.starFreighter.model.SpacePirate;
 
@@ -45,8 +47,18 @@ public final class PirateController {
             // Assign each crew member a role. Doesn't matter which.
             enemyCrew.set(i, pirate);
         }
+        
+        // Create an inventory for the space pirates.
+        Inventory enemyInventory = new Inventory();
+        enemyInventory.addItem(ItemList.JUNK);
+        enemyInventory.addItem(ItemList.JUNK);
+        enemyInventory.addItem(ItemList.JUNK);
+        enemyInventory.addItem(ItemList.OLD_PARTS);
+        enemyInventory.addItem(ItemList.OLD_PARTS);
+        enemyInventory.addItem(ItemList.NEW_PARTS);
+        enemyInventory.setCurrency(100);
 
         // Return our enemy object.
-        return new SpacePirate(enemyShip, enemyCrew);
+        return new SpacePirate(enemyShip, enemyCrew, enemyInventory);
     }
 }

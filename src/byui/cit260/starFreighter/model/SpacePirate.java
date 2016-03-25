@@ -12,15 +12,18 @@ public class SpacePirate implements Serializable {
      */
     private final Ship ship;
     private final CrewRoster crew;
+    private final Inventory inventory;
     
     /**
      * Constructor.
      * @param ship
      * @param crew 
+     * @param inventory 
      */
-    public SpacePirate(Ship ship, CrewRoster crew) {
+    public SpacePirate(Ship ship, CrewRoster crew, Inventory inventory) {
         this.ship = ship;
         this.crew = crew;
+        this.inventory = inventory;
     }
     
     /**
@@ -39,11 +42,20 @@ public class SpacePirate implements Serializable {
         return crew;
     }
 
+    /**
+     * Gets the space pirate's inventory.
+     * @return 
+     */
+    public Inventory getInventory() {
+        return inventory;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.ship);
-        hash = 29 * hash + Objects.hashCode(this.crew);
+        int hash = 3;
+        hash = 73 * hash + Objects.hashCode(this.ship);
+        hash = 73 * hash + Objects.hashCode(this.crew);
+        hash = 73 * hash + Objects.hashCode(this.inventory);
         return hash;
     }
 
@@ -62,11 +74,14 @@ public class SpacePirate implements Serializable {
         if (!Objects.equals(this.ship, other.ship)) {
             return false;
         }
-        return Objects.equals(this.crew, other.crew);
+        if (!Objects.equals(this.crew, other.crew)) {
+            return false;
+        }
+        return Objects.equals(this.inventory, other.inventory);
     }
 
     @Override
     public String toString() {
-        return "SpacePirate{" + "ship=" + ship + ", crew=" + crew + '}';
+        return "SpacePirate{" + "ship=" + ship + ", crew=" + crew + ", inventory=" + inventory + '}';
     }
 }

@@ -1,5 +1,6 @@
 package byui.cit260.starFreighter.model;
 
+import byui.cit260.starFreighter.constants.ItemList;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -68,6 +69,15 @@ public class Inventory implements Serializable {
      */
     public void addItem(InventoryItem item) {
         contents.add(item);
+    }
+    
+    /**
+     * Adds an item to the inventory.
+     * @param item 
+     */
+    public void addItem(ItemList item) {
+        InventoryItem newItem = new InventoryItem(item.getName(), item.getValue());
+        contents.add(newItem);
     }
     
     /**

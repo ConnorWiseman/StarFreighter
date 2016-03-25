@@ -120,7 +120,9 @@ public class CombatMenu extends MenuView {
             return true;
         }
         else if (enemyShip.getHull() <= 0) {
-            // add a bunch of stuff from the pirates
+            // Take the space pirates' stuff.
+            InventoryController.addInventoryToPlayerInventory(enemy.getInventory());
+            
             // Display the outcome.
             TextBox.displayText(
                 "You destroy the space pirates' vessel and " +

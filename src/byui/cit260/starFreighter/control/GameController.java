@@ -1,5 +1,6 @@
 package byui.cit260.starFreighter.control;
 
+import byui.cit260.starFreighter.constants.ItemList;
 import byui.cit260.starFreighter.exceptions.GameControlException;
 import byui.cit260.starFreighter.model.CrewRoster;
 import byui.cit260.starFreighter.model.GameInstance;
@@ -45,6 +46,9 @@ public class GameController {
         
         // Create the player's inventory and give them a little cash.
         Inventory newInventory = InventoryController.createInventory();
+        newInventory.addItem(ItemList.NEW_PARTS);
+        newInventory.addItem(ItemList.NEW_PARTS);
+        newInventory.addItem(ItemList.NEW_PARTS);
         newInventory.setCurrency(100);
 
         // Create a CrewRoster for the Ship.

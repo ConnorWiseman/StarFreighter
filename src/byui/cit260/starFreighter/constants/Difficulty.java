@@ -1,7 +1,7 @@
 package byui.cit260.starFreighter.constants;
 
 /**
- * A basic class for describing enemy difficulty ratings.
+ * A basic enum for describing enemy difficulty ratings.
  */
 public enum Difficulty {
     EASY(25, 10, 2),
