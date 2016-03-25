@@ -92,7 +92,7 @@ public class HelpMenu extends MenuView {
                 return true;
             }
             default: {
-                console.println(INVALID);
+                CONSOLE.println(INVALID);
                 break;
             }
         }

@@ -87,7 +87,7 @@ public class ShipMenu extends MenuView {
                 return true;
             }
             default: {
-                console.println(INVALID);
+                CONSOLE.println(INVALID);
                 break;
             }
         }

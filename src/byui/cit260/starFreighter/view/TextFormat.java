@@ -7,7 +7,7 @@ import starfreighter.StarFreighter;
  * A utility class for displaying text boxes, menus, and the like in a uniform
  * format.
  */
-public class DisplayFormat {
+public class TextFormat {
     protected static PrintWriter console = StarFreighter.getOutFile();
     /**
      * Creates a string of a specified length, then fills it with a specified

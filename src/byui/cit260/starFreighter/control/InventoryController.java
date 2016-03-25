@@ -123,4 +123,35 @@ public class InventoryController {
         sortByValue(currentInventory);
         sortByValue(otherInventory);
     }
+    
+    /**
+     * Adds a bunch of debris to the player's inventory. Used in TravelDisplay.
+     */
+    public static void salvageDebris() {
+        // Create a bunch of stuff...
+        InventoryItem junk1 = new InventoryItem("Junk", 1);
+        InventoryItem junk2 = new InventoryItem("Junk", 1);
+        InventoryItem junk3 = new InventoryItem("Junk", 1);
+        InventoryItem junk4 = new InventoryItem("Junk", 1);
+        InventoryItem junk5 = new InventoryItem("Junk", 1);
+        InventoryItem oldParts1 = new InventoryItem("Old Parts", 3);
+        InventoryItem oldParts2 = new InventoryItem("Old Parts", 3);
+        InventoryItem oldParts3 = new InventoryItem("Old Parts", 3);
+        InventoryItem newParts = new InventoryItem("New Parts", 15);
+
+        // ... then add it to the player's inventory.
+        Inventory playerInventory = getInventory();
+        playerInventory.addItem(junk1);
+        playerInventory.addItem(junk2);
+        playerInventory.addItem(junk3);
+        playerInventory.addItem(junk4);
+        playerInventory.addItem(junk5);
+        playerInventory.addItem(oldParts1);
+        playerInventory.addItem(oldParts2);
+        playerInventory.addItem(oldParts3);
+        playerInventory.addItem(newParts);
+
+        // Sort the player's inventory as a parting gesture.
+        sortByValue(playerInventory);
+    }
 }

@@ -54,21 +54,9 @@ public class CrewController {
      * @param name
      * @return 
      */
-    private static CrewMember createCrewMember(String name) {
+    public static CrewMember createCrewMember(String name) {
         CrewStatistics stats = new CrewStatistics();
         return new CrewMember(name, stats);
-    }
-    
-    /**
-     * Creates a crew member to serve as a space pirate.
-     * @return 
-     */
-    public static CrewMember createSpacePirate(Difficulty difficulty) {
-        CrewStatistics stats = new CrewStatistics();
-        CrewMember pirate = new CrewMember("Space Pirate", stats);
-        pirate.setHitPoints(difficulty.getCrewHitPoints());
-        pirate.setStat(Role.FIGHTER, difficulty.getCrewFighterStat());
-        return pirate;
     }
     
     /**

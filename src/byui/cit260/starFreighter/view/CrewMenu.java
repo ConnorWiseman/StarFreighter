@@ -24,7 +24,7 @@ public final class CrewMenu extends MenuView {
      */
     private void displayCrew() {
         for (CrewMember member : CrewController.getRoster()) {
-            console.println(member.name() + ":\t\t" + member.getHitPoints() +
+            CONSOLE.println(member.name() + ":\t\t" + member.getHitPoints() +
                 "/" + member.getMaxHitPoints() + "HP");
         }
     }
@@ -43,7 +43,7 @@ public final class CrewMenu extends MenuView {
                 return true;
             }
             default: {
-                console.println(INVALID);
+                CONSOLE.println(INVALID);
                 break;
             }
         }

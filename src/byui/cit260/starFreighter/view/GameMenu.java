@@ -12,7 +12,6 @@ public final class GameMenu extends MenuView {
     private final ShipMenu shipMenu = new ShipMenu();
     private final CrewMenu crewMenu = new CrewMenu();
     private final InventoryMenu inventoryMenu = new InventoryMenu();
-    private final MapMenu mapMenu = new MapMenu();
     private final HelpMenu helpMenu = new HelpMenu();
     
     /**
@@ -20,9 +19,9 @@ public final class GameMenu extends MenuView {
      */
     public GameMenu() {
         menuTitle = "Game Menu";
-        menuItems.add(new MenuItem('S', "Ship Control"));
-        menuItems.add(new MenuItem('C', "Captain and Crew"));
-        menuItems.add(new MenuItem('M', "Map & Navigation"));
+        menuItems.add(new MenuItem('S', "Ship"));
+        menuItems.add(new MenuItem('C', "Crew"));
+        menuItems.add(new MenuItem('T', "Travel"));
         menuItems.add(new MenuItem('I', "Inventory"));
         menuItems.add(new MenuItem('H', "Help"));
         menuItems.add(new MenuItem('E', "Exit to main menu"));
@@ -39,8 +38,8 @@ public final class GameMenu extends MenuView {
                 crewMenu.display();
                 break;
             }
-            case 'M': {
-                mapMenu.display();
+            case 'T': {
+                TravelView.display();
                 break;
             }
             case 'I': {
@@ -55,7 +54,7 @@ public final class GameMenu extends MenuView {
                 return true;
             }
             default: {
-                console.println(INVALID);
+                CONSOLE.println(INVALID);
                 break;
             }
         }

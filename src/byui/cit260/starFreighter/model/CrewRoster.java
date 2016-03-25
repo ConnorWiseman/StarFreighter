@@ -8,14 +8,35 @@ import java.util.Arrays;
  * An abstraction layer between a Ship and its CrewMembers.
  */
 public class CrewRoster implements Serializable {
+    /**
+     * Class members.
+     */
     private final CrewMember[] roster = new CrewMember[5];
 
+    /**
+     * Gets the crew roster.
+     * @return 
+     */
     public CrewMember[] getRoster() {
         return roster;
     }
 
+    /**
+     * Sets the specified crew member to the specified role.
+     * @param index
+     * @param crewMember 
+     */
     public void set(Role index, CrewMember crewMember) {
         roster[index.ordinal()] = crewMember;
+    }
+
+    /**
+     * Sets the specified crew member to the specified role.
+     * @param index
+     * @param crewMember 
+     */
+    public void set(int index, CrewMember crewMember) {
+        roster[index] = crewMember;
     }
 
     @Override

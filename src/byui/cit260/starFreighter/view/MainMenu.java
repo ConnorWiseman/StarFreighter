@@ -84,7 +84,7 @@ public final class MainMenu extends MenuView {
     private void saveGame() {
         try {
             GameController.saveGame();
-            console.println("File successfully saved.");
+            CONSOLE.println("File successfully saved.");
             gameMenu.display();
         } catch (GameControlException | IOException saveError) {
             ErrorView.display(this.getClass().getName(), saveError.getMessage());
@@ -110,7 +110,7 @@ public final class MainMenu extends MenuView {
                 return true;
             }
             default: {
-                console.println(INVALID);
+                CONSOLE.println(INVALID);
                 break;
             }
         }

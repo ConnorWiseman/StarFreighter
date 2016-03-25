@@ -6,7 +6,7 @@ package byui.cit260.starFreighter.constants;
 public enum Difficulty {
     EASY(25, 10, 2),
     MEDIUM(50, 20, 4),
-    HARD(100, 30, 6);
+    HARD(100, 30, 6); // unused?
     
     /**
      * Constants.

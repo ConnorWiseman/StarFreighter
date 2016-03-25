@@ -29,12 +29,12 @@ public final class InventoryMenu extends MenuView {
      */
     private void displayInventoryContents() {
         Inventory playerInventory = InventoryController.getInventory();
-        console.println("You have " + playerInventory.getCurrency() + " " + InventoryController.CURRENCY);
-        console.println("[Item name]\t[Value]");
+        CONSOLE.println("You have " + playerInventory.getCurrency() + " " + InventoryController.CURRENCY);
+        CONSOLE.println("[Item name]\t[Value]");
         playerInventory.getContents().stream().forEach((current) -> {
-            console.println(current);
+            CONSOLE.println(current);
         });
-        console.println("Your cargo is worth a combined " +
+        CONSOLE.println("Your cargo is worth a combined " +
                 InventoryController.calculateTotalValue(playerInventory) +
                 " credits.");
     }
@@ -50,13 +50,13 @@ public final class InventoryMenu extends MenuView {
         int index = 1;
         for (InventoryItem current : inventory) {
             // Pad the index with a leading zero for readability's sake.
-            console.write("[");
+            CONSOLE.write("[");
             if (index < 10) {
-                console.write("0");
+                CONSOLE.write("0");
             }
-            console.write(index + "] - " + current.getName() + "\t");
-            console.write(InventoryController.calculateResaleValue(current) + "\n");
-            console.flush();
+            CONSOLE.write(index + "] - " + current.getName() + "\t");
+            CONSOLE.write(InventoryController.calculateResaleValue(current) + "\n");
+            CONSOLE.flush();
             // Increment the index.
             index++;
         }
@@ -141,7 +141,7 @@ public final class InventoryMenu extends MenuView {
                 return true;
             }
             default: {
-                console.println(INVALID);
+                CONSOLE.println(INVALID);
                 break;
             }
         }

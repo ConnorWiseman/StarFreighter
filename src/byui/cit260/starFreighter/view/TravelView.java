@@ -1,7 +1,9 @@
 package byui.cit260.starFreighter.view;
 
-import byui.cit260.starFreighter.control.EncounterController;
+import byui.cit260.starFreighter.constants.Difficulty;
+import byui.cit260.starFreighter.control.InventoryController;
 import byui.cit260.starFreighter.control.PlanetSystemController;
+import byui.cit260.starFreighter.control.RandomNumbers;
 import byui.cit260.starFreighter.control.ShipController;
 import byui.cit260.starFreighter.model.Planet;
 import byui.cit260.starFreighter.model.Ship;
@@ -10,7 +12,11 @@ import java.io.IOException;
 /**
  *
  */
-public class TravelDisplay extends Display {
+public class TravelView extends Display {
+    /**
+     * Class constants.
+     */
+    private static final CombatMenu COMBAT_MENU = new CombatMenu();
 
     /**
      * Displays the travel view to the player.
@@ -87,7 +93,7 @@ public class TravelDisplay extends Display {
                     playerShip.setFuel(playerShip.getFuel() - fuelCost);
                     
                     // Then generate a random encounter.
-                    EncounterController.generateEncounter();
+                    randomEncounter();
                 }
                 else {
                     // Inform the player of the need to refuel.
@@ -103,7 +109,47 @@ public class TravelDisplay extends Display {
                 CONSOLE.println("Travel canceled.");
             }
         } catch (IOException error) {
-            ErrorView.display(TravelDisplay.class.getName(), error.getMessage());
+            ErrorView.display(TravelView.class.getName(), error.getMessage());
+        }
+    }
+
+    /**
+     * Handles random encounters after successfully traveling.
+     */
+    private static void randomEncounter() {
+        TextBox.displayText("The " +
+                ShipController.getShip().getName() +
+                " embarks into the cold reaches of space...");
+        
+        int selection = RandomNumbers.range(1, 5);
+        switch(selection) {
+            case 1: {
+                TextBox.displayText("... and arrives at its detination without incident.");
+                break;
+            }
+            case 2: {
+                TextBox.displayText("... and is attacked by space pirates!");
+                COMBAT_MENU.initiateCombat(Difficulty.EASY);
+                break;
+            }
+            case 3: {
+                TextBox.displayText("... and is attacked by space pirates!");
+                COMBAT_MENU.initiateCombat(Difficulty.MEDIUM);
+                break;
+            }
+            case 4: {
+                TextBox.displayText(
+                    "... and finds jettisoned cargo along the" +
+                    " way! One man's trash is another man's treasure. You" +
+                    " salvage everything you can find."
+                );
+                InventoryController.salvageDebris();
+                break;
+            }
+            case 5: {
+                TextBox.displayText("... and explodes into a million pieces!");
+                break;
+            }
         }
     }
 }

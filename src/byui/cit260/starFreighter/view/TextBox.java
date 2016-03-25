@@ -25,14 +25,14 @@ public final class TextBox {
      */
     public static void displayText(String... multiple) {
         // Display the top separator and spacing.
-        DisplayFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
-        DisplayFormat.displaySeparatorSpacing(MAX_WIDTH, V_SYMBOL);
+        TextFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
+        TextFormat.displaySeparatorSpacing(MAX_WIDTH, V_SYMBOL);
         
         // Iterate over each String supplied as an argument.
         for (String text : multiple) {
             if (text.length() < MAX_WIDTH) {
                 // If it's a short string, just display it as a line.
-                DisplayFormat.displayLine(text, MAX_WIDTH, V_SYMBOL);
+                TextFormat.displayLine(text, MAX_WIDTH, V_SYMBOL);
             }
             else {
                 // If it's a long string, break it apart into words.
@@ -62,13 +62,13 @@ public final class TextBox {
                 
                 // Display each line in the block of text.
                 lines.stream().forEach((String line) -> {
-                    DisplayFormat.displayLine(line, MAX_WIDTH, V_SYMBOL);
+                    TextFormat.displayLine(line, MAX_WIDTH, V_SYMBOL);
                 });
             }
             // Display spacing after each block of text.
-            DisplayFormat.displaySeparatorSpacing(MAX_WIDTH, V_SYMBOL);
+            TextFormat.displaySeparatorSpacing(MAX_WIDTH, V_SYMBOL);
         }
         // Display the bottom separator.
-        DisplayFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
+        TextFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
     }
 }

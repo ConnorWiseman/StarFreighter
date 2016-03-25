@@ -18,7 +18,7 @@ public abstract class MenuView implements ViewInterface {
     private static final String V_SYMBOL = "|";
     private static final String DIVIDER = " - ";
     protected static String INVALID = "\nInvalid selection. Please try again.";
-    protected static final PrintWriter console = StarFreighter.getOutFile();
+    protected static final PrintWriter CONSOLE = StarFreighter.getOutFile();
 
     /**
      * Class instance properties.
@@ -36,17 +36,17 @@ public abstract class MenuView implements ViewInterface {
      * Displays the menu.
      */
     protected void displayMenu() {
-        DisplayFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
-        DisplayFormat.displayLine(menuTitle, MAX_WIDTH, V_SYMBOL);
-        DisplayFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
+        TextFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
+        TextFormat.displayLine(menuTitle, MAX_WIDTH, V_SYMBOL);
+        TextFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
         menuItems.stream().forEach((item) -> {
-            DisplayFormat.displayLine(
+            TextFormat.displayLine(
                 item.symbol() + DIVIDER + item.name(),
                 MAX_WIDTH,
                 V_SYMBOL
             );
         });
-        DisplayFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
+        TextFormat.displaySeparator(MAX_WIDTH, H_SYMBOL);
     }
     
     /**
