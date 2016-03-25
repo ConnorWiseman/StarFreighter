@@ -4,6 +4,7 @@ import byui.cit260.starFreighter.control.GameController;
 import byui.cit260.starFreighter.exceptions.GameControlException;
 import byui.cit260.starFreighter.model.MenuItem;
 import java.io.IOException;
+import starfreighter.StarFreighter;
 
 /**
  * The game's main menu view.
@@ -67,7 +68,10 @@ public final class MainMenu extends MenuView {
     private void loadGame() {
         try {
             GameController.loadGame();
-            console.println("File successfully loaded.");
+            String playerName = StarFreighter.getCurrentGame().getPlayer().getName();
+            TextBox.displayText(
+                "Welcome back, Captain " + playerName + ". You have the bridge."
+            );
             gameMenu.display();
         } catch (GameControlException | IOException | ClassNotFoundException error) {
             ErrorView.display(this.getClass().getName(), error.getMessage());

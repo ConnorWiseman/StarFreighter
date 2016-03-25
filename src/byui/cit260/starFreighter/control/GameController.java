@@ -43,7 +43,7 @@ public class GameController {
         Ship newShip = ShipController.createShip(shipName);
 
         // Create a CrewRoster for the Ship.
-        CrewRoster newRoster = CrewController.createCrew(newPlayer.name());
+        CrewRoster newRoster = CrewController.createCrew(newPlayer.getName());
         
         // Create a PlanetSystem for this game instance.
         PlanetSystem planets = PlanetSystemController.createSystem();

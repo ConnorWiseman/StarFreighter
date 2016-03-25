@@ -24,7 +24,7 @@ public class Player implements Serializable {
      * Retrieves the player's name.
      * @return 
      */
-    public String name() {
+    public String getName() {
         return this.name;
     }
 
