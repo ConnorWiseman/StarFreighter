@@ -30,7 +30,7 @@ public final class PirateController {
         
         // Set the ship's hull integrity. Fuel doesn't matter, pirates don't travel.
         enemyShip.setHullIntegrity(difficulty.getHullIntegrity());
-        enemyShip.setHull(enemyShip.hullIntegrity());
+        enemyShip.setHull(enemyShip.getHullIntegrity());
         
         // Create a crew of five pirates.
         CrewRoster enemyCrew = new CrewRoster();

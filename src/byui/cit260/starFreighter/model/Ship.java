@@ -48,7 +48,7 @@ public class Ship implements Serializable {
      * Gets the Ship's fuel capacity.
      * @return 
      */
-    public int fuelCapacity() {
+    public int getFuelCapacity() {
         return fuelCapacity;
     }
 
@@ -64,7 +64,7 @@ public class Ship implements Serializable {
      * Gets the Ship's hull integrity.
      * @return 
      */
-    public int hullIntegrity() {
+    public int getHullIntegrity() {
         return hullIntegrity;
     }
 

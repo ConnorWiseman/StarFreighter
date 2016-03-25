@@ -20,9 +20,10 @@ public class ShipController {
         // Assign values to the Ship's properties.
         newShip.setFuelCapacity(100);
         newShip.setHullIntegrity(100);
-        newShip.setFuel(newShip.fuelCapacity());
-        newShip.setHull(newShip.hullIntegrity());
+        newShip.setFuel(newShip.getFuelCapacity());
+        newShip.setHull(newShip.getHullIntegrity());
 
+        // Return the new ship.
         return newShip;
     }
 
@@ -55,10 +56,26 @@ public class ShipController {
     }
     
     /**
-     * Consumes fuel when traveling.
-     * @param fuelCost 
+     * Calculates the cost of refueling the player's ship.
+     * @return 
      */
-    public static void consumeFuel(int fuelCost) {
+    public static int calculateRefuelCost() {
+        Ship playerShip = getShip();
+        int maxFuel = playerShip.getFuelCapacity();
+        int currentFuel = playerShip.getFuel();
         
+        return (int) ((maxFuel - currentFuel) * 0.5);
+    }
+    
+    /**
+     * Calculates the cost of repairing the player's ship.
+     * @return 
+     */
+    public static int calculateRepairCost() {
+        Ship playerShip = getShip();
+        int maxHull = playerShip.getHullIntegrity();
+        int currentHull = playerShip.getHull();
+        
+        return (maxHull - currentHull) * 2;
     }
 }

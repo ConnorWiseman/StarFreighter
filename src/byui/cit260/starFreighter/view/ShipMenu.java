@@ -1,9 +1,11 @@
 package byui.cit260.starFreighter.view;
 
+import byui.cit260.starFreighter.control.InventoryController;
 import byui.cit260.starFreighter.control.ShipController;
 import byui.cit260.starFreighter.model.MenuItem;
 import byui.cit260.starFreighter.model.Ship;
 import java.io.IOException;
+import starfreighter.StarFreighter;
 
 /**
  * The help menu view, accessible in-game.
@@ -30,8 +32,8 @@ public class ShipMenu extends MenuView {
         TextBox.displayText(
             "Welcome, Captain. The " + ship.getName() + " is reporting the" +
                 " following status:",
-            "Hull integrity: " + ship.getHull() + "/" + ship.hullIntegrity(),
-            "Fuel supply: " + ship.getFuel() + "/" + ship.fuelCapacity()
+            "Hull integrity: " + ship.getHull() + "/" + ship.getHullIntegrity(),
+            "Fuel supply: " + ship.getFuel() + "/" + ship.getFuelCapacity()
         );
     }
 
@@ -54,7 +56,71 @@ public class ShipMenu extends MenuView {
      * Refuels the player's ship.
      */
     private void refuelShip() {
+        // Get the player's ship.
+        Ship playerShip = ShipController.getShip();
         
+        // Check to make sure fuel supplies aren't full already.
+        if (playerShip.getFuel() == playerShip.getFuelCapacity()) {
+            TextBox.displayText(
+                "The " +
+                playerShip.getName() +
+                "'s fuel supplies are full, sir."
+            );
+            return;
+        }
+        
+        // Calculate the cost of refueling.
+        int refuelCost = ShipController.calculateRefuelCost();
+
+        // Inform the player of the consequences of their actions.
+        TextBox.displayText(
+            "Refueling the " +
+            playerShip.getName() +
+            " will cost " +
+            refuelCost +
+            " " +
+            InventoryController.CURRENCY +
+            "."
+        );
+        
+        try {
+            // Does the player want to proceed?
+            char proceed = Input.getCharSameLineUppercase("Proceed? (Y/N) ");
+
+            // If the player does, then proceed. Otherwise, cancel.
+            if (proceed == 'Y') {
+                // Make sure the player's ship has enough extra fuel to run.
+                if (StarFreighter.getCurrentGame().getInventory().getCurrency() >= refuelCost) {
+                    // Update the player's fuel.
+                    playerShip.setFuel(playerShip.getFuelCapacity());
+                    
+                    // Display a confirmation message.
+                    TextBox.displayText(
+                        "You spend " +
+                        refuelCost +
+                        " " +
+                        InventoryController.CURRENCY +
+                        " to refuel the " +
+                        playerShip.getName() +
+                        "."
+                    );
+                }
+                else {
+                    // Inform the player of their inability to refuel.
+                    // Should have used a budget!
+                    TextBox.displayText(
+                        "Unfortunately, you cannot afford to refuel your ship."
+                    );
+                }
+            }
+            else {
+                TextBox.displayText(
+                    "Refueling canceled."
+                );
+            }
+        } catch (IOException error) {
+            ErrorView.display(TravelView.class.getName(), error.getMessage());
+        }
     }
 
     /**
