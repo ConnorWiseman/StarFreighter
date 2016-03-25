@@ -2,7 +2,7 @@ package byui.cit260.starFreighter.control;
 
 import byui.cit260.starFreighter.model.Inventory;
 import byui.cit260.starFreighter.model.InventoryItem;
-import java.util.ArrayList;
+import byui.cit260.starFreighter.model.Planet;
 import java.util.Collections;
 import starfreighter.StarFreighter;
 
@@ -27,7 +27,11 @@ public class InventoryController {
      * @return 
      */
     public static Inventory createInventory() {
-        return new Inventory();
+        Inventory playerInventory = new Inventory();
+        
+        playerInventory.addItem(new InventoryItem("Testing", 100));
+        
+        return playerInventory;
     }
     
     /**
@@ -42,7 +46,7 @@ public class InventoryController {
      * Sorts a particular inventory by item value.
      * @param toSort
      */
-    public void sortByValue(Inventory toSort) {
+    public static void sortByValue(Inventory toSort) {
         Collections.sort(toSort.getContents(), (InventoryItem itemOne, InventoryItem itemTwo) -> {
             if (itemOne.getValue() > itemTwo.getValue()) {
                 return 1;
@@ -59,12 +63,18 @@ public class InventoryController {
      * @param item 
      */
     public static void sellItem(InventoryItem item) {
-        // get player's current location
-        // remove item from player's inventory
-        // add resale value to player's currency
-        // add item to shop at current location
-        // remove resale value from shop's currency
-        // done
+        Inventory currentInventory = getInventory();
+        
+        Planet currentLocation = ShipController.getShip().getLocation();
+        Inventory otherInventory = currentLocation.getShop();
+        
+        currentInventory.removeItem(item);
+        currentInventory.addCurrency(item.getValue());
+        otherInventory.addItem(item);
+        otherInventory.removeCurrency(item.getValue());
+
+        sortByValue(currentInventory);
+        sortByValue(otherInventory);
     }
 
     /**

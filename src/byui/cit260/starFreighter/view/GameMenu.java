@@ -11,6 +11,7 @@ public final class GameMenu extends MenuView {
      */
     private final ShipMenu shipMenu = new ShipMenu();
     private final CrewMenu crewMenu = new CrewMenu();
+    private final InventoryMenu inventoryMenu = new InventoryMenu();
     private final MapMenu mapMenu = new MapMenu();
     private final HelpMenu helpMenu = new HelpMenu();
     
@@ -43,7 +44,7 @@ public final class GameMenu extends MenuView {
                 break;
             }
             case 'I': {
-                //this.InmeMenuView();
+                inventoryMenu.display();
                 break;
             }
             case 'H': {

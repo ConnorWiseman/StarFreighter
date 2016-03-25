@@ -4,7 +4,6 @@ import byui.cit260.starFreighter.control.GameController;
 import byui.cit260.starFreighter.exceptions.GameControlException;
 import byui.cit260.starFreighter.model.MenuItem;
 import java.io.IOException;
-import starfreighter.StarFreighter;
 
 /**
  * The game's main menu view.

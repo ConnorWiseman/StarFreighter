@@ -14,6 +14,7 @@ public final class Planet implements Serializable {
     private final String desc;
     private final Point coords;
     private final char symbol;
+    private final Inventory shop;
 
     /**
      * Class constructor.
@@ -27,6 +28,8 @@ public final class Planet implements Serializable {
         this.desc = desc;
         this.coords = coords;
         this.symbol = symbol;
+        this.shop = new Inventory();
+        this.shop.setCurrency(10000);
     }
     
     /**
@@ -60,14 +63,23 @@ public final class Planet implements Serializable {
     public char getSymbol() {
         return symbol;
     }
+    
+    /**
+     * Gets the planet's shop.
+     * @return 
+     */
+    public Inventory getShop() {
+        return shop;
+    }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 31 * hash + Objects.hashCode(this.name);
-        hash = 31 * hash + Objects.hashCode(this.desc);
-        hash = 31 * hash + Objects.hashCode(this.coords);
-        hash = 31 * hash + this.symbol;
+        int hash = 5;
+        hash = 71 * hash + Objects.hashCode(this.name);
+        hash = 71 * hash + Objects.hashCode(this.desc);
+        hash = 71 * hash + Objects.hashCode(this.coords);
+        hash = 71 * hash + this.symbol;
+        hash = 71 * hash + Objects.hashCode(this.shop);
         return hash;
     }
 
@@ -92,11 +104,14 @@ public final class Planet implements Serializable {
         if (!Objects.equals(this.desc, other.desc)) {
             return false;
         }
-        return Objects.equals(this.coords, other.coords);
+        if (!Objects.equals(this.coords, other.coords)) {
+            return false;
+        }
+        return Objects.equals(this.shop, other.shop);
     }
 
     @Override
     public String toString() {
-        return "Planet{" + "name=" + name + ", desc=" + desc + ", coords=" + coords + ", symbol=" + symbol + '}';
+        return "Planet{" + "name=" + name + ", desc=" + desc + ", coords=" + coords + ", symbol=" + symbol + ", shop=" + shop + '}';
     }
 }

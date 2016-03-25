@@ -45,6 +45,7 @@ public class GameController {
         
         // Create the player's inventory.
         Inventory newInventory = InventoryController.createInventory();
+        newInventory.setCurrency(100);
 
         // Create a CrewRoster for the Ship.
         CrewRoster newRoster = CrewController.createCrew(newPlayer.getName());

@@ -39,6 +39,22 @@ public class Inventory implements Serializable {
     }
     
     /**
+     * Adds to the inventory's currency.
+     * @param value 
+     */
+    public void addCurrency(int value) {
+        setCurrency(value + getCurrency());
+    }
+    
+    /**
+     * Removes from the inventory's currency.
+     * @param value 
+     */
+    public void removeCurrency(int value) {
+        setCurrency(getCurrency() - value);
+    }
+    
+    /**
      * Gets the contents of the inventory.
      * @return 
      */
@@ -52,6 +68,14 @@ public class Inventory implements Serializable {
      */
     public void addItem(InventoryItem item) {
         contents.add(item);
+    }
+    
+    /**
+     * Removes an item from the inventory.
+     * @param item 
+     */
+    public void removeItem(InventoryItem item) {
+        contents.remove(item);
     }
 
     @Override
