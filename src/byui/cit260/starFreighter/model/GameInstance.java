@@ -12,6 +12,7 @@ public class GameInstance implements Serializable {
      */
     private Player player;
     private Ship ship;
+    private Inventory inventory;
     private CrewRoster crew;
     private PlanetSystem planets;
 
@@ -49,6 +50,20 @@ public class GameInstance implements Serializable {
     public void setShip(Ship ship) {
         this.ship = ship;
     }
+    
+    /**
+     * @return the inventory
+     */
+    public Inventory getInventory() {
+        return inventory;
+    }
+    
+    /**
+     * @param inventory the inventory to set
+     */
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
 
     /**
      * @return the crew
@@ -83,10 +98,11 @@ public class GameInstance implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.player);
-        hash = 59 * hash + Objects.hashCode(this.ship);
-        hash = 59 * hash + Objects.hashCode(this.crew);
-        hash = 59 * hash + Objects.hashCode(this.planets);
+        hash = 97 * hash + Objects.hashCode(this.player);
+        hash = 97 * hash + Objects.hashCode(this.ship);
+        hash = 97 * hash + Objects.hashCode(this.inventory);
+        hash = 97 * hash + Objects.hashCode(this.crew);
+        hash = 97 * hash + Objects.hashCode(this.planets);
         return hash;
     }
 
@@ -108,6 +124,9 @@ public class GameInstance implements Serializable {
         if (!Objects.equals(this.ship, other.ship)) {
             return false;
         }
+        if (!Objects.equals(this.inventory, other.inventory)) {
+            return false;
+        }
         if (!Objects.equals(this.crew, other.crew)) {
             return false;
         }
@@ -116,6 +135,6 @@ public class GameInstance implements Serializable {
 
     @Override
     public String toString() {
-        return "GameInstance{" + "player=" + player + ", ship=" + ship + ", crew=" + crew + ", planets=" + planets + '}';
+        return "GameInstance{" + "player=" + player + ", ship=" + ship + ", inventory=" + inventory + ", crew=" + crew + ", planets=" + planets + '}';
     }
 }

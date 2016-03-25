@@ -3,6 +3,7 @@ package byui.cit260.starFreighter.control;
 import byui.cit260.starFreighter.exceptions.GameControlException;
 import byui.cit260.starFreighter.model.CrewRoster;
 import byui.cit260.starFreighter.model.GameInstance;
+import byui.cit260.starFreighter.model.Inventory;
 import byui.cit260.starFreighter.model.Planet;
 import byui.cit260.starFreighter.model.PlanetSystem;
 import byui.cit260.starFreighter.model.Player;
@@ -41,6 +42,9 @@ public class GameController {
 
         // Create a new Ship.
         Ship newShip = ShipController.createShip(shipName);
+        
+        // Create the player's inventory.
+        Inventory newInventory = InventoryController.createInventory();
 
         // Create a CrewRoster for the Ship.
         CrewRoster newRoster = CrewController.createCrew(newPlayer.getName());
@@ -51,6 +55,7 @@ public class GameController {
         // Add the created objects to the new GameInstance.
         newGame.setPlayer(newPlayer);
         newGame.setShip(newShip);
+        newGame.setInventory(newInventory);
         newGame.setCrew(newRoster);
         newGame.setPlanetSystem(planets);
 
