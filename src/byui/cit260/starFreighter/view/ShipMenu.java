@@ -30,8 +30,8 @@ public class ShipMenu extends MenuView {
         TextBox.displayText(
             "Welcome, Captain. The " + ship.getName() + " is reporting the" +
                 " following status:",
-            "Hull integrity: " + ship.hull() + "/" + ship.hullIntegrity(),
-            "Fuel supply: " + ship.fuel() + "/" + ship.fuelCapacity()
+            "Hull integrity: " + ship.getHull() + "/" + ship.hullIntegrity(),
+            "Fuel supply: " + ship.getFuel() + "/" + ship.fuelCapacity()
         );
     }
 

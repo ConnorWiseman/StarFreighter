@@ -80,7 +80,7 @@ public class Ship implements Serializable {
      * Gets the Ship's fuel.
      * @return
      */
-    public int fuel() {
+    public int getFuel() {
         return fuel;
     }
 
@@ -96,7 +96,7 @@ public class Ship implements Serializable {
      * Gets the Ship's hull status.
      * @return
      */
-    public int hull() {
+    public int getHull() {
         return hull;
     }
 

@@ -1,6 +1,7 @@
 package byui.cit260.starFreighter.control;
 
 import byui.cit260.starFreighter.constants.Difficulty;
+import byui.cit260.starFreighter.constants.Role;
 import byui.cit260.starFreighter.model.Ship;
 import starfreighter.StarFreighter;
 
@@ -61,11 +62,22 @@ public class ShipController {
     }
 
     /**
-     * Calculates the fuel cost given a specified distance.
+     * Calculates the fuel cost given a specified distance. Uses the pilot skill
+     * to determine how much fuel is consumed when traveling.
      * @param distance
      * @return 
      */
     public static int calculateFuelCost(double distance) {
-        return 0;
+        int pilotModifier = CrewController.getCrewMemberAssignedTo(Role.PILOT).stat(Role.PILOT);
+        int fuelCostModifier = 11 - pilotModifier;
+        return (int) ((int) distance * fuelCostModifier);
+    }
+    
+    /**
+     * Consumes fuel when traveling.
+     * @param fuelCost 
+     */
+    public static void consumeFuel(int fuelCost) {
+        
     }
 }

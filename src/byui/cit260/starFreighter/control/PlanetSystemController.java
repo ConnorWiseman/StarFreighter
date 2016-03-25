@@ -85,7 +85,7 @@ public final class PlanetSystemController {
      * @param symbol
      * @return 
      */
-    public static Planet planetSymbol(char symbol) {
+    public static Planet planetAtSymbol(char symbol) {
         ArrayList<Planet> planets = getSystem().getContents();
         for (Planet planet : planets) {
             if (planet.getSymbol() == symbol) {
