@@ -148,4 +148,58 @@ public final class Input {
         // Return the user's input.
         return value;
     }
+
+    /**
+     * Gets an int, accepting input on the next line.
+     * @param prompt
+     * @return 
+     * @throws java.io.IOException 
+     */
+    public static int getInt(String prompt) throws IOException {
+        return promptForInt(prompt, false);
+    }
+
+    /**
+     * Gets an int, accepting input on the same line.
+     * @param prompt
+     * @return 
+     * @throws java.io.IOException 
+     */
+    public static int getIntSameLine(String prompt) throws IOException {
+        return promptForInt(prompt, true);
+    }
+
+    /**
+     * Displays a prompt, then gets a string of user input.
+     * @param prompt
+     * @param sameLine
+     * @return
+     */
+    private static int promptForInt(String prompt, boolean sameLine) throws IOException {
+        int value;
+
+        while(true) {
+            if (sameLine) {
+                console.write(prompt);
+                console.flush();
+            }
+            else {
+                console.println(prompt);
+            }
+
+            // Attempt to read an integer in.
+            try {
+                value = Integer.parseInt(KEYBOARD_INPUT.readLine().trim());
+            } catch(NumberFormatException error) {
+                console.println("Invalid input - please enter an integer.");
+                continue;
+            }
+            
+            // Once we have valid input, break from the loop.
+            break;
+        }
+        
+        // Return the user's input.
+        return value;
+    }
 }
