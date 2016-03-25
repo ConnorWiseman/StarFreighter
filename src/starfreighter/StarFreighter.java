@@ -1,6 +1,7 @@
 package starfreighter;
 
 import byui.cit260.starFreighter.model.GameInstance;
+import byui.cit260.starFreighter.view.ErrorView;
 import byui.cit260.starFreighter.view.MainMenu;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class StarFreighter {
     /**
      * Class constants.
      */
-    public static final MainMenu MAIN_MENU = new MainMenu();
+    public static MainMenu mainMenu;
     private static PrintWriter outFile = null;
     private static BufferedReader inFile = null;
     private static PrintWriter logFile = null;
@@ -32,11 +33,17 @@ public class StarFreighter {
         try {
             StarFreighter.inFile = new BufferedReader(new InputStreamReader(System.in));
             StarFreighter.outFile = new PrintWriter(System.out, true);
-            MAIN_MENU.display();
+            String errorPath = "log.txt";
+            StarFreighter.logFile = new PrintWriter(errorPath);
+            mainMenu = new MainMenu();
+            mainMenu.display();
         } catch (Throwable startError) {
-            System.out.println("Exception: " + startError.toString()
-                    + "\nCause: " + startError.getCause()
-                    + "\nMessage: " + startError.getMessage());
+            System.out.println(
+                "Exception: " + startError.toString() + 
+                "\nCause: " + startError.getCause() + 
+                "\nMessage: " + startError.getMessage()
+            );
+            startError.printStackTrace();
         } 
         finally {
             try {
@@ -50,8 +57,8 @@ public class StarFreighter {
                     StarFreighter.logFile.close();
                 }
             } 
-            catch (IOException ex) { 
-                System.out.println("Error closing files");
+            catch (IOException closeError) {
+                System.out.println("Error closing files.");
                 return;   
             }
         }
@@ -71,5 +78,53 @@ public class StarFreighter {
      */
     public static void setCurrentGame(GameInstance newGame) {
         CURRENT_GAME = newGame;
+    }
+
+    /**
+     * Gets the outfile.
+     * @return 
+     */
+    public static PrintWriter getOutFile() {
+        return outFile;
+    }
+
+    /**
+     * Sets the outfile.
+     * @param outFile 
+     */
+    public static void setOutFile(PrintWriter outFile) {
+        StarFreighter.outFile = outFile;
+    }
+
+    /**
+     * Gets the infile.
+     * @return 
+     */
+    public static BufferedReader getInFile() {
+        return inFile;
+    }
+
+    /**
+     * Sets the infile.
+     * @param inFile 
+     */
+    public static void setInFile(BufferedReader inFile) {
+        StarFreighter.inFile = inFile;
+    }
+
+    /**
+     * Gets the log file.
+     * @return 
+     */
+    public static PrintWriter getLogFile() {
+        return logFile;
+    }
+
+    /**
+     * Sets the log file.
+     * @param logFile 
+     */
+    public static void setLogFile(PrintWriter logFile) {
+        StarFreighter.logFile = logFile;
     }
 }

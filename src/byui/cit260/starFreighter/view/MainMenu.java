@@ -4,10 +4,6 @@ import byui.cit260.starFreighter.control.GameController;
 import byui.cit260.starFreighter.exceptions.GameControlException;
 import byui.cit260.starFreighter.model.MenuItem;
 import java.io.IOException;
-import static java.lang.System.out;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import starfreighter.StarFreighter;
 
 /**
  * The game's main menu view.
@@ -48,7 +44,7 @@ public final class MainMenu extends MenuView {
     /**
      * Starts a new game.
      */
-    private void newGame() {
+    private void newGame() throws IOException {
         // Prompt the player for their name and the name of their ship.
         String playerName = Input.getStringSameLine("Please enter your name: ");
         String shipName = Input.getStringSameLine("Please name your ship: ");
@@ -71,11 +67,10 @@ public final class MainMenu extends MenuView {
     private void loadGame() {
         try {
             GameController.loadGame();
-            out.println("File successfully loaded.");
+            console.println("File successfully loaded.");
             gameMenu.display();
         } catch (GameControlException | IOException | ClassNotFoundException error) {
-            out.println("Unable to load game. Error: ");
-            System.out.println(error.getMessage());
+            ErrorView.display(this.getClass().getName(), error.getMessage());
         }
     }
     
@@ -85,13 +80,12 @@ public final class MainMenu extends MenuView {
     private void saveGame() {
         try {
             GameController.saveGame();
-            out.println("File successfully saved.");
+            console.println("File successfully saved.");
             gameMenu.display();
-        } catch (GameControlException ex) {
-            out.println("Unable to save game. Error: ");
-            out.println(ex.getMessage());
-        } catch (IOException ex) {
-            Logger.getLogger(StarFreighter.MAIN_MENU.getTitle()).log(Level.SEVERE, null, ex);
+        } catch (GameControlException saveError) {
+            ErrorView.display(this.getClass().getName(), saveError.getMessage());
+        } catch (IOException error) {
+            ErrorView.display(this.getClass().getName(), error.getMessage());
         }
     }
 
@@ -99,7 +93,11 @@ public final class MainMenu extends MenuView {
     public boolean doAction(char action) {
         switch (action) {
             case 'N': {
-                this.newGame();
+                try {
+                    this.newGame();
+                } catch (IOException error) {
+                    ErrorView.display(this.getClass().getName(), error.getMessage());
+                }
                 break;
             }
             case 'L': {
@@ -114,7 +112,7 @@ public final class MainMenu extends MenuView {
                 return true;
             }
             default: {
-                System.out.println(INVALID);
+                console.println(INVALID);
                 break;
             }
         }

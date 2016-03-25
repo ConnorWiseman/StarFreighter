@@ -5,7 +5,7 @@ import byui.cit260.starFreighter.model.MenuItem;
 /**
  * The in-game menu view.
  */
-class GameMenu extends MenuView {
+public final class GameMenu extends MenuView {
     /**
      * Class properties. Additional views called by this view.
      */
@@ -30,26 +30,33 @@ class GameMenu extends MenuView {
     @Override
     public boolean doAction(char action) {
         switch (action) {
-            case 'S':
+            case 'S': {
                 shipMenu.display();
                 break;
-            case 'C':
+            }
+            case 'C': {
                 crewMenu.display();
                 break;
-            case 'M':
+            }
+            case 'M': {
                 mapMenu.display();
                 break;
-            case 'I':
+            }
+            case 'I': {
                 //this.InmeMenuView();
                 break;
-            case 'H':
+            }
+            case 'H': {
                 helpMenu.display();
                 break;
-            case 'E':
+            }
+            case 'E': {
                 return true;
-            default:
-                System.out.println(INVALID);
+            }
+            default: {
+                console.println(INVALID);
                 break;
+            }
         }
         return false;
     }

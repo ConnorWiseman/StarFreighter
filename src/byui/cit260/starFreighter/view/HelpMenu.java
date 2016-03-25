@@ -23,7 +23,7 @@ public class HelpMenu extends MenuView {
     @Override
     public boolean doAction(char action) {
         switch (action) {
-            case 'G':
+            case 'G': {
                 TextBox.displayText(
                     "You are a spaceship captain desiring to be the best and" +
                         " wealthiest in the galaxy. A deep-space phenomena" +
@@ -33,7 +33,8 @@ public class HelpMenu extends MenuView {
                         "ship."
                 );
                 break;
-            case 'C':
+            }
+            case 'C': {
                 TextBox.displayText(
                     "There are five crew member roles.",
                     "Pilot: The better they are the faster you travel and the" +
@@ -50,7 +51,8 @@ public class HelpMenu extends MenuView {
                         " high!"
                 );
                 break;
-            case 'J':
+            }
+            case 'J': {
                 TextBox.displayText(
                     "You can access the jobs boards on any planet. You'll be" +
                         " given a task to complete and rewarded upon" +
@@ -59,7 +61,8 @@ public class HelpMenu extends MenuView {
                         " be accessed at any time from the game menu."
                 );
                 break;
-            case 'N':
+            }
+            case 'N': {
                 TextBox.displayText(
                     "You can access the map anytime in the game menu. Each" +
                         " location has a specific distance and fuel cost. You" +
@@ -67,7 +70,8 @@ public class HelpMenu extends MenuView {
                         " planet."
                 );
                 break;
-            case 'R':
+            }
+            case 'R': {
                 TextBox.displayText(
                     "Merchants can be accessed in the game menu. You can sell" +
                         " items you don't need or buy what you need. You need" +
@@ -79,14 +83,18 @@ public class HelpMenu extends MenuView {
                         " menu."
                 );
                 break;
-            case 'T':
+            }
+            case 'T': {
                 //this.displayHelpMenu();
                 break;
-            case 'E':
+            }
+            case 'E': {
                 return true;
-            default:
-                System.out.println(INVALID);
+            }
+            default: {
+                console.println(INVALID);
                 break;
+            }
         }
         return false;
     }

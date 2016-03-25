@@ -1,7 +1,10 @@
 package byui.cit260.starFreighter.view;
 
 import byui.cit260.starFreighter.model.MenuItem;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import starfreighter.StarFreighter;
 
 /**
  * An abstraction layer between other menu classes and the view interface.
@@ -15,6 +18,7 @@ public abstract class MenuView implements ViewInterface {
     private static final String V_SYMBOL = "|";
     private static final String DIVIDER = " - ";
     protected static String INVALID = "\nInvalid selection. Please try again.";
+    protected static final PrintWriter console = StarFreighter.getOutFile();
 
     /**
      * Class instance properties.
@@ -55,7 +59,13 @@ public abstract class MenuView implements ViewInterface {
 
     @Override
     public char getInput() {
-        return Input.getCharSameLineUppercase("Select an option: ");
+        char input = 0;
+        try {
+            input = Input.getCharSameLineUppercase("Select an option: ");
+        } catch (IOException error) {
+            ErrorView.display(this.getClass().getName(), error.getMessage());
+        }
+        return input;
     }
 
     @Override

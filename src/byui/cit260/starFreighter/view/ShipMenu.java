@@ -3,6 +3,9 @@ package byui.cit260.starFreighter.view;
 import byui.cit260.starFreighter.control.ShipController;
 import byui.cit260.starFreighter.model.MenuItem;
 import byui.cit260.starFreighter.model.Ship;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The help menu view, accessible in-game.
@@ -36,7 +39,7 @@ public class ShipMenu extends MenuView {
      * @param name
      * @return 
      */
-    private void renameShip() {
+    private void renameShip() throws IOException {
         String newName = Input.getStringSameLine("Enter new name: ");
         ShipController.renameShip(newName);
         TextBox.displayText(
@@ -47,17 +50,25 @@ public class ShipMenu extends MenuView {
     @Override
     public boolean doAction(char action) {
         switch (action) {
-            case 'S':
+            case 'S': {
                 shipStatus();
                 break;
-            case 'R':
-                renameShip();
+            }
+            case 'R': {
+                try {
+                    renameShip();
+                } catch (IOException error) {
+                    ErrorView.display(this.getClass().getName(), error.getMessage());
+                }
                 break;
-            case 'E':
+            }
+            case 'E': {
                 return true;
-            default:
-                System.out.println(INVALID);
+            }
+            default: {
+                console.println(INVALID);
                 break;
+            }
         }
         return false;
     }

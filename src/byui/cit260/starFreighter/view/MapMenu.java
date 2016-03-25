@@ -19,17 +19,21 @@ public class MapMenu extends MenuView {
     @Override
     public boolean doAction(char action) {
         switch (action) {
-            case 'M':
+            case 'M': {
                 MapDisplay.display();
                 break;
-            case 'T':
+            }
+            case 'T': {
                 // travel
                 break;
-            case 'E':
+            }
+            case 'E': {
                 return true;
-            default:
-                System.out.println(INVALID);
+            }
+            default: {
+                console.println(INVALID);
                 break;
+            }
         }
         return false;
     }

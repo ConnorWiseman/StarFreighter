@@ -19,7 +19,7 @@ public final class CrewMenu extends MenuView {
 
     private void displayCrew() {
         for (CrewMember member : CrewController.getRoster()) {
-            System.out.println(member.name() + ":\t\t" + member.hitPoints() +
+            console.println(member.name() + ":\t\t" + member.hitPoints() +
                 "/" + member.maxHitPoints() + "HP");
         }
     }
@@ -31,11 +31,13 @@ public final class CrewMenu extends MenuView {
                 displayCrew();
                 break;
             }
-            case 'E':
+            case 'E': {
                 return true;
-            default:
-                System.out.println(INVALID);
+            }
+            default: {
+                console.println(INVALID);
                 break;
+            }
         }
         return false;
     }

@@ -7,6 +7,7 @@ import byui.cit260.starFreighter.model.Planet;
 import byui.cit260.starFreighter.model.PlanetSystem;
 import byui.cit260.starFreighter.model.Player;
 import byui.cit260.starFreighter.model.Ship;
+import byui.cit260.starFreighter.view.ErrorView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,12 +15,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import starfreighter.StarFreighter;
 
 /**
  * Controls the GameInstance object.
  */
 public class GameController {
+    /**
+     * Class constants.
+     */
+    protected static final PrintWriter console = StarFreighter.getOutFile();
     
     /**
      * Creates a new game.
@@ -100,7 +106,7 @@ public class GameController {
         try {
             new File(System.getProperty("user.home") + File.separator + "StarFreighter").mkdir();
         } catch (SecurityException error) {
-            System.out.println("Error while creating directory in Java:" + error);
+            ErrorView.display(GameController.class.getName(), error.getMessage());
         }
 
         // Save the current game instance to the directory.

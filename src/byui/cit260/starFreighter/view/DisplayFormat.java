@@ -1,10 +1,14 @@
 package byui.cit260.starFreighter.view;
 
+import java.io.PrintWriter;
+import starfreighter.StarFreighter;
+
 /**
  * A utility class for displaying text boxes, menus, and the like in a uniform
  * format.
  */
 public class DisplayFormat {
+    protected static PrintWriter console = StarFreighter.getOutFile();
     /**
      * Creates a string of a specified length, then fills it with a specified
      * substring.
@@ -23,7 +27,7 @@ public class DisplayFormat {
      * @param hSymbol
      */
     protected static void displaySeparator(int maxWidth, String hSymbol) {
-        System.out.println(fillString(maxWidth + 3, hSymbol));
+        console.println(fillString(maxWidth + 3, hSymbol));
     }
 
     /**
@@ -33,7 +37,7 @@ public class DisplayFormat {
      */
     protected static void displaySeparatorSpacing(int maxWidth, String vSymbol) {
         String repeated = fillString(maxWidth + 1, " ");
-        System.out.println(vSymbol + repeated + vSymbol);
+        console.println(vSymbol + repeated + vSymbol);
     }
 
     /**
@@ -47,6 +51,6 @@ public class DisplayFormat {
         int lengthDifference = maxWidth - line.length();
         String emptySpace = fillString(lengthDifference, " ");
         finalLine += emptySpace + vSymbol;
-        System.out.println(finalLine);
+        console.println(finalLine);
     }
 }
