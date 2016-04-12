@@ -12,6 +12,11 @@ import starfreighter.StarFreighter;
  */
 public class ShipMenu extends MenuView {
     /**
+     * Class properties. Additional views called by this view.
+     */
+    private final UpgradeMenu upgradeMenu = new UpgradeMenu();
+    
+    /**
      * Class constructor. Sets menu title and defines all menu items.
      */
     public ShipMenu() {
@@ -20,6 +25,7 @@ public class ShipMenu extends MenuView {
         menuItems.add(new MenuItem('N', "Rename Ship"));
         menuItems.add(new MenuItem('F', "Refuel Ship"));
         menuItems.add(new MenuItem('R', "Repair Ship"));
+        menuItems.add(new MenuItem('U', "Upgrades"));
         menuItems.add(new MenuItem('E', "Exit to previous menu"));
     }
 
@@ -211,6 +217,10 @@ public class ShipMenu extends MenuView {
             }
             case 'R': {
                 repairShip();
+                break;
+            }
+            case 'U': {
+                upgradeMenu.display();
                 break;
             }
             case 'E': {

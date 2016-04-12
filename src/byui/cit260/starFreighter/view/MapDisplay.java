@@ -11,8 +11,8 @@ public final class MapDisplay extends Display {
     /**
      * Class constants.
      */
-    private final static int ROWS = 10; // number of horizontal rows in the map
-    private final static int COLS = 18; // number of vertical columns in the map
+    private final static int ROWS = 15; // number of horizontal rows in the map
+    private final static int COLS = 27; // number of vertical columns in the map
     private final static char SYMBOL_EMPTY = '.'; // used to display empty space
     private final static int MAP_HSPACE = 1; // how much horizontal space in the grid
     private final static int MAP_VSPACE = 0; // how much vertical space in the grid

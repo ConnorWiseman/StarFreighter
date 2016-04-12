@@ -1,5 +1,6 @@
 package byui.cit260.starFreighter.model;
 
+import byui.cit260.starFreighter.constants.ItemList;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,15 +13,26 @@ public class InventoryItem implements Serializable {
      */
     private String name;
     private int value;
+    private int quantity;
 
     /**
      * Class constructor.
      * @param name
      * @param value 
+     * @param quantity 
      */
-    public InventoryItem(String name, int value) {
+    public InventoryItem(String name, int value, int quantity) {
         this.name = name;
         this.value = value;
+    }
+    
+    /**
+     * Alternative class constructor.
+     * @param item 
+     */
+    public InventoryItem(ItemList item) {
+        this.name = item.getName();
+        this.value = item.getValue();
     }
 
     /**
@@ -55,11 +67,20 @@ public class InventoryItem implements Serializable {
         value = newValue;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 31 * hash + Objects.hashCode(this.name);
-        hash = 31 * hash + this.value;
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.name);
+        hash = 83 * hash + this.value;
+        hash = 83 * hash + this.quantity;
         return hash;
     }
 
@@ -78,11 +99,20 @@ public class InventoryItem implements Serializable {
         if (this.value != other.value) {
             return false;
         }
-        return Objects.equals(this.name, other.name);
+        if (this.quantity != other.quantity) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "InventoryItem{" + "name=" + name + ", value=" + value + '}';
+        return "InventoryItem{" + "name=" + name + ", value=" + value + ", quantity=" + quantity + '}';
     }
+
+    
+   
 }

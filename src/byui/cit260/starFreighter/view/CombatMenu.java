@@ -72,6 +72,10 @@ public class CombatMenu extends MenuView {
         int playerDamage = CombatController.calculateDamage(playerAttackPool);
         int enemyDamage = CombatController.calculateDamage(enemyAttackPool);
         
+        // Have each ship trade blows, as it were.
+        playerShip.setHull(playerShip.getHull() - enemyDamage);
+        enemyShip.setHull(enemyShip.getHull() - playerDamage);
+        
         // Display battle information.
         TextBox.displayText(
             "The space pirates attack! Hull integrity drops by " +
@@ -80,12 +84,12 @@ public class CombatMenu extends MenuView {
             "The " + playerShip.getName() + " returns fire! The enemy " +
                 "vessel's hull integrity drops by " +
                 playerDamage +
-                " points!"
+                " points!",
+            playerShip.getName() + "'s current hull integrity: " + playerShip.getHull(),
+            enemyShip.getName() + " current hull integrity: " + enemyShip.getHull()    
         );
         
-        // Have each ship trade blows, as it were.
-        playerShip.setHull(playerShip.getHull() - enemyDamage);
-        enemyShip.setHull(enemyShip.getHull() - playerDamage);
+
         
         // Handle the results of this round of battle.
         if (playerShip.getHull() <= 0 && enemyShip.getHull() <= 0) {
@@ -137,7 +141,8 @@ public class CombatMenu extends MenuView {
             // Display the outcome.
             TextBox.displayText(
                 "You destroy the space pirates' vessel and " +
-                "seize their cargo."
+                "seize their cargo, arriving at your destination triumphantly!",
+                playerShip.getName() + "'s current hull integrity: " + playerShip.getHull()    
             );
             return true;
         }

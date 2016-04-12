@@ -1,5 +1,6 @@
 package byui.cit260.starFreighter.model;
 
+import byui.cit260.starFreighter.constants.PlanetList;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -33,6 +34,18 @@ public class PlanetSystem implements Serializable {
      * @param newPlanet 
      */
     public void addPlanet(Planet newPlanet) {
+        contents.add(newPlanet);
+    }
+    
+    /**
+     * Adds a planet to the planetary system.
+     * @param planet
+     */
+    public void addPlanet(PlanetList planet) {
+        Planet newPlanet = new Planet(planet.getName(),
+                planet.getDesc(),
+                planet.getSymbol(),
+                planet.getCoords());
         contents.add(newPlanet);
     }
 

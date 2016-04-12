@@ -1,5 +1,6 @@
 package byui.cit260.starFreighter.control;
 
+import byui.cit260.starFreighter.constants.PlanetList;
 import byui.cit260.starFreighter.model.Planet;
 import byui.cit260.starFreighter.model.PlanetSystem;
 import byui.cit260.starFreighter.model.Point;
@@ -31,27 +32,11 @@ public final class PlanetSystemController {
         
         // Create each planet using some random numbers, and add it to the
         // system. Sorry, we gotta do it manually.
-        system.addPlanet(new Planet(
-                "Kryta", 
-                "A barren desert planet with a few secrets", 
-                // Kryta, as the starting planet, should always be in column 1
-                new Point(1, RandomNumbers.range(2, 8)), 
-                'K'));
-        system.addPlanet(new Planet(
-                "Qualufe",
-                "Oceans as far as the eye can see",
-                new Point(RandomNumbers.range(5, 6), RandomNumbers.range(0, 9)),
-                'Q'));
-        system.addPlanet(new Planet(
-                "Mezopan",
-                "Green forests and tall trees",
-                new Point(RandomNumbers.range(8, 10), RandomNumbers.range(3, 7)),
-                'M'));
-        system.addPlanet(new Planet(
-                "Redecent",
-                "The galaxy's capital",
-                new Point(RandomNumbers.range(14, 15), RandomNumbers.range(4, 6)),
-                'R'));
+        system.addPlanet(PlanetList.KRYTA);
+        system.addPlanet(PlanetList.QUALUFE);
+        system.addPlanet(PlanetList.MEZOPAN);
+        system.addPlanet(PlanetList.REDECENT);
+        system.addPlanet(PlanetList.GOAL);
         
         // Return the system.
         return system;
@@ -127,6 +112,13 @@ public final class PlanetSystemController {
         // Square the result
         double coordXSquared = Math.pow(coordX, 2);
         double coordYSquared = Math.pow(coordY, 2);
+        // Cubing the result created some weird situations in which coordSum
+        // became negative. You can't get the square root of a negative number,
+        // so TravelView would print NaN as the distance to a planet "behind"
+        // the player's position.
+        // If you can change this function to fix that before tonight, be my
+        // guest! Until then though, this needs to go back to squaring the
+        // result, as per the distance forumla.
 
         // Add the squares
         double coordSum = coordXSquared + coordYSquared;

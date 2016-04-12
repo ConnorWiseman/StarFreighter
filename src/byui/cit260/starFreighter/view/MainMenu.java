@@ -3,6 +3,7 @@ package byui.cit260.starFreighter.view;
 import byui.cit260.starFreighter.control.GameController;
 import byui.cit260.starFreighter.exceptions.GameControlException;
 import byui.cit260.starFreighter.model.MenuItem;
+import static byui.cit260.starFreighter.view.TextFormat.console;
 import java.io.IOException;
 
 /**
@@ -84,7 +85,7 @@ public final class MainMenu extends MenuView {
     private void saveGame() {
         try {
             GameController.saveGame();
-            CONSOLE.println("File successfully saved.");
+            console.println("File successfully saved.");
             gameMenu.display();
         } catch (GameControlException | IOException saveError) {
             ErrorView.display(this.getClass().getName(), saveError.getMessage());

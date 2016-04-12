@@ -56,6 +56,8 @@ public final class PirateController {
         enemyInventory.addItem(ItemList.OLD_PARTS);
         enemyInventory.addItem(ItemList.OLD_PARTS);
         enemyInventory.addItem(ItemList.NEW_PARTS);
+        enemyInventory.addItem(ItemList.BIO_SEDIMENTS);
+        enemyInventory.addItem(ItemList.PEARL);
         enemyInventory.setCurrency(100);
 
         // Return our enemy object.

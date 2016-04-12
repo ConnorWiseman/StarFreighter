@@ -19,7 +19,7 @@ public class ShipController {
         Ship newShip = new Ship(shipName);
         
         // Assign values to the Ship's properties.
-        newShip.setFuelCapacity(100);
+        newShip.setFuelCapacity(125);
         newShip.setHullIntegrity(100);
         newShip.setFuel(newShip.getFuelCapacity());
         newShip.setHull(newShip.getHullIntegrity());

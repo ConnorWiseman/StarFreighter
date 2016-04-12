@@ -1,10 +1,13 @@
 package byui.cit260.starFreighter.control;
 
+import byui.cit260.starFreighter.constants.FetchJobList;
 import byui.cit260.starFreighter.constants.ItemList;
+import static byui.cit260.starFreighter.control.PlanetSystemController.planetNamed;
 import byui.cit260.starFreighter.exceptions.GameControlException;
 import byui.cit260.starFreighter.model.CrewRoster;
 import byui.cit260.starFreighter.model.GameInstance;
 import byui.cit260.starFreighter.model.Inventory;
+import byui.cit260.starFreighter.model.JobRegistry;
 import byui.cit260.starFreighter.model.Planet;
 import byui.cit260.starFreighter.model.PlanetSystem;
 import byui.cit260.starFreighter.model.Player;
@@ -47,8 +50,11 @@ public class GameController {
         // Create the player's inventory and give them a little cash.
         Inventory newInventory = InventoryController.createInventory();
         newInventory.addItem(ItemList.NEW_PARTS);
+        newInventory.addItem(ItemList.JUNK);
         newInventory.addItem(ItemList.NEW_PARTS);
+        newInventory.addItem(ItemList.JUNK);
         newInventory.addItem(ItemList.NEW_PARTS);
+        newInventory.addItem(ItemList.JUNK);
         newInventory.setCurrency(100);
 
         // Create a CrewRoster for the Ship.
@@ -56,6 +62,9 @@ public class GameController {
         
         // Create a PlanetSystem for this game instance.
         PlanetSystem planets = PlanetSystemController.createSystem();
+        
+        // Create a JobRegistry for this game instance.
+        JobRegistry jobs = JobController.createJobRegistry();
 
         // Add the created objects to the new GameInstance.
         newGame.setPlayer(newPlayer);
@@ -63,11 +72,23 @@ public class GameController {
         newGame.setInventory(newInventory);
         newGame.setCrew(newRoster);
         newGame.setPlanetSystem(planets);
+        newGame.setJobRegistry(jobs);
 
         /* Pass the new GameInstance up to the main program so it can be
            accessed from within the various game views. */
         StarFreighter.setCurrentGame(newGame);
         
+        
+        // Assign some jobs. There's probably a better way to do this...
+        // I don't like including job related stuff in here, it feels out of
+        // place. Any suggestions?
+        JobRegistry kryta = planetNamed("Kryta").getJobRegistry();
+        kryta.add(JobController.createFetchJob(FetchJobList.TRADE_NEW_PARTS));
+        kryta.add(JobController.createFetchJob(FetchJobList.TRADE_OLD_PARTS));
+        
+                JobRegistry qualufe = planetNamed("Qualufe").getJobRegistry();
+        kryta.add(JobController.createFetchJob(FetchJobList.TRADE_BIO_SEDIMENTS));
+        kryta.add(JobController.createFetchJob(FetchJobList.TRADE_PEARL));
         // Set the ship's starting point. We have to do this, 'cause they're
         // generated randomly. We also have to do this here, because the controller
         // reads from the game instance- without an instance set, we'll get
@@ -108,6 +129,12 @@ public class GameController {
      * @throws IOException 
      */
     public static void saveGame() throws GameControlException, IOException {
+        // This check avoids saving if no game has been started.
+        GameInstance currentGame = StarFreighter.getCurrentGame();
+        if (currentGame == null) {
+            return;
+        }
+        
         String saveFilePath = System.getProperty("user.home") +
                     File.separator + "StarFreighter" + File.separator + 
                     "save.data";
@@ -122,7 +149,7 @@ public class GameController {
         // Save the current game instance to the directory.
         try (FileOutputStream fop = new FileOutputStream(saveFilePath)) {
             ObjectOutputStream output = new ObjectOutputStream(fop);
-            output.writeObject(StarFreighter.getCurrentGame());
+            output.writeObject(currentGame);
         } catch (IOException error) {
             throw new GameControlException(error.getMessage());
         }

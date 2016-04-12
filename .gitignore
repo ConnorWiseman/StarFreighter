@@ -8,7 +8,7 @@
 *.war
 *.ear
 
-log.txt
+logfile.txt
 hs_err_pid*
 
 # NetBeans Project files

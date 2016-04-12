@@ -1,0 +1,11 @@
+
+
+      Crew Report
+
+Name                           HitPoints        Pilot Points      Fighter Points       Doctor Points     Mechanic Points       Trader Points
+--------------------             -------             -------             -------             -------             -------             -------
+Sulu                                  30                   4                   0                   0                   0                   0
+McCoy                                 30                   0                   0                   0                   4                   0
+Bones                                 30                   0                   0                   4                   0                   0
+Connor                                30                   0                   4                   0                   0                   0
+Spock                                 30                   0                   0                   0                   0                   4

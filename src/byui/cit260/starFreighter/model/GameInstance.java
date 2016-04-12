@@ -15,6 +15,7 @@ public class GameInstance implements Serializable {
     private Inventory inventory;
     private CrewRoster crew;
     private PlanetSystem planets;
+    private JobRegistry jobs;
 
     /**
      * Class constructor.
@@ -95,14 +96,31 @@ public class GameInstance implements Serializable {
         this.planets = planets;
     }
 
+    /**
+     * Gets the job list.
+     * @return 
+     */
+    public JobRegistry getJobRegistry() {
+        return jobs;
+    }
+    
+    /**
+     * Sets the job list.
+     * @param jobs 
+     */
+    public void setJobRegistry(JobRegistry jobs) {
+        this.jobs = jobs;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.player);
-        hash = 97 * hash + Objects.hashCode(this.ship);
-        hash = 97 * hash + Objects.hashCode(this.inventory);
-        hash = 97 * hash + Objects.hashCode(this.crew);
-        hash = 97 * hash + Objects.hashCode(this.planets);
+        int hash = 3;
+        hash = 23 * hash + Objects.hashCode(this.player);
+        hash = 23 * hash + Objects.hashCode(this.ship);
+        hash = 23 * hash + Objects.hashCode(this.inventory);
+        hash = 23 * hash + Objects.hashCode(this.crew);
+        hash = 23 * hash + Objects.hashCode(this.planets);
+        hash = 23 * hash + Objects.hashCode(this.jobs);
         return hash;
     }
 
@@ -130,11 +148,14 @@ public class GameInstance implements Serializable {
         if (!Objects.equals(this.crew, other.crew)) {
             return false;
         }
-        return Objects.equals(this.planets, other.planets);
+        if (!Objects.equals(this.planets, other.planets)) {
+            return false;
+        }
+        return Objects.equals(this.jobs, other.jobs);
     }
 
     @Override
     public String toString() {
-        return "GameInstance{" + "player=" + player + ", ship=" + ship + ", inventory=" + inventory + ", crew=" + crew + ", planets=" + planets + '}';
+        return "GameInstance{" + "player=" + player + ", ship=" + ship + ", inventory=" + inventory + ", crew=" + crew + ", planets=" + planets + ", jobs=" + jobs + '}';
     }
 }

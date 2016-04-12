@@ -12,24 +12,26 @@ public final class Planet implements Serializable {
      */
     private final String name;
     private final String desc;
-    private final Point coords;
     private final char symbol;
+    private final Point coords;
     private final Inventory shop;
+    private final JobRegistry jobs;
 
     /**
      * Class constructor.
      * @param name
      * @param desc
+     * @param symbol
      * @param coords
-     * @param symbol 
      */
-    public Planet(String name, String desc, Point coords, char symbol) {
+    public Planet(String name, String desc, char symbol, Point coords) {
         this.name = name;
         this.desc = desc;
-        this.coords = coords;
         this.symbol = symbol;
+        this.coords = coords;
         this.shop = new Inventory();
         this.shop.setCurrency(10000);
+        this.jobs = new JobRegistry();
     }
     
     /**
@@ -72,14 +74,23 @@ public final class Planet implements Serializable {
         return shop;
     }
 
+    /**
+     * Get's the planet's job list.
+     * @return 
+     */
+    public JobRegistry getJobRegistry() {
+        return jobs;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + Objects.hashCode(this.name);
-        hash = 71 * hash + Objects.hashCode(this.desc);
-        hash = 71 * hash + Objects.hashCode(this.coords);
-        hash = 71 * hash + this.symbol;
-        hash = 71 * hash + Objects.hashCode(this.shop);
+        int hash = 7;
+        hash = 73 * hash + Objects.hashCode(this.name);
+        hash = 73 * hash + Objects.hashCode(this.desc);
+        hash = 73 * hash + this.symbol;
+        hash = 73 * hash + Objects.hashCode(this.coords);
+        hash = 73 * hash + Objects.hashCode(this.shop);
+        hash = 73 * hash + Objects.hashCode(this.jobs);
         return hash;
     }
 
@@ -107,11 +118,14 @@ public final class Planet implements Serializable {
         if (!Objects.equals(this.coords, other.coords)) {
             return false;
         }
-        return Objects.equals(this.shop, other.shop);
+        if (!Objects.equals(this.shop, other.shop)) {
+            return false;
+        }
+        return Objects.equals(this.jobs, other.jobs);
     }
 
     @Override
     public String toString() {
-        return "Planet{" + "name=" + name + ", desc=" + desc + ", coords=" + coords + ", symbol=" + symbol + ", shop=" + shop + '}';
+        return "Planet{" + "name=" + name + ", desc=" + desc + ", symbol=" + symbol + ", coords=" + coords + ", shop=" + shop + ", jobs=" + jobs + '}';
     }
 }

@@ -1,0 +1,12 @@
+
+
+       Inventory Report
+
+Name                     Value
+--------------------     -----
+New Parts                   50
+Junk                         5
+New Parts                   50
+Junk                         5
+New Parts                   50
+Junk                         5

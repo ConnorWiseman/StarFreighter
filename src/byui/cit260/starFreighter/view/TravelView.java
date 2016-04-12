@@ -48,7 +48,7 @@ public class TravelView extends Display {
                     // Set the destination.
                     destination = PlanetSystemController.planetAtSymbol(selection);
                 }
-                
+
                 // Calculate the distance.
                 distance = PlanetSystemController.calculateDistance(destination);
                 
@@ -131,10 +131,12 @@ public class TravelView extends Display {
                 ShipController.getShip().getName() +
                 " embarks into the cold reaches of space...");
         
-        int selection = RandomNumbers.range(1, 5);
+        
+        
+        int selection = RandomNumbers.range(1, 4);
         switch(selection) {
             case 1: {
-                TextBox.displayText("... and arrives at its detination without incident.");
+                TextBox.displayText("... and arrives at its destination without incident.");
                 break;
             }
             case 2: {
@@ -154,10 +156,6 @@ public class TravelView extends Display {
                     " salvage everything you can find."
                 );
                 InventoryController.salvageDebris();
-                break;
-            }
-            case 5: {
-                TextBox.displayText("... and explodes into a million pieces!");
                 break;
             }
         }

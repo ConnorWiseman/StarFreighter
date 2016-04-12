@@ -1,6 +1,5 @@
 package byui.cit260.starFreighter.control;
 
-import byui.cit260.starFreighter.constants.Difficulty;
 import byui.cit260.starFreighter.constants.Role;
 import byui.cit260.starFreighter.model.CrewMember;
 import byui.cit260.starFreighter.model.CrewRoster;

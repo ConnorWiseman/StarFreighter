@@ -13,6 +13,7 @@ import starfreighter.StarFreighter;
  * A controller class for handling item and monetary transactions.
  */
 public class InventoryController {
+    
     /**
      * Class constants.
      */
@@ -22,21 +23,23 @@ public class InventoryController {
      * Private constructor prevents instantiation.
      */
     private InventoryController() {
-        
+
     }
-    
+
     /**
      * Creates a new inventory.
-     * @return 
+     *
+     * @return
      */
     public static Inventory createInventory() {
         Inventory inventory = new Inventory();
         return inventory;
     }
-    
+
     /**
      * Gets the player's inventory.
-     * @return 
+     *
+     * @return
      */
     public static Inventory getPlayerInventory() {
         return StarFreighter.getCurrentGame().getInventory();
@@ -44,6 +47,7 @@ public class InventoryController {
 
     /**
      * Sorts a particular inventory by item value.
+     *
      * @param toSort
      */
     public static void sortByValue(Inventory toSort) {
@@ -57,11 +61,12 @@ public class InventoryController {
             return 0;
         });
     }
-    
+
     /**
      * Calculates the total value of a specified inventory.
+     *
      * @param inventory
-     * @return 
+     * @return
      */
     public static int calculateTotalValue(Inventory inventory) {
         int totalValue = 0;
@@ -70,12 +75,13 @@ public class InventoryController {
         }
         return totalValue;
     }
-    
+
     /**
      * Calculates the resale value of a specific item. Takes into account the
      * skill of the crew member assigned to the trader role.
+     *
      * @param item
-     * @return 
+     * @return
      */
     public static int calculateResaleValue(InventoryItem item) {
         CrewRoster playerCrew = CrewController.getPlayerRoster();
@@ -84,17 +90,18 @@ public class InventoryController {
         double resaleValue = baseResaleValue + (0.05 * tradeModifier);
         return (int) ((int) item.getValue() * resaleValue);
     }
-    
+
     /**
      * Sells a particular item to the shop on the current planet.
-     * @param item 
+     *
+     * @param item
      */
     public static void sellItem(InventoryItem item) {
         Inventory playerInventory = getPlayerInventory();
-        
+
         Planet currentLocation = ShipController.getShip().getLocation();
         Inventory otherInventory = currentLocation.getShop();
-        
+
         playerInventory.removeItem(item);
         playerInventory.addCurrency(calculateResaleValue(item));
         otherInventory.addItem(item);
@@ -103,16 +110,16 @@ public class InventoryController {
         sortByValue(playerInventory);
         sortByValue(otherInventory);
     }
-    
+
     /**
      * Sells all the items in the player's inventory.
      */
     public static void sellAll() {
         Inventory playerInventory = getPlayerInventory();
-        
+
         Planet currentLocation = ShipController.getShip().getLocation();
         Inventory otherInventory = currentLocation.getShop();
-        
+
         // While the inventory has things in it, sell the first one.
         while (playerInventory.getContents().size() > 0) {
             InventoryItem current = playerInventory.getContents().get(0);
@@ -128,14 +135,15 @@ public class InventoryController {
 
     /**
      * Buys a particular item from the shop on the current planet.
-     * @param item 
+     *
+     * @param item
      */
     public static void buyItem(InventoryItem item) {
         Inventory playerInventory = getPlayerInventory();
-        
+
         Planet currentLocation = ShipController.getShip().getLocation();
         Inventory otherInventory = currentLocation.getShop();
-        
+
         otherInventory.removeItem(item);
         otherInventory.addCurrency(item.getValue());
         playerInventory.addItem(item);
@@ -144,7 +152,7 @@ public class InventoryController {
         sortByValue(playerInventory);
         sortByValue(otherInventory);
     }
-    
+
     /**
      * Adds a bunch of debris to the player's inventory. Used in TravelDisplay.
      */
@@ -164,32 +172,34 @@ public class InventoryController {
         // Sort the player's inventory as a parting gesture.
         sortByValue(playerInventory);
     }
-    
+
     /**
      * Empties the specified inventory.
-     * @param inventory 
+     *
+     * @param inventory
      */
     public static void emptyInventory(Inventory inventory) {
         inventory.empty();
     }
-    
+
     /**
      * Adds the contents of a specified inventory to the player's inventory.
-     * @param inventory 
+     *
+     * @param inventory
      */
     public static void addInventoryToPlayerInventory(Inventory inventory) {
         // Get the player's inventory.
         Inventory playerInventory = getPlayerInventory();
-        
+
         // Iterate over the specified inventory and add each item to the
         // player's inventory.
         inventory.getContents().stream().forEach((current) -> {
             playerInventory.addItem(current);
         });
-        
+
         // Sort the player's inventory.
         sortByValue(playerInventory);
-        
+
         // Give the player's inventory the other inventory's currency, too.
         playerInventory.setCurrency(playerInventory.getCurrency() + inventory.getCurrency());
     }
